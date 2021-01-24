@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { useIntl } from "react-intl";
+import GeoCoder from "../components/geoCoder";
+import NavMenu from "../components/NavMenu";
 
 export default function Home() {
   const { formatMessage } = useIntl();
@@ -10,6 +12,14 @@ export default function Home() {
       <Head>
         <title>{t("app.name")}</title>
       </Head>
+
+      <header
+        dir="ltr"
+        className="flex p-2 border border-blue-500 h-14 bg-yellow-50"
+      >
+        <GeoCoder />
+        <NavMenu />
+      </header>
 
       <h1 className="font-bold">{t("app.name")}</h1>
       <h3>{t("home.hello")}</h3>
