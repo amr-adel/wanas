@@ -1,13 +1,18 @@
 import Head from "next/head";
+import { useIntl } from "react-intl";
 
 export default function Home() {
+  const { formatMessage } = useIntl();
+  const t = (id) => formatMessage({ id });
+
   return (
     <div>
       <Head>
-        <title>Wanas</title>
+        <title>{t("app.name")}</title>
       </Head>
 
-      <h1>Wanas</h1>
+      <h1>{t("app.name")}</h1>
+      <h3>{t("home.hello")}</h3>
     </div>
   );
 }
