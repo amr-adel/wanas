@@ -4,6 +4,7 @@ import { IntlProvider } from "react-intl";
 import * as locales from "../lang";
 
 import "../styles/globals.css";
+import "../styles/app.css";
 
 function MyApp({ Component, pageProps }) {
   const { locale, defaultLocale } = useRouter();
