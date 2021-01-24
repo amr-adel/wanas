@@ -13,10 +13,7 @@ export default function Home() {
         <title>{t("app.name")}</title>
       </Head>
 
-      <header
-        dir="ltr"
-        className="flex p-2 border border-blue-500 h-14 bg-yellow-50"
-      >
+      <header dir="ltr" className="flex p-2 h-14 bg-brown">
         <GeoCoder />
         <NavMenu />
       </header>
