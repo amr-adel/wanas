@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useIntl } from "react-intl";
-import GeoCoder from "../components/geoCoder";
+import GeoCoder from "../components/GeoCoder";
 import NavMenu from "../components/NavMenu";
 
 export default function Home() {
