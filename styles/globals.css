@@ -4,7 +4,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap");
 
-body {
+html {
   font-family: "Noto Sans", sans-serif;
 }
 
@@ -16,4 +16,18 @@ h5,
 h6 {
   font-family: "Fira Sans", sans-serif;
   font-weight: normal;
+}
+
+html[dir="rtl"] {
+  font-family: sans-serif;
+}
+
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] h5,
+html[dir="rtl"] h6 {
+  font-family: sans-serif;
+  font-weight: 600;
 }
