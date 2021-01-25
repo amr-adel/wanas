@@ -37,10 +37,17 @@ module.exports = {
         900: "#0d0b0b",
       },
     },
-    extend: {},
+    extend: {
+      transitionProperty: {
+        width: "width",
+      },
+    },
   },
   variants: {
-    extend: {},
+    extend: {
+      width: ["hover", "focus", "focus-within"],
+      transitionProperty: ["hover", "focus"],
+    },
   },
   plugins: [],
 };
