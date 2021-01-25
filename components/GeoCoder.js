@@ -63,7 +63,7 @@ export default function GeoCoder() {
       }`}
     >
       <label className="flex justify-center text-brown-200">
-        <Icon name="search-location" box="6" classes="flex-shrink-0" />
+        <Icon name="search-location" classes="w-6 h-6 flex-shrink-0" />
         <input
           type="text"
           dir={locale === "ar" ? "rtl" : "ltr"}
@@ -82,7 +82,7 @@ export default function GeoCoder() {
               setQuery("");
             }}
           >
-            <Icon name="close" box="6" classes="flex-shrink-0" />
+            <Icon name="close" classes="w-6 h-6 flex-shrink-0" />
           </button>
         )}
       </label>

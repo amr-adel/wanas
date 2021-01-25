@@ -67,7 +67,7 @@ export default function NavMenu() {
         className="h-10 w-10 focus:outline-none text-brown-200"
         onClick={toggleMenu}
       >
-        <Icon name={showMenu ? "close" : "menu"} box="6" classes="mx-auto" />
+        <Icon name={showMenu ? "close" : "menu"} classes="h-6 w-6 mx-auto" />
       </button>
 
       {showMenu && menu}
