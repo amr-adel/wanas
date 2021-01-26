@@ -63,7 +63,7 @@ export default function GeoCoder() {
       }`}
     >
       <label className="flex justify-center text-brown-200">
-        <Icon name="search-location" classes="w-6 h-6 flex-shrink-0" />
+        <Icon name="location-arrow" classes="w-4 h-6 flex-shrink-0" />
         <input
           type="text"
           dir={locale === "ar" ? "rtl" : "ltr"}
@@ -73,7 +73,7 @@ export default function GeoCoder() {
           onBlur={() => setFocused(false)}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="h-full w-20 leading-6 bg-transparent ml-2 pl-2 flex-1 focus:outline-none placeholder-brown-300 text-brown text-lg border-l border-brown-100"
+          className="h-full w-20 leading-6 bg-transparent ml-2 px-2 flex-1 focus:outline-none placeholder-brown-300 text-brown text-lg border-l border-brown-100"
         />
         {query && focused && (
           <button
