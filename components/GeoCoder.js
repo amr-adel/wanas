@@ -3,9 +3,7 @@ import { useIntl } from "react-intl";
 import useThrottle from "../hooks/useThrottle";
 import Icon from "./Icon";
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
-export default function GeoCoder() {
+export default function GeoCoder({ setCenter }) {
   const [focused, setFocused] = useState(false);
   const [query, setQuery] = useState("");
   const [geoSuggestions, setGeoSuggestions] = useState(null);
@@ -30,7 +28,7 @@ export default function GeoCoder() {
           {data.features.map((place) => (
             <li
               key={place.id}
-              className="flex flex-col px-2 py-1 mb-2 bg-white rounded-md cursor-pointer"
+              className="flex flex-col px-2 py-1 mb-2 bg-white rounded-lg cursor-pointer"
               onMouseDown={(e) => handleSuggestion(e, place)}
             >
               <h5 className="text-brown text-lg font-bold">{place.text}</h5>
@@ -45,9 +43,10 @@ export default function GeoCoder() {
     }
   }, [throttledQuery]);
 
-  const handleSuggestion = (e, { bbox, place_name }) => {
+  const handleSuggestion = (e, { center, place_name }) => {
     e.preventDefault();
-    console.log(bbox);
+    // Mapbox [Lon, Lat], FourSquare [Lat, Lon]
+    setCenter([center[1], center[0]]);
     setQuery(place_name);
     // setFocused(false);
     document.activeElement.blur();
@@ -56,7 +55,7 @@ export default function GeoCoder() {
   return (
     <div
       id="geo-coder"
-      className={`p-2 relative transition-width mr-auto rounded-md ${
+      className={`p-2 relative transition-width mr-auto rounded-lg ${
         focused
           ? "bg-brown-50 shadow-lg w-full rounded-b-none"
           : "w-9/12 bg-brown-100"
@@ -90,7 +89,7 @@ export default function GeoCoder() {
       {focused && (
         <div
           id="results"
-          className="absolute top-10 left-0 right-0 p-2 bg-brown-50 border-t border-brown-100 rounded-b-md shadow-lg"
+          className="absolute top-10 left-0 right-0 p-2 bg-brown-50 border-t border-brown-100 rounded-b-lg shadow-lg"
         >
           {geoSuggestions}
         </div>

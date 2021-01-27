@@ -39,15 +39,15 @@ export default function NavMenu() {
   const menu = (
     <nav
       dir="ltr"
-      className="fixed top-14 left-0 w-screen bg-brown-50 p-4 pb-2 border-b-2 border-brown shadow-lg"
+      className="fixed top-14 left-0 w-screen bg-brown-50 p-4 pb-2 border-b-2 border-brown rounded-b-lg shadow-lg"
     >
       <ul>{/* Menu links */}</ul>
-      <ul className="pt-2 flex items-center justify-center border-t border-brown-200">
+      <ul className="pt-2 flex items-center justify-center border-t border-brown-100">
         {locales.map((loc) => {
           return (
             <li
               key={loc}
-              className={`py-2 px-4 mx-2 rounded-md ${
+              className={`py-2 px-4 mx-2 rounded-lg ${
                 loc === locale ? "bg-red text-red-50" : ""
               }`}
             >

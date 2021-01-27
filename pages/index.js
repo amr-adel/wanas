@@ -1,11 +1,18 @@
 import Head from "next/head";
+import { useState } from "react";
 import { useIntl } from "react-intl";
+
 import GeoCoder from "../components/GeoCoder";
 import NavMenu from "../components/NavMenu";
+import FourSquare from "../components/FourSquare";
 
 export default function Home() {
   const { formatMessage } = useIntl();
   const t = (id) => formatMessage({ id });
+
+  // App state
+  const [center, setCenter] = useState([0, 0]);
+  const [venues, setVenues] = useState([]);
 
   return (
     <div>
@@ -13,13 +20,19 @@ export default function Home() {
         <title>{t("app.name")}</title>
       </Head>
 
-      <header dir="ltr" className="flex p-2 h-14 bg-brown">
-        <GeoCoder />
+      <header
+        dir="ltr"
+        className="flex p-2 h-14 bg-brown fixed top-0 left-0 w-full z-50 shadow-md"
+      >
+        <GeoCoder setCenter={setCenter} />
         <NavMenu />
       </header>
 
-      <h1 className="font-bold">{t("app.name")}</h1>
-      <h3>{t("home.hello")}</h3>
+      <div className="w-full h-64 bg-brown-700 flex justify-center items-center fixed top-14 text-brown-50">
+        MAP
+      </div>
+
+      <FourSquare center={center} setVenues={setVenues} />
     </div>
   );
 }
