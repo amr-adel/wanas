@@ -15,12 +15,10 @@ export default function FourSquare({ center }) {
       `/api/fs?locale=${locale === "ar" ? "en" : locale}&ll=${center}`
     );
 
-    console.log(data);
-
     const TempVenues = data.response.groups[0].items.map((venue) => {
       const { id, name, location, categories } = venue.venue;
       return (
-        <li key={id} className="bg-white p-2 mb-4 rounded-lg shadow">
+        <li key={id} className="bg-gray-50 p-2 mb-4 rounded-lg shadow">
           {/* <img
             id="category-icon"
             className="bg-brown-400 rounded-md"
@@ -32,20 +30,25 @@ export default function FourSquare({ center }) {
           /> */}
 
           {categories[0] ? (
-            <span className="text-xs  text-brown-300 bg-brown-50 py-.5 px-1 rounded">
+            <span className="text-xs text-yellow-400 bg-yellow-50 py-1 px-2 rounded">
               {categories[0].name}
             </span>
           ) : null}
 
-          <h6 className="text-xl text-red border-b border-brown-50 mb-1 py-1">
+          <h6 className="text-xl text-red-500 border-b border-gray-200 mb-1 py-1">
             {name}
           </h6>
-          <p className="text-sm text-brown-400">
+          <p className="text-sm text-gray-400">
             {location.formattedAddress[0]} <br />
             {location.formattedAddress[1]}
           </p>
         </li>
       );
+    });
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
     });
 
     setVenuesContainer(TempVenues);
@@ -54,7 +57,7 @@ export default function FourSquare({ center }) {
   }, [center]);
 
   return (
-    <div className="bg-brown-400 px-2 py-4 mt-72 z-10 relative rounded-t-xl">
+    <div className="bg-gray-600 px-2 py-4 mt-72 z-10 relative rounded-t-xl">
       <div id="venues-container">
         <ol className="flex flex-col">{venuesContainer}</ol>
       </div>

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useIntl } from "react-intl";
 import useThrottle from "../hooks/useThrottle";
-import Icon from "./Icon";
+import Loader from "../utils/Loader";
+import Icon from "../utils/Icon";
 
 export default function GeoCoder({ setCenter }) {
   const [focused, setFocused] = useState(false);
@@ -14,7 +15,7 @@ export default function GeoCoder({ setCenter }) {
 
   useEffect(async () => {
     if (focused && throttledQuery.length > 2) {
-      setGeoSuggestions(<div>Loading....</div>);
+      setGeoSuggestions(<Loader classes="text-gray-400 h-4 my-4" />);
 
       console.log("API call!");
 
@@ -28,11 +29,11 @@ export default function GeoCoder({ setCenter }) {
           {data.features.map((place) => (
             <li
               key={place.id}
-              className="flex flex-col px-2 py-1 mb-2 bg-white rounded-lg cursor-pointer"
+              className="flex flex-col px-2 py-1 mb-2 bg-white rounded-lg cursor-pointer shadow hover:shadow-md"
               onMouseDown={(e) => handleSuggestion(e, place)}
             >
-              <h5 className="text-brown text-lg font-bold">{place.text}</h5>
-              <span className="text-brown-300 text-sm">{place.place_name}</span>
+              <h5 className="text-red-500 text-lg font-bold">{place.text}</h5>
+              <span className="text-gray-400 text-sm">{place.place_name}</span>
             </li>
           ))}
         </ol>
@@ -57,12 +58,15 @@ export default function GeoCoder({ setCenter }) {
       id="geo-coder"
       className={`p-2 relative transition-width mr-auto rounded-lg ${
         focused
-          ? "bg-brown-50 shadow-lg w-full rounded-b-none"
-          : "w-9/12 bg-brown-100"
+          ? "bg-gray-200 shadow-lg w-full rounded-b-none"
+          : "w-9/12 bg-gray-700"
       }`}
     >
-      <label className="flex justify-center text-brown-200">
-        <Icon name="location-arrow" classes="w-4 h-6 flex-shrink-0" />
+      <label className="flex justify-center text-gray-400">
+        <Icon
+          name="location-arrow"
+          classes="w-6 h-6 flex-shrink-0 pr-2 border-r border-gray-400"
+        />
         <input
           type="text"
           dir={locale === "ar" ? "rtl" : "ltr"}
@@ -72,7 +76,9 @@ export default function GeoCoder({ setCenter }) {
           onBlur={() => setFocused(false)}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="h-full w-20 leading-6 bg-transparent ml-2 px-2 flex-1 focus:outline-none placeholder-brown-300 text-brown text-lg border-l border-brown-100"
+          className={`h-full w-20 leading-6 bg-transparent px-2 flex-1 focus:outline-none placeholder-gray-400 ${
+            focused ? " text-gray-700" : " text-gray-400"
+          } text-lg`}
         />
         {query && focused && (
           <button
@@ -89,7 +95,7 @@ export default function GeoCoder({ setCenter }) {
       {focused && (
         <div
           id="results"
-          className="absolute top-10 left-0 right-0 p-2 bg-brown-50 border-t border-brown-100 rounded-b-lg shadow-lg"
+          className="absolute top-10 left-0 right-0 p-2 bg-gray-200 border-t border-gray-300 rounded-b-lg shadow-lg"
         >
           {geoSuggestions}
         </div>
