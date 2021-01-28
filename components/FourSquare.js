@@ -6,15 +6,19 @@ import useSWR from "swr";
 import Loader from "../utils/Loader";
 import FourSquareVenues from "./FourSquareVenues";
 
+import { useStore } from "../hooks/useStore";
+
 const fetchVenues = (center, locale) => {
   return axios.get(
     `/api/fs?locale=${locale === "ar" ? "en" : locale}&ll=${center}`
   );
 };
 
-export default function FourSquare({ center }) {
+export default function FourSquare() {
   const { formatMessage, locale } = useIntl();
   const t = (id) => formatMessage({ id });
+
+  const center = useStore((state) => state.center);
 
   const { data, error } = useSWR(
     center[0] === 0 && center[1] === 0 ? null : [center, locale],

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useIntl } from "react-intl";
+
 import useThrottle from "../hooks/useThrottle";
+import { useStore } from "../hooks/useStore";
 
 import axios from "axios";
 import useSWR from "swr";
@@ -16,13 +18,15 @@ const fetchGeoCode = (throttledQuery, locale) => {
     .then((res) => res.data);
 };
 
-export default function GeoCoder({ setCenter }) {
+export default function GeoCoder() {
   const { formatMessage, locale } = useIntl();
   const t = (id) => formatMessage({ id });
 
   const [focused, setFocused] = useState(false);
   const [query, setQuery] = useState("");
   const { throttledQuery } = useThrottle(query);
+
+  const set = useStore((state) => state.set);
 
   const { data: geoSuggestions, error } = useSWR(
     throttledQuery.length <= 2 ? null : [throttledQuery, locale],
@@ -33,8 +37,12 @@ export default function GeoCoder({ setCenter }) {
 
   const handleSuggestion = (e, { center, place_name }) => {
     e.preventDefault();
-    // Mapbox [Lon, Lat], FourSquare [Lat, Lon]
-    setCenter([center[1], center[0]]);
+
+    set((state) => {
+      // Mapbox [Lon, Lat], FourSquare [Lat, Lon]
+      state.center = [center[1], center[0]];
+    });
+
     setQuery(place_name);
     document.activeElement.blur();
   };
