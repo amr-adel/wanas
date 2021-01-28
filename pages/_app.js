@@ -1,3 +1,4 @@
+import { SWRConfig } from "swr";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { IntlProvider } from "react-intl";
@@ -12,11 +13,7 @@ function MyApp({ Component, pageProps }) {
   const messages = locales[locale];
 
   useEffect(() => {
-    if (locale === "ar") {
-      document.dir = "rtl";
-    } else {
-      document.dir = "ltr";
-    }
+    document.dir = locale === "ar" ? "rtl" : "ltr";
   }, [locale]);
 
   return (
@@ -25,7 +22,17 @@ function MyApp({ Component, pageProps }) {
       defaultLocale={defaultLocale}
       messages={messages}
     >
-      <Component {...pageProps} />
+      <SWRConfig
+        value={{
+          initialData: null,
+          revalidateOnFocus: false,
+          revalidateOnReconnect: false,
+          shouldRetryOnError: false,
+          onError: (err, key, config) => console.log(err, key),
+        }}
+      >
+        <Component {...pageProps} />
+      </SWRConfig>
     </IntlProvider>
   );
 }

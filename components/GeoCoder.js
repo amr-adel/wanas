@@ -1,55 +1,41 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useIntl } from "react-intl";
 import useThrottle from "../hooks/useThrottle";
+
+import axios from "axios";
+import useSWR from "swr";
+
 import Loader from "../utils/Loader";
 import Icon from "../utils/Icon";
 
-export default function GeoCoder({ setCenter }) {
-  const [focused, setFocused] = useState(false);
-  const [query, setQuery] = useState("");
-  const [geoSuggestions, setGeoSuggestions] = useState(null);
-  const { throttledQuery } = useThrottle(query);
+const fetchGeoCode = (throttledQuery, locale) => {
+  return axios
+    .get(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${throttledQuery}.json?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}&language=${locale}&types=region,district,place`
+    )
+    .then((res) => res.data);
+};
 
+export default function GeoCoder({ setCenter }) {
   const { formatMessage, locale } = useIntl();
   const t = (id) => formatMessage({ id });
 
-  useEffect(async () => {
-    if (focused && throttledQuery.length > 2) {
-      setGeoSuggestions(<Loader classes="text-gray-400 h-4 my-4" />);
+  const [focused, setFocused] = useState(false);
+  const [query, setQuery] = useState("");
+  const { throttledQuery } = useThrottle(query);
 
-      console.log("API call!");
+  const { data: geoSuggestions, error } = useSWR(
+    throttledQuery.length <= 2 ? null : [throttledQuery, locale],
+    fetchGeoCode
+  );
 
-      const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${throttledQuery}.json?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}&language=${locale}&types=region,district,place`;
-
-      const res = await fetch(url);
-      const data = await res.json();
-
-      const suggestions = (
-        <ol dir={locale === "ar" ? "rtl" : "ltr"} className="flex flex-col">
-          {data.features.map((place) => (
-            <li
-              key={place.id}
-              className="flex flex-col px-2 py-1 mb-2 bg-white rounded-lg cursor-pointer shadow hover:shadow-md"
-              onMouseDown={(e) => handleSuggestion(e, place)}
-            >
-              <h5 className="text-red-500 text-lg font-bold">{place.text}</h5>
-              <span className="text-gray-400 text-sm">{place.place_name}</span>
-            </li>
-          ))}
-        </ol>
-      );
-      setGeoSuggestions(suggestions);
-    } else {
-      setGeoSuggestions(null);
-    }
-  }, [throttledQuery]);
+  const isLoading = !geoSuggestions && !error && throttledQuery.length > 2;
 
   const handleSuggestion = (e, { center, place_name }) => {
     e.preventDefault();
     // Mapbox [Lon, Lat], FourSquare [Lat, Lon]
     setCenter([center[1], center[0]]);
     setQuery(place_name);
-    // setFocused(false);
     document.activeElement.blur();
   };
 
@@ -97,7 +83,26 @@ export default function GeoCoder({ setCenter }) {
           id="results"
           className="absolute top-10 left-0 right-0 p-2 bg-gray-200 border-t border-gray-300 rounded-b-lg shadow-lg"
         >
-          {geoSuggestions}
+          {isLoading && <Loader classes="text-gray-400 h-4 my-4" />}
+
+          {geoSuggestions && (
+            <ol dir={locale === "ar" ? "rtl" : "ltr"} className="flex flex-col">
+              {geoSuggestions.features.map((place) => (
+                <li
+                  key={place.id}
+                  className="flex flex-col px-2 py-1 mb-2 bg-white rounded-lg cursor-pointer shadow hover:shadow-md"
+                  onMouseDown={(e) => handleSuggestion(e, place)}
+                >
+                  <h5 className="text-red-500 text-lg font-bold">
+                    {place.text}
+                  </h5>
+                  <span className="text-gray-400 text-sm">
+                    {place.place_name}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          )}
         </div>
       )}
     </div>
