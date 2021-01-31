@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.btn {
+  @apply py-2 px-4 rounded-md focus:outline-none;
+}
+
+.btn-outlined {
+  @apply btn border-2 border-current font-bold;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap");
 
 html {

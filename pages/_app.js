@@ -6,6 +6,7 @@ import * as locales from "../lang";
 
 import "../styles/globals.css";
 import "../styles/app.css";
+import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }) {
   const { locale, defaultLocale } = useRouter();
@@ -31,7 +32,9 @@ function MyApp({ Component, pageProps }) {
           onError: (err, key, config) => console.log(err, key),
         }}
       >
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </SWRConfig>
     </IntlProvider>
   );

@@ -50,20 +50,23 @@ export default function GeoCoder() {
   return (
     <div
       id="geo-coder"
-      className={`p-2 relative transition-width mr-auto rounded-lg ${
+      className={`p-2 relative transition-width rounded-lg ${
         focused
           ? "bg-gray-200 shadow-lg w-full rounded-b-none"
           : "w-9/12 bg-gray-700"
       }`}
     >
-      <label className="flex justify-center text-gray-400">
+      <label
+        className={`flex justify-center text-gray-400 ${
+          locale === "ar" ? "flex-row-reverse" : ""
+        }`}
+      >
         <Icon
           name="location-arrow"
           classes="w-6 h-6 flex-shrink-0 pr-2 border-r border-gray-400"
         />
         <input
           type="text"
-          dir={locale === "ar" ? "rtl" : "ltr"}
           placeholder={t("geoCoderPlaceholder")}
           spellCheck="false"
           onFocus={() => setFocused(true)}

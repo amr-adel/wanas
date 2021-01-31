@@ -29,6 +29,12 @@ module.exports = {
       transitionProperty: {
         width: "width",
       },
+      height: {
+        inner: "var(--inner-height, 100vh)",
+      },
+      minHeight: {
+        inner: "var(--inner-height, 100vh)",
+      },
     },
   },
   variants: {
