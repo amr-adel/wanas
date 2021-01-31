@@ -50,10 +50,8 @@ export default function GeoCoder() {
   return (
     <div
       id="geo-coder"
-      className={`p-2 relative transition-width rounded-lg ${
-        focused
-          ? "bg-gray-200 shadow-lg w-full rounded-b-none"
-          : "w-9/12 bg-gray-700"
+      className={`p-2 mx-auto relative transition-width rounded-lg ${
+        focused ? "bg-gray-200 shadow-lg w-full" : "w-10/12 bg-gray-700"
       }`}
     >
       <label
@@ -73,7 +71,7 @@ export default function GeoCoder() {
           onBlur={() => setFocused(false)}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className={`h-full w-20 leading-6 bg-transparent px-2 flex-1 focus:outline-none placeholder-gray-400 ${
+          className={`h-6 w-20 bg-transparent px-2 flex-1 focus:outline-none placeholder-gray-400 ${
             focused ? " text-gray-700" : " text-gray-400"
           } text-lg`}
         />
@@ -90,10 +88,7 @@ export default function GeoCoder() {
       </label>
 
       {focused && (
-        <div
-          id="results"
-          className="absolute top-10 left-0 right-0 p-2 bg-gray-200 border-t border-gray-300 rounded-b-lg shadow-lg"
-        >
+        <div id="results" className="p-2 pb-0 mt-2 border-t border-gray-300">
           {isLoading && <Loader classes="text-gray-400 h-4 my-4" />}
 
           {geoSuggestions && (

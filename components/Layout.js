@@ -58,7 +58,7 @@ export default function Layout({ children }) {
 
             <ul
               dir="ltr"
-              className="my-2 py-2 flex items-center justify-center border rounded-md border-gray-200"
+              className="my-4 py-2 flex items-center justify-center border rounded-md border-gray-200"
             >
               {locales.map((loc) => {
                 return (
@@ -77,7 +77,7 @@ export default function Layout({ children }) {
             </ul>
 
             <button
-              className="btn-outlined mx-auto mt-4 text-gray-700"
+              className="btn-outlined mx-auto text-gray-700"
               onClick={() => hideModal()}
             >
               {t("welcome.continue")}

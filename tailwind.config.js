@@ -35,6 +35,16 @@ module.exports = {
       minHeight: {
         inner: "var(--inner-height, 100vh)",
       },
+      backgroundImage: (theme) => ({
+        "icons-light": "url('/images/wanas-icons-light.png')",
+        "icons-dark": "url('/images/wanas-icons-dark.png')",
+      }),
+      backgroundSize: {
+        auto: "auto",
+        cover: "cover",
+        contain: "contain",
+        "50%": "120px",
+      },
     },
   },
   variants: {
