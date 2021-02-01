@@ -10,6 +10,14 @@
   @apply btn border-2 border-current font-bold;
 }
 
+.pattern-dark {
+  @apply bg-gray-800 bg-icons-light bg-50%;
+}
+
+.pattern-light {
+  @apply bg-gray-300 bg-icons-dark bg-50%;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap");
 
 html {

@@ -1,19 +1,12 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import Link from "next/link";
 
 import Icon from "../utils/Icon";
-
-const localesName = {
-  en: "English",
-  es: "Español",
-  ar: "عربي",
-};
+import LocaleSwitcher from "./LocaleSwitcher";
 
 export default function NavMenu() {
   const [showMenu, setShowMenu] = useState(false);
-  const { locale, locales } = useRouter();
   const { formatMessage } = useIntl();
   const t = (id) => formatMessage({ id });
 
@@ -41,23 +34,12 @@ export default function NavMenu() {
       dir="ltr"
       className="fixed top-14 left-0 w-screen bg-gray-50 p-4 pb-2 border-b-2 border-gray-700 rounded-b-lg shadow-lg"
     >
-      <ul>{/* Menu links */}</ul>
-      <ul className="pt-2 flex items-center justify-center border-t border-gray-200">
-        {locales.map((loc) => {
-          return (
-            <li
-              key={loc}
-              className={`py-2 px-4 mx-2 rounded-lg ${
-                loc === locale ? "bg-red-500 text-red-50" : ""
-              }`}
-            >
-              <Link href="" locale={loc}>
-                {localesName[loc]}
-              </Link>
-            </li>
-          );
-        })}
+      <ul className="mb-2 felx flex-col text-center border-b border-gray-200 text-xl">
+        <li className="p-2 my-2">
+          <Link href="/">Home</Link>
+        </li>
       </ul>
+      <LocaleSwitcher />
     </nav>
   );
 

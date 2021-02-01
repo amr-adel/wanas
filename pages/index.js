@@ -1,15 +1,10 @@
 import Head from "next/head";
 import { useIntl } from "react-intl";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
-import SetInnerHeightVar from "../utils/SetInnerHeightVar";
 import Logo from "../utils/Logo";
 import GeoCoder from "../components/GeoCoder";
-import Modal from "../components/Modal";
 import { useStore } from "../hooks/useStore";
-import useLocalStorage from "../hooks/useLocalStorage";
-import { useEffect } from "react";
 
 const fourSquareSections = [
   "all",
@@ -22,17 +17,15 @@ const fourSquareSections = [
 ];
 
 export default function Home() {
-  const { locale, locales, pathname } = useRouter();
-  const router = useRouter();
   const { formatMessage } = useIntl();
   const t = (id) => formatMessage({ id });
 
-  const section = useStore((state) => state.FSParams.section);
+  const section = useStore((state) => state.fourSquare.reqParams.section);
   const set = useStore((state) => state.set);
 
   const handleChangeSection = (sec) => {
     set((state) => {
-      state.FSParams.section = sec;
+      state.fourSquare.reqParams.section = sec;
     });
   };
 
@@ -50,7 +43,7 @@ export default function Home() {
         <Logo type="text" classes="h-8" />
       </div>
 
-      <div className="h-full w-full p-4 flex-1 flex flex-col bg-gray-800 bg-icons-light bg-50% bg-repeat rounded-t-2xl relative">
+      <div className="h-full w-full p-4 flex-1 flex flex-col pattern-dark rounded-t-2xl relative">
         <div id="select-section" className="p-4 border-b border-gray-600">
           <h3 className="mb-2 text-xl text-center text-gray-200">
             {t("home.looking-for")}
@@ -70,11 +63,15 @@ export default function Home() {
             ))}
           </ul>
         </div>
-        <div id="select-city" className="py-4 px-2">
+        <div id="select-city" className="py-4 px-2 flex flex-col items-center">
           <h3 className="mb-2 text-xl text-center text-gray-200">
             {t("home.looking-in")}
           </h3>
           <GeoCoder />
+
+          {/* <Link href="/explore">
+            <span className="text-xl text-gray-200">Explore</span>
+          </Link> */}
         </div>
       </div>
     </div>

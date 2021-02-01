@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useIntl } from "react-intl";
+import { useRouter } from "next/router";
 
 import useThrottle from "../hooks/useThrottle";
 import { useStore } from "../hooks/useStore";
@@ -13,7 +14,7 @@ import Icon from "../utils/Icon";
 const fetchGeoCode = (throttledQuery, locale) => {
   return axios
     .get(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${throttledQuery}.json?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}&language=${locale}&types=region,district,place`
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${throttledQuery}.json?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}&language=${locale}&types=region,district,place,postcode`
     )
     .then((res) => res.data);
 };
@@ -28,6 +29,9 @@ export default function GeoCoder() {
 
   const set = useStore((state) => state.set);
 
+  const { pathname } = useRouter();
+  const router = useRouter();
+
   const { data: geoSuggestions, error } = useSWR(
     throttledQuery.length <= 2 ? null : [throttledQuery, locale],
     fetchGeoCode
@@ -40,17 +44,21 @@ export default function GeoCoder() {
 
     set((state) => {
       // Mapbox [Lon, Lat], FourSquare [Lat, Lon]
-      state.center = [center[1], center[0]];
+      state.fourSquare.reqParams.ll = [center[1], center[0]];
     });
 
     setQuery(place_name);
     document.activeElement.blur();
+
+    if (pathname !== "/explore") {
+      router.push("/explore");
+    }
   };
 
   return (
     <div
       id="geo-coder"
-      className={`p-2 mx-auto relative transition-width rounded-lg ${
+      className={`p-2 relative transition-width rounded-lg ${
         focused ? "bg-gray-200 shadow-lg w-full" : "w-10/12 bg-gray-700"
       }`}
     >

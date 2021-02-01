@@ -1,6 +1,6 @@
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
-import { localeNames } from "../lang";
 
 import SetInnerHeightVar from "../utils/SetInnerHeightVar";
 import Logo from "../utils/Logo";
@@ -8,7 +8,10 @@ import Logo from "../utils/Logo";
 import Modal from "../components/Modal";
 import { useStore } from "../hooks/useStore";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { useEffect } from "react";
+
+import GeoCoder from "../components/GeoCoder";
+import NavMenu from "../components/NavMenu";
+import LocaleSwitcher from "../components/LocaleSwitcher";
 
 export default function Layout({ children }) {
   const { locale, locales, pathname } = useRouter();
@@ -34,14 +37,6 @@ export default function Layout({ children }) {
     }
   }, []);
 
-  const handleChangeLocale = (newLocale) => {
-    router.push(pathname, pathname, {
-      locale: newLocale,
-    });
-
-    setUser({ locale: newLocale });
-  };
-
   return (
     <div>
       <SetInnerHeightVar />
@@ -56,25 +51,12 @@ export default function Layout({ children }) {
 
             <p className="text-gray-700">{t("welcome.change-locale")}</p>
 
-            <ul
-              dir="ltr"
-              className="my-4 py-2 flex items-center justify-center border rounded-md border-gray-200"
+            <div
+              id="locale-switcher-container"
+              className="p-2 my-4 bg-gray-200 rounded-md"
             >
-              {locales.map((loc) => {
-                return (
-                  <li key={loc}>
-                    <button
-                      onClick={() => handleChangeLocale(loc)}
-                      className={`btn mx-2 ${
-                        loc === locale ? "bg-red-500 text-red-50" : ""
-                      }`}
-                    >
-                      {localeNames[loc]}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
+              <LocaleSwitcher />
+            </div>
 
             <button
               className="btn-outlined mx-auto text-gray-700"
@@ -88,11 +70,12 @@ export default function Layout({ children }) {
 
       {pathname !== "/" && (
         <header
-          dir="ltr"
-          className="flex p-2 h-14 bg-gray-800 fixed top-0 left-0 w-full z-50 shadow-md"
+          className={`flex justify-between items-start ${
+            locale === "ar" ? "flex-row-reverse" : ""
+          } p-2 h-14 pattern-dark fixed top-0 left-0 w-full z-50 shadow-md`}
         >
-          {/* <GeoCoder setCenter={setCenter} /> */}
-          {/* <NavMenu /> */}
+          <GeoCoder />
+          <NavMenu />
         </header>
       )}
 
