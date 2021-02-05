@@ -39,12 +39,16 @@ export default function GeoCoder() {
 
   const isLoading = !geoSuggestions && !error && throttledQuery.length > 2;
 
-  const handleSuggestion = (e, { center, place_name }) => {
+  const handleSuggestion = (e, { center, text, place_name, context }) => {
     e.preventDefault();
+
+    const countryCode = context.filter((con) => con.id.includes("country"))[0]
+      .short_code;
 
     set((state) => {
       // Mapbox [Lon, Lat], FourSquare [Lat, Lon]
       state.fourSquare.reqParams.ll = [center[1], center[0]];
+      state.fourSquare.reqParams.near = `${text}, ${countryCode}`;
     });
 
     setQuery(place_name);

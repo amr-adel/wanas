@@ -14,6 +14,9 @@ export const en = {
   "home.fs-section.shops": "shops",
   "home.fs-section.arts": "arts",
   "home.fs-section.outdoors": "outdoors",
+  // Venue details
+  "venue.moreInfo": "More information at FourSquare",
+  "venue.gmaps": "Location on Google Maps",
   // GeoCoder
   geoCoderPlaceholder: "Region, city",
 };

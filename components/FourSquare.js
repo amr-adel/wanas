@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 
 import axios from "axios";
@@ -9,13 +10,7 @@ import Loader from "../utils/Loader";
 import Icon from "../utils/Icon";
 
 const fetchVenues = (reqParams, locale) => {
-  const { ll, limit, section, radius, offset } = reqParams;
-
-  return axios.get(
-    `/api/exploreVenues?locale=${
-      locale === "ar" ? "en" : locale
-    }&ll=${ll}&limit=${limit}&section=${section}`
-  );
+  return axios.post(`/api/exploreVenues`, { ...reqParams, locale });
 };
 
 export default function FourSquare() {
@@ -27,17 +22,11 @@ export default function FourSquare() {
   const [activeTab, setActiveTab] = useState("info");
 
   const { data, error } = useSWR(
-    reqParams.ll ? [reqParams, locale] : null,
+    reqParams.ll || reqParams.near ? [reqParams, locale] : null,
     fetchVenues
   );
 
   const isLoading = !data && !error && reqParams.ll;
-
-  // useEffect(() => {
-  //   if (data) {
-  //     console.log("data: ", data);
-  //   }
-  // }, [data]);
 
   const tabs = ["info", "settings", "history", "bookmark"];
 
@@ -49,7 +38,7 @@ export default function FourSquare() {
     ),
     settings: "Request parameters",
     history: "Visited venues",
-    bookmark: "Bokkmarked venues",
+    bookmark: "Bookmarked venues",
   };
 
   return (
@@ -60,7 +49,9 @@ export default function FourSquare() {
       >
         <ul
           id="tab-switcher"
-          className="flex w-full pattern-dark bg-yellow divide-x-2 divide-gray-600"
+          className={`flex ${
+            locale === "ar" ? "flex-row-reverse" : ""
+          } w-full pattern-dark bg-yellow divide-x-2 divide-gray-600`}
         >
           {tabs.map((tab) => (
             <li
@@ -84,12 +75,17 @@ export default function FourSquare() {
 
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
 
-      {data && <FourSquareVenues venues={data.data.response.groups[0].items} />}
+      {/* {data && console.log(data)} */}
+      {data && (
+        <FourSquareVenues venues={data?.data?.response?.groups[0]?.items} />
+      )}
     </div>
   );
 }
 
 export function FourSquareVenues({ venues }) {
+  const router = useRouter();
+
   return (
     <ol id="venues-container" className="flex flex-col">
       {venues.map((venue) => {
@@ -98,6 +94,7 @@ export function FourSquareVenues({ venues }) {
           <li
             key={id}
             className="bg-gray-50 p-2 mb-4 rounded-lg shadow hover:shadow-md cursor-pointer"
+            onClick={() => router.push(`/venues/${id}`)}
           >
             {categories[0] ? (
               <span className="text-xs text-yellow-400 bg-yellow-50 py-1 px-2 rounded">
@@ -105,9 +102,9 @@ export function FourSquareVenues({ venues }) {
               </span>
             ) : null}
 
-            <h6 className="text-xl text-red-500 border-b border-gray-200 mb-1 py-1">
+            <h3 className="text-xl text-red-500 border-b border-gray-200 mb-1 py-1">
               {name}
-            </h6>
+            </h3>
             <p className="text-sm text-gray-400">
               {location.formattedAddress[0]} <br />
               {location.formattedAddress[1]}

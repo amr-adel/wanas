@@ -44,7 +44,7 @@ export default function Explore() {
       </div>
 
       <div
-        id="foursquare-container"
+        id="results-container"
         className="h-full w-full p-4 relative flex-1 flex flex-col border-t-2 border-gray-100 pattern-light rounded-t-2xl"
       >
         <FourSquare />

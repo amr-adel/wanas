@@ -43,7 +43,7 @@ export default function Home() {
         <Logo type="text" classes="h-8" />
       </div>
 
-      <div className="h-full w-full p-4 flex-1 flex flex-col pattern-dark rounded-t-2xl relative">
+      <div className="h-full w-full p-4 flex-1 flex flex-col border-t-2 border-gray-600 pattern-dark rounded-t-2xl relative">
         <div id="select-section" className="p-4 border-b border-gray-600">
           <h3 className="mb-2 text-xl text-center text-gray-200">
             {t("home.looking-for")}

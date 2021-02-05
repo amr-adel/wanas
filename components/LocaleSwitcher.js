@@ -4,13 +4,13 @@ import { localeNames } from "../lang";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function LocaleSwitcher() {
-  const { locale, locales, pathname } = useRouter();
+  const { locale, locales, asPath } = useRouter();
   const router = useRouter();
 
   const [user, setUser] = useLocalStorage("user_settings", null);
 
   const handleChangeLocale = (newLocale) => {
-    router.push(pathname, pathname, {
+    router.replace(asPath, asPath, {
       locale: newLocale,
     });
 

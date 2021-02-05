@@ -14,6 +14,9 @@ export const ar = {
   "home.fs-section.shops": "متاجر",
   "home.fs-section.arts": "فنون",
   "home.fs-section.outdoors": "في الهواء الطلق",
+  // Venue details
+  "venue.moreInfo": "معلومات أكثر على FourSquare",
+  "venue.gmaps": "الموقع على Google Maps",
   // GeoCoder
   geoCoderPlaceholder: "منطقة أو مدينة",
 };

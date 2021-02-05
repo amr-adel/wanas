@@ -1,18 +1,20 @@
 const axios = require("axios").default;
 
 export default async (req, res) => {
-  const { vid } = req.query;
+  const { vid, locale } = req.query;
 
-  // return axios
-  //   .get(
-  //     `https://api.foursquare.com/v2/venues/${vid}?client_id=${process.env.FS_ID}&client_secret=${process.env.FS_SECRET}&v=20210115`
-  //   )
-  //   .then((response) => res.json(response.data))
-  //   .catch((e) => {
-  //     res.json(e.response.data);
-  //   });
+  // return setTimeout(() => {
+  //   return res.json(venue);
+  // }, 750);
 
-  return res.json(venue);
+  return axios
+    .get(
+      `https://api.foursquare.com/v2/venues/${vid}?client_id=${process.env.FS_ID}&client_secret=${process.env.FS_SECRET}&locale=${locale}&v=20210115`
+    )
+    .then((response) => res.json(response.data))
+    .catch((e) => {
+      res.json(e.response.data);
+    });
 };
 
 const venue = {
@@ -23,7 +25,7 @@ const venue = {
   response: {
     venue: {
       id: "4ee2696393ad88a6bed30288",
-      name: "Naguib Mahfouz Cafe (مقهى نجيب محفوظ)",
+      name: "Naguib Mahfouz Cafe",
       contact: {
         phone: "+20225903788",
         formattedPhone: "+20 2 25903788",
@@ -103,7 +105,7 @@ const venue = {
         currency: "$",
       },
       likes: {
-        count: 498,
+        count: 47498,
         groups: [
           {
             type: "others",
