@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { useIntl } from "react-intl";
 
 import SetInnerHeightVar from "../utils/SetInnerHeightVar";
@@ -39,6 +40,41 @@ export default function Layout({ children }) {
 
   return (
     <div>
+      <Head>
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/app-icons/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/app-icons/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/app-icons/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/app-icons/site.webmanifest" />
+        <link
+          rel="mask-icon"
+          href="/app-icons/safari-pinned-tab.svg"
+          color="#ef4444"
+        />
+        <link rel="shortcut icon" href="/app-icons/favicon.ico" />
+        <meta name="apple-mobile-web-app-title" content="Wanas" />
+        <meta name="application-name" content="Wanas" />
+        <meta name="msapplication-TileColor" content="#f1f5f9" />
+        <meta
+          name="msapplication-config"
+          content="/app-icons/browserconfig.xml"
+        />
+        <meta name="theme-color" content="#f1f5f9" />
+      </Head>
+
       <SetInnerHeightVar />
       {showModal && (
         <Modal>

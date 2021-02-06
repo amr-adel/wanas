@@ -50,6 +50,7 @@ function Venue() {
     venueDetails = (
       <>
         <header>
+          {/* Venue name ========================================== */}
           <h1 className="p-2 text-2xl text-center text-red-500">{name}</h1>
 
           {categories?.length > 0 && (
@@ -57,6 +58,7 @@ function Venue() {
               id="categories"
               className="pb-2 flex flex-wrap items-center justify-center"
             >
+              {/* Categories ========================================== */}
               {categories.map((cat) => (
                 <span
                   key={cat.name}
@@ -69,6 +71,7 @@ function Venue() {
           )}
         </header>
 
+        {/* Best photo ========================================== */}
         <div className="w-full relative py-4">
           <div
             id="background-img"
@@ -87,6 +90,7 @@ function Venue() {
               router.locale === "ar" ? "left-2" : "right-2"
             } w-20`}
           >
+            {/* Rating ========================================== */}
             {rating && (
               <div id="rating" className="flex flex-col rounded-lg shadow">
                 <div
@@ -113,6 +117,7 @@ function Venue() {
               </div>
             )}
 
+            {/* Likes ========================================== */}
             {likes?.count !== 0 && (
               <div
                 id="likes"
@@ -125,6 +130,7 @@ function Venue() {
               </div>
             )}
 
+            {/* Price ========================================== */}
             {price && (
               <div
                 id="price"
@@ -145,13 +151,18 @@ function Venue() {
           </div>
         </div>
 
+        {/* Address ========================================== */}
         {location.formattedAddress && (
-          <p className="text-gray-700 py-2">
-            {location.formattedAddress[0]} <br />
-            {location.formattedAddress[1]}
-          </p>
+          <div id="address" className="flex">
+            <Icon name="pin" classes="w-4 h-4 text-gray-200 mt-3 mr-1" />
+            <p className="text-gray-700 py-2">
+              {location.formattedAddress[0]} <br />
+              {location.formattedAddress[1]}
+            </p>
+          </div>
         )}
 
+        {/* Tips ========================================== */}
         {tips?.groups[0]?.items?.length > 0 && (
           <div id="tips" className="py-4 px-2 flex flex-col">
             {tips.groups[0].items.map((tip) => (
@@ -167,6 +178,7 @@ function Venue() {
           </div>
         )}
 
+        {/* External links ========================================== */}
         <div id="external-links" className="flex flex-col pt-4 pb-2">
           <a
             href={`https://foursquare.com/v/${id}`}
