@@ -14,7 +14,7 @@ export const es = {
   "home.fs-section.shops": "tiendas",
   "home.fs-section.arts": "letras",
   "home.fs-section.outdoors": "al aire libre",
-
+  // Explore
   "explore.info.start":
     "Comience seleccionando (región, ciudad) arriba o mueva el mapa al lugar donde desea explorar.",
   "explore.info.zero": "Ningún lugar coincide con su ubicación/búsqueda.",
@@ -30,6 +30,8 @@ export const es = {
   "explore.settings.sort.popularity": "popularidad",
   "explore.settings.sort.distance": "distancia",
   "explore.settings.confirm": "Actualizar la configuración de búsqueda",
+  "explore.history.msg": "Tus lugares recientemente explorados: ",
+  "explore.history.clear": "Limpiar el historial reciente",
   // Venue details
   "venue.moreInfo": "Mas información en FourSquare",
   "venue.gmaps": "Ubicación en Google Maps",

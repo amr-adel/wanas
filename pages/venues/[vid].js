@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 
@@ -6,6 +7,7 @@ import useSWR from "swr";
 
 import Loader from "../../utils/Loader";
 import Icon from "../../utils/Icon";
+import useRecentVenues from "../../hooks/useRecentVenues";
 
 const fetchVenue = (vid, locale) => {
   return axios.get(`/api/getVenue?vid=${vid}&locale=${locale}`);
@@ -18,11 +20,21 @@ function Venue() {
   const router = useRouter();
   const { vid, ll } = router.query;
 
+  const { addToRecent } = useRecentVenues();
+
   const { data, error } = useSWR(vid ? [vid, locale] : null, fetchVenue);
 
   const isLoding = !data && !error && vid;
 
   let venueDetails = null;
+
+  useEffect(() => {
+    if (data?.data?.response?.venue) {
+      const { id, name, location, categories } = data.data.response.venue;
+
+      addToRecent({ venue: { id, name, location, categories } });
+    }
+  }, [data]);
 
   if (isLoding) {
     venueDetails = <Loader classes="text-gray-400 h-14 py-5" />;

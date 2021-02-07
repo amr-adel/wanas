@@ -30,6 +30,8 @@ export const en = {
   "explore.settings.sort.popularity": "popularity",
   "explore.settings.sort.distance": "distance",
   "explore.settings.confirm": "Update search settings",
+  "explore.history.msg": "Your recently explored venues: ",
+  "explore.history.clear": "Clear recent history",
   // Venue details
   "venue.moreInfo": "More information at FourSquare",
   "venue.gmaps": "Location on Google Maps",

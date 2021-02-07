@@ -19,7 +19,7 @@ export const ar = {
     "ابدأ بتحديد (المنطقة ، المدينة) أعلاه ، أو انقل الخريطة إلى المكان الذي تريد استكشافه.",
   "explore.info.zero": "لا يوجد مكان يطابق الموقع/اعدادات البحث.",
   "explore.info.venues": " مكان تم ايجاده",
-  "explore.info.near": " ، بالقرب من",
+  "explore.info.near": " ، بالقرب من ",
   "explore.info.section": " ، ذا صلة بـ",
   "explore.settings.sections": "أبحث في:",
   "explore.settings.radius": "نطاق البحث:",
@@ -30,6 +30,8 @@ export const ar = {
   "explore.settings.sort.popularity": "الشعبية",
   "explore.settings.sort.distance": "المسافة",
   "explore.settings.confirm": "تحديث اعدادت البحث",
+  "explore.history.msg": "الأماكن التي استكشفتها مؤخرًا : ",
+  "explore.history.clear": "أحذف القائمة",
   // Venue details
   "venue.moreInfo": "معلومات أكثر على FourSquare",
   "venue.gmaps": "الموقع على Google Maps",

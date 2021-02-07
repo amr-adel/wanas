@@ -8,6 +8,7 @@ import useSWR from "swr";
 import { useStore } from "../hooks/useStore";
 import Loader from "../utils/Loader";
 import Icon from "../utils/Icon";
+import useRecentVenues from "../hooks/useRecentVenues";
 
 const fetchVenues = (reqParams, locale) => {
   return axios.post(`/api/exploreVenues`, { ...reqParams, locale });
@@ -20,6 +21,8 @@ export default function FourSquare() {
   const { sections, reqParams } = useStore((state) => state.fourSquare);
 
   const [activeTab, setActiveTab] = useState("info");
+
+  const { recent, clearRecent } = useRecentVenues();
 
   const { data, error } = useSWR(
     reqParams.ll || reqParams.near ? [reqParams, locale] : null,
@@ -41,7 +44,28 @@ export default function FourSquare() {
       <InfoTab total={data?.data?.response?.totalResults} />
     ),
     settings: <SettingsTab setActiveTab={setActiveTab} />,
-    history: "Visited venues",
+    history: (
+      <div className="flex flex-col py-4">
+        <div>
+          {t("explore.history.msg")}(
+          <span className="text-red-500 tracking-wider font-bold">
+            {recent?.length}
+          </span>
+          )
+        </div>
+
+        {recent?.length > 0 && (
+          <div id="clear-recent" className="text-center pt-4">
+            <button
+              className="btn-outlined text-gray-700"
+              onClick={clearRecent}
+            >
+              {t("explore.history.clear")}
+            </button>
+          </div>
+        )}
+      </div>
+    ),
     bookmark: "Bookmarked venues",
   };
 
@@ -81,13 +105,22 @@ export default function FourSquare() {
 
       {/* {data && console.log(data)} */}
 
-      {pagination}
+      {activeTab === "info" && (
+        <>
+          {pagination}
 
-      {data && (
-        <FourSquareVenues venues={data?.data?.response?.groups[0]?.items} />
+          {data && (
+            <FourSquareVenues venues={data?.data?.response?.groups[0]?.items} />
+          )}
+
+          {pagination}
+        </>
       )}
 
-      {pagination}
+      {activeTab === "history" && recent?.length > 0 && (
+        <FourSquareVenues venues={recent} />
+      )}
+      {/* {activeTab === "history" && console.log(recent)} */}
     </div>
   );
 }

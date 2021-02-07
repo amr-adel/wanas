@@ -35,8 +35,11 @@ export default function NavMenu() {
       className="fixed top-14 left-0 w-screen bg-gray-50 p-4 pb-2 border-b-2 border-gray-700 rounded-b-lg shadow-lg"
     >
       <ul className="mb-2 felx flex-col text-center border-b border-gray-200 text-xl">
-        <li className="p-2 my-2">
+        <li key="home" className="p-2 my-2">
           <Link href="/">Home</Link>
+        </li>
+        <li key="explore" className="p-2 my-2">
+          <Link href="/explore">Explore</Link>
         </li>
       </ul>
       <LocaleSwitcher />
