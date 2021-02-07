@@ -14,6 +14,16 @@ export const ar = {
   "home.fs-section.shops": "متاجر",
   "home.fs-section.arts": "فنون",
   "home.fs-section.outdoors": "في الهواء الطلق",
+  // Explore
+  "explore.settings.sections": "أبحث في:",
+  "explore.settings.radius": "نطاق البحث:",
+  "explore.settings.auto": "تلقائي",
+  "explore.settings.radius.unit": " كم",
+  "explore.settings.limit": "عدد النتائج في كل صفحة:",
+  "explore.settings.sort": "رتب حسب:",
+  "explore.settings.sort.popularity": "الشعبية",
+  "explore.settings.sort.distance": "المسافة",
+  "explore.settings.confirm": "تحديث اعدادت البحث",
   // Venue details
   "venue.moreInfo": "معلومات أكثر على FourSquare",
   "venue.gmaps": "الموقع على Google Maps",

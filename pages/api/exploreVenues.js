@@ -6,11 +6,15 @@ export default async (req, res) => {
   for (let param in req.body) {
     let tempParam = req.body[param];
 
-    if (tempParam) {
+    if (tempParam && tempParam !== "auto" && tempParam !== "all") {
       if (param === "sort") {
-        params += `&${tempParam}=1`;
+        params += `&${
+          tempParam === "popularity" ? "sortByPopularity" : "sortByDistance"
+        }=1`;
+      } else if (param === "radius") {
+        params += `&${param}=${tempParam * 1000}`;
       } else {
-        params += tempParam !== "all" ? `&${param}=${tempParam}` : "";
+        params += `&${param}=${tempParam}`;
       }
     }
   }
@@ -18,7 +22,7 @@ export default async (req, res) => {
   // return res.json(params);
 
   const url = encodeURI(
-    `https://api.foursquare.com/v2/venues/explore?client_id=${process.env.FS_ID}&client_secret=${process.env.FS_SECRET}${params}&sortByPopularity=1&day=any&time=any&v=20210115`
+    `https://api.foursquare.com/v2/venues/explore?client_id=${process.env.FS_ID}&client_secret=${process.env.FS_SECRET}${params}&day=any&time=any&v=20210115`
   );
 
   return axios

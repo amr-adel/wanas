@@ -154,7 +154,7 @@ function Venue() {
         {/* Address ========================================== */}
         {location.formattedAddress && (
           <div id="address" className="flex">
-            <Icon name="pin" classes="w-4 h-4 text-gray-200 mt-3 mr-1" />
+            <Icon name="pin" classes="w-4 h-4 text-gray-200 mt-3 mx-1" />
             <p className="text-gray-700 py-2">
               {location.formattedAddress[0]} <br />
               {location.formattedAddress[1]}

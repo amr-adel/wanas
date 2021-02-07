@@ -14,6 +14,16 @@ export const en = {
   "home.fs-section.shops": "shops",
   "home.fs-section.arts": "arts",
   "home.fs-section.outdoors": "outdoors",
+  // Explore
+  "explore.settings.sections": "Search in:",
+  "explore.settings.radius": "Search radius:",
+  "explore.settings.auto": "auto",
+  "explore.settings.radius.unit": " Km",
+  "explore.settings.limit": "Results per page:",
+  "explore.settings.sort": "Sort by:",
+  "explore.settings.sort.popularity": "popularity",
+  "explore.settings.sort.distance": "distance",
+  "explore.settings.confirm": "Update search settings",
   // Venue details
   "venue.moreInfo": "More information at FourSquare",
   "venue.gmaps": "Location on Google Maps",

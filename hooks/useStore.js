@@ -6,14 +6,15 @@ export const useStore = create((set) => ({
   fourSquare: {
     selectedVenue: null,
     venues: [],
+    sections: ["all", "food", "drinks", "coffee", "shops", "arts", "outdoors"],
     reqParams: {
       section: "all",
       ll: null,
       near: null,
-      radius: null,
-      limit: 20,
+      radius: "auto",
+      limit: 15,
       offset: null,
-      sort: null,
+      sort: "auto",
     },
   },
   set: (fn) => set(produce(fn)),

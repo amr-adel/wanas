@@ -21,6 +21,7 @@ export default function Home() {
   const t = (id) => formatMessage({ id });
 
   const section = useStore((state) => state.fourSquare.reqParams.section);
+  const { sections } = useStore((state) => state.fourSquare);
   const set = useStore((state) => state.set);
 
   const handleChangeSection = (sec) => {
@@ -49,7 +50,7 @@ export default function Home() {
             {t("home.looking-for")}
           </h3>
           <ul className="flex flex-wrap justify-center">
-            {fourSquareSections.map((sec) => (
+            {sections.map((sec) => (
               <li key={sec}>
                 <button
                   onClick={() => handleChangeSection(sec)}
@@ -68,10 +69,6 @@ export default function Home() {
             {t("home.looking-in")}
           </h3>
           <GeoCoder />
-
-          {/* <Link href="/explore">
-            <span className="text-xl text-gray-200">Explore</span>
-          </Link> */}
         </div>
       </div>
     </div>
