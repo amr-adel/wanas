@@ -279,7 +279,7 @@ function Paginate({ total }) {
 
       <button
         id="next"
-        disabled={offset + limit > total}
+        disabled={offset + limit >= total}
         className="disabled:text-gray-500 text-yellow focus:outline-none"
         onClick={() =>
           set((state) => {

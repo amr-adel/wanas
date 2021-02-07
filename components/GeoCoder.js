@@ -49,6 +49,7 @@ export default function GeoCoder() {
       // Mapbox [Lon, Lat], FourSquare [Lat, Lon]
       state.fourSquare.reqParams.ll = [center[1], center[0]];
       state.fourSquare.reqParams.near = `${text}, ${countryCode}`;
+      state.fourSquare.reqParams.offset = 0;
     });
 
     setQuery(place_name);
