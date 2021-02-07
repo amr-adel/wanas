@@ -13,7 +13,7 @@ export const useStore = create((set) => ({
       near: null,
       radius: "auto",
       limit: 15,
-      offset: null,
+      offset: 0,
       sort: "auto",
     },
   },

@@ -28,6 +28,10 @@ export default function FourSquare() {
 
   const isLoading = !data && !error && reqParams.ll;
 
+  const pagination = data?.data?.response?.totalResults > reqParams.limit && (
+    <Paginate total={data.data.response.totalResults} />
+  );
+
   const tabs = ["info", "settings", "history", "bookmark"];
 
   const tabBody = {
@@ -76,9 +80,14 @@ export default function FourSquare() {
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
 
       {/* {data && console.log(data)} */}
+
+      {pagination}
+
       {data && (
         <FourSquareVenues venues={data?.data?.response?.groups[0]?.items} />
       )}
+
+      {pagination}
     </div>
   );
 }
@@ -93,7 +102,7 @@ export function FourSquareVenues({ venues }) {
         return (
           <li
             key={id}
-            className="bg-gray-50 p-2 mb-4 rounded-lg shadow hover:shadow-md cursor-pointer"
+            className="bg-gray-50 p-2 mb-4 last:mb-0 rounded-lg shadow hover:shadow-md cursor-pointer"
             onClick={() => router.push(`/venues/${id}`)}
           >
             {categories[0] ? (
@@ -132,7 +141,7 @@ function Settings({ setActiveTab }) {
   const updateSearchParams = () => {
     setActiveTab("info");
     set((state) => {
-      state.fourSquare.reqParams = settings;
+      state.fourSquare.reqParams = { ...settings, offset: 0 };
     });
   };
 
@@ -149,7 +158,7 @@ function Settings({ setActiveTab }) {
             <li key={sec}>
               <button
                 onClick={() => handleChange("section", sec)}
-                className={`btn my-1 mx-2 text-xs ${
+                className={`btn my-1 mx-2 text-sm ${
                   sec === settings.section ? "bg-red-500" : "bg-gray-700"
                 } text-gray-200 capitalize`}
               >
@@ -168,7 +177,7 @@ function Settings({ setActiveTab }) {
             <li key={rad}>
               <button
                 onClick={() => handleChange("radius", rad)}
-                className={`btn my-1 mx-2 text-xs ${
+                className={`btn my-1 mx-2 text-sm ${
                   rad === settings.radius ? "bg-red-500" : "bg-gray-700"
                 } text-gray-200 capitalize`}
               >
@@ -189,7 +198,7 @@ function Settings({ setActiveTab }) {
             <li key={limit}>
               <button
                 onClick={() => handleChange("limit", limit)}
-                className={`btn my-1 mx-2 text-xs ${
+                className={`btn my-1 mx-2 text-sm ${
                   limit === settings.limit ? "bg-red-500" : "bg-gray-700"
                 } text-gray-200`}
               >
@@ -208,7 +217,7 @@ function Settings({ setActiveTab }) {
             <li key={`sort-${sortBy}`}>
               <button
                 onClick={() => handleChange("sort", sortBy)}
-                className={`btn my-1 mx-2 text-xs ${
+                className={`btn my-1 mx-2 text-sm ${
                   sortBy === settings.sort ? "bg-red-500" : "bg-gray-700"
                 } text-gray-200 capitalize`}
               >
@@ -231,6 +240,58 @@ function Settings({ setActiveTab }) {
           {t("explore.settings.confirm")}
         </button>
       </div>
+    </div>
+  );
+}
+
+function Paginate({ total }) {
+  const { formatMessage, locale } = useIntl();
+  const t = (id) => formatMessage({ id });
+
+  const { limit, offset } = useStore((state) => state.fourSquare.reqParams);
+  const set = useStore((state) => state.set);
+
+  return (
+    <div
+      id="pagination"
+      className={`h-12 flex items-center bg-gray-50 m-4 rounded-lg overflow-hidden shadow`}
+    >
+      <button
+        id="prev"
+        disabled={!offset}
+        className="disabled:text-gray-500 text-yellow focus:outline-none"
+        onClick={() =>
+          set((state) => {
+            state.fourSquare.reqParams.offset -= limit;
+          })
+        }
+      >
+        <Icon
+          name={locale === "ar" ? "right" : "left"}
+          classes="h-12 w-12 p-2 pattern-dark"
+        />
+      </button>
+
+      <span className="flex-1 text-center text-gray-700 font-bold tracking-widest">
+        {offset + 1} : {limit + offset > total ? total : limit + offset} (
+        <span className="text-gray-400">{total}</span>)
+      </span>
+
+      <button
+        id="next"
+        disabled={offset + limit > total}
+        className="disabled:text-gray-500 text-yellow focus:outline-none"
+        onClick={() =>
+          set((state) => {
+            state.fourSquare.reqParams.offset += limit;
+          })
+        }
+      >
+        <Icon
+          name={locale !== "ar" ? "right" : "left"}
+          classes="h-12 w-12 p-2 pattern-dark"
+        />
+      </button>
     </div>
   );
 }

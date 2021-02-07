@@ -15,7 +15,7 @@ import NavMenu from "../components/NavMenu";
 import LocaleSwitcher from "../components/LocaleSwitcher";
 
 export default function Layout({ children }) {
-  const { locale, locales, pathname } = useRouter();
+  const { locale, asPath, pathname } = useRouter();
   const router = useRouter();
 
   const { formatMessage } = useIntl();
@@ -31,7 +31,7 @@ export default function Layout({ children }) {
       setUser({ locale: locale });
     } else {
       if (user.locale !== locale) {
-        router.push(pathname, pathname, {
+        router.replace(asPath, asPath, {
           locale: user.locale,
         });
       }

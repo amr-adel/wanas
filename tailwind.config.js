@@ -52,6 +52,8 @@ module.exports = {
     extend: {
       width: ["hover", "focus", "focus-within"],
       transitionProperty: ["hover", "focus"],
+      textColor: ["disabled"],
+      margin: ["last"],
     },
   },
   plugins: [],
