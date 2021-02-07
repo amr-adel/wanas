@@ -15,6 +15,12 @@ export const en = {
   "home.fs-section.arts": "arts",
   "home.fs-section.outdoors": "outdoors",
   // Explore
+  "explore.info.start":
+    "Start by selecting (region, city) above, or move the map to where you want to explore.",
+  "explore.info.zero": "No place match your location/search.",
+  "explore.info.venues": " Venues found",
+  "explore.info.near": " , near ",
+  "explore.info.section": " , related to ",
   "explore.settings.sections": "Search in:",
   "explore.settings.radius": "Search radius:",
   "explore.settings.auto": "auto",

@@ -14,7 +14,13 @@ export const es = {
   "home.fs-section.shops": "tiendas",
   "home.fs-section.arts": "letras",
   "home.fs-section.outdoors": "al aire libre",
-  // Explore
+
+  "explore.info.start":
+    "Comience seleccionando (región, ciudad) arriba o mueva el mapa al lugar donde desea explorar.",
+  "explore.info.zero": "Ningún lugar coincide con su ubicación/búsqueda.",
+  "explore.info.venues": " Lugares encontrados",
+  "explore.info.near": " , cerca ",
+  "explore.info.section": " , Relacionado con ",
   "explore.settings.sections": "Busca en:",
   "explore.settings.radius": "Radio de búsqueda:",
   "explore.settings.auto": "defecto",

@@ -38,9 +38,9 @@ export default function FourSquare() {
     info: isLoading ? (
       <Loader classes="text-gray-400 h-4 my-4" />
     ) : (
-      "Response information"
+      <InfoTab total={data?.data?.response?.totalResults} />
     ),
-    settings: <Settings setActiveTab={setActiveTab} />,
+    settings: <SettingsTab setActiveTab={setActiveTab} />,
     history: "Visited venues",
     bookmark: "Bookmarked venues",
   };
@@ -125,7 +125,49 @@ export function FourSquareVenues({ venues }) {
   );
 }
 
-function Settings({ setActiveTab }) {
+function InfoTab({ total }) {
+  const { formatMessage } = useIntl();
+  const t = (id) => formatMessage({ id });
+
+  const {
+    sections,
+    reqParams: { section, near, radius },
+  } = useStore((state) => state.fourSquare);
+
+  let msg = "";
+
+  if (total === undefined) {
+    msg = t("explore.info.start");
+  } else if (total === 0) {
+    msg = t("explore.info.zero");
+  } else {
+    msg = (
+      <h1>
+        <span className="text-red-500">{total}</span>
+        {t("explore.info.venues")}
+        {near ? t("explore.info.near") : ""}
+        {near ? <span className="text-red-500">{near}</span> : ""}
+        {section !== "all" ? t("explore.info.section") : ""}
+        {section !== "all" ? (
+          <span className="text-red-500">
+            {t(`home.fs-section.${section}`)}
+          </span>
+        ) : (
+          ""
+        )}
+        .
+      </h1>
+    );
+  }
+
+  return (
+    <div id="info-containe4" className="p-4 text-gray-700 text-center">
+      {msg}
+    </div>
+  );
+}
+
+function SettingsTab({ setActiveTab }) {
   const { formatMessage } = useIntl();
   const t = (id) => formatMessage({ id });
 

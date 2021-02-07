@@ -15,6 +15,12 @@ export const ar = {
   "home.fs-section.arts": "فنون",
   "home.fs-section.outdoors": "في الهواء الطلق",
   // Explore
+  "explore.info.start":
+    "ابدأ بتحديد (المنطقة ، المدينة) أعلاه ، أو انقل الخريطة إلى المكان الذي تريد استكشافه.",
+  "explore.info.zero": "لا يوجد مكان يطابق الموقع/اعدادات البحث.",
+  "explore.info.venues": " مكان تم ايجاده",
+  "explore.info.near": " ، بالقرب من",
+  "explore.info.section": " ، ذا صلة بـ",
   "explore.settings.sections": "أبحث في:",
   "explore.settings.radius": "نطاق البحث:",
   "explore.settings.auto": "تلقائي",

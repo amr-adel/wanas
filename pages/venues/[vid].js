@@ -61,7 +61,7 @@ function Venue() {
               {/* Categories ========================================== */}
               {categories.map((cat) => (
                 <span
-                  key={cat.name}
+                  key={cat.id}
                   className="text-sm text-yellow-400 bg-yellow-50 py-1 px-2 rounded m-1"
                 >
                   {cat.name}
