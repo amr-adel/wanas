@@ -37,4 +37,7 @@ export const ar = {
   "venue.gmaps": "الموقع على Google Maps",
   // GeoCoder
   geoCoderPlaceholder: "منطقة أو مدينة",
+  currentLocation: "موقعي الحالي",
+  "currentLocation.error": "لا يمكن التعرف على موقعك الحالي.",
+  "currentLocation.error.1": "برجاء اتاحة خدمة التعرف على المواقع (GPS).",
 };

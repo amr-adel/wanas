@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
 
@@ -76,6 +76,8 @@ export default function GeoCoder() {
           name="location-arrow"
           classes="w-6 h-6 flex-shrink-0 pr-2 border-r border-gray-400"
         />
+
+        {/* Input */}
         <input
           type="text"
           placeholder={t("geoCoderPlaceholder")}
@@ -88,6 +90,8 @@ export default function GeoCoder() {
             focused ? " text-gray-700" : " text-gray-400"
           } text-lg`}
         />
+
+        {/* Clear search input */}
         {query && focused && (
           <button
             onMouseDown={(e) => {
@@ -100,9 +104,13 @@ export default function GeoCoder() {
         )}
       </label>
 
+      {/* Suggestions */}
       {focused && (
-        <div id="results" className="p-2 pb-0 mt-2 border-t border-gray-300">
-          {isLoading && <Loader classes="text-gray-400 h-4 my-4" />}
+        <div
+          id="results"
+          className="p-2 pb-0 my-2 border-t border-gray-300 divide-y divide-gray-300"
+        >
+          {isLoading && <Loader classes="text-gray-400 h-8 py-2" />}
 
           {geoSuggestions && (
             <ol dir={locale === "ar" ? "rtl" : "ltr"} className="flex flex-col">
@@ -122,6 +130,91 @@ export default function GeoCoder() {
               ))}
             </ol>
           )}
+
+          <CurrentLocation />
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CurrentLocation() {
+  const { formatMessage, locale } = useIntl();
+  const t = (id) => formatMessage({ id });
+
+  const { pathname } = useRouter();
+  const router = useRouter();
+
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  const set = useStore((state) => state.set);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      setCurrentLocation("ready");
+    }
+  }, []);
+
+  const success = (position) => {
+    const { latitude: lat, longitude: lon } = position.coords;
+
+    setCurrentLocation("ready");
+
+    set((state) => {
+      // Mapbox [Lon, Lat], FourSquare [Lat, Lon]
+      state.fourSquare.reqParams.ll = [lat, lon];
+      state.fourSquare.reqParams.near = null;
+      state.fourSquare.reqParams.offset = 0;
+    });
+
+    document.activeElement.blur();
+
+    if (pathname !== "/explore") {
+      router.push("/explore");
+    }
+  };
+
+  const error = (e) => {
+    setCurrentLocation("ready");
+    setErrorMsg(t(`currentLocation.${e.code === 1 ? "error.1" : "error"}`));
+  };
+
+  const options = {
+    enableHighAccuracy: true,
+    maximumAge: 30000,
+    timeout: 27000,
+  };
+
+  const handleCurrentLocation = (e) => {
+    e.preventDefault();
+
+    setErrorMsg(null);
+
+    setCurrentLocation("searching");
+
+    return navigator.geolocation.getCurrentPosition(success, error, options);
+  };
+
+  return !currentLocation ? null : (
+    <div id="current-location" onMouseDown={handleCurrentLocation}>
+      {currentLocation === "searching" ? (
+        <Loader classes="text-gray-400 h-8 py-2" />
+      ) : (
+        <div
+          className={`flex items-center divide-x ${
+            locale === "ar" ? "divide-x-reverse" : ""
+          } divide-gray-300 p-2 my-2 text-gray-500 bg-white rounded-lg cursor-pointer shadow hover:shadow-md`}
+        >
+          <Icon
+            name="my-location"
+            classes="w-6 h-6 mx-2 flex-shrink-0 text-yellow"
+          />
+
+          <span className="px-2 py-1">
+            <h5>{t("currentLocation")}</h5>
+            {errorMsg && <p className="text-sm text-red-400">{errorMsg}</p>}
+          </span>
         </div>
       )}
     </div>

@@ -37,4 +37,7 @@ export const en = {
   "venue.gmaps": "Location on Google Maps",
   // GeoCoder
   geoCoderPlaceholder: "Region, city",
+  currentLocation: "My current Location",
+  "currentLocation.error": "Unable to retrive your current location.",
+  "currentLocation.error.1": "Please, enable Location access on your device.",
 };
