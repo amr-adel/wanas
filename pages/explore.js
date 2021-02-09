@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import Head from "next/head";
+
 import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
+import { useStore } from "../hooks/useStore";
 
 import FourSquare from "../components/FourSquare";
-import { useStore } from "../hooks/useStore";
+import Map from "../components/Map";
 
 export default function Explore() {
   const { formatMessage } = useIntl();
@@ -36,12 +38,7 @@ export default function Explore() {
         <title>{t("app.name")}</title>
       </Head>
 
-      <div
-        id="map"
-        className="h-64 w-full fixed top-14 flex items-center justify-center bg-yellow-100"
-      >
-        MAP
-      </div>
+      <Map />
 
       <div
         id="results-container"

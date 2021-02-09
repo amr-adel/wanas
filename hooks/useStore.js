@@ -3,9 +3,9 @@ import produce from "immer";
 
 export const useStore = create((set) => ({
   modal: false,
+  markers: [],
   fourSquare: {
     selectedVenue: null,
-    venues: [],
     sections: ["all", "food", "drinks", "coffee", "shops", "arts", "outdoors"],
     reqParams: {
       section: "all",

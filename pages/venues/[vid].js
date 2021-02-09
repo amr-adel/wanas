@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import ReactMapGL, { Marker } from "react-map-gl";
+import axios from "axios";
+
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
-
-import axios from "axios";
 import useSWR from "swr";
 
 import Loader from "../../utils/Loader";
@@ -16,6 +17,15 @@ const fetchVenue = (vid, locale) => {
 function Venue() {
   const { formatMessage, locale } = useIntl();
   const t = (id) => formatMessage({ id });
+
+  const [venueCoords, setVenueCoords] = useState({ latitude: 0, longitude: 0 });
+
+  const [viewport, setViewport] = useState({
+    width: "100vw",
+    height: "100%",
+    zoom: 16,
+    ...venueCoords,
+  });
 
   const router = useRouter();
   const { vid, ll } = router.query;
@@ -31,6 +41,14 @@ function Venue() {
   useEffect(() => {
     if (data?.data?.response?.venue) {
       const { id, name, location, categories } = data.data.response.venue;
+
+      setVenueCoords({ latitude: location.lat, longitude: location.lng });
+
+      setViewport({
+        ...viewport,
+        latitude: location.lat,
+        longitude: location.lng,
+      });
 
       addToRecent({ venue: { id, name, location, categories } });
     }
@@ -232,7 +250,15 @@ function Venue() {
         id="map"
         className="h-64 w-full fixed top-14 flex items-center justify-center bg-yellow-100"
       >
-        MAP
+        <ReactMapGL
+          {...viewport}
+          mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+          onViewportChange={(nextViewport) => setViewport(nextViewport)}
+        >
+          <Marker {...venueCoords}>
+            <div className="h-1 w-1 bg-red-500"></div>
+          </Marker>
+        </ReactMapGL>
       </div>
 
       <div

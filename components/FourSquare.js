@@ -18,7 +18,7 @@ export default function FourSquare() {
   const { formatMessage, locale } = useIntl();
   const t = (id) => formatMessage({ id });
 
-  const { sections, reqParams } = useStore((state) => state.fourSquare);
+  const reqParams = useStore((state) => state.fourSquare.reqParams);
 
   const [activeTab, setActiveTab] = useState("info");
 
@@ -127,6 +127,24 @@ export default function FourSquare() {
 
 export function FourSquareVenues({ venues }) {
   const router = useRouter();
+
+  const set = useStore((state) => state.set);
+
+  useEffect(() => {
+    if (venues.length > 0) {
+      const markers = venues.map((venue) => {
+        return {
+          id: venue.venue.id,
+          lat: venue.venue.location.lat,
+          lng: venue.venue.location.lng,
+        };
+      });
+
+      set((state) => {
+        state.markers = markers;
+      });
+    }
+  }, [venues]);
 
   return (
     <ol id="venues-container" className="flex flex-col">
