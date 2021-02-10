@@ -58,6 +58,7 @@ export default function Map() {
         {...viewport}
         mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
+        reuseMaps={true}
         // transitionDuration={500}
         // transitionInterpolator={new LinearInterpolator(["zoom"])}
       >

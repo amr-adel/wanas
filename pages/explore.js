@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 
 import { useIntl } from "react-intl";
@@ -15,22 +15,28 @@ export default function Explore() {
   const router = useRouter();
 
   const { reqParams } = useStore((state) => state.fourSquare);
+  const [loadMap, setLoadMap] = useState(false);
+
+  // Sync reqParams with URL
+  // useEffect(() => {
+  //   if (reqParams.ll) {
+  //     router.push(
+  //       {
+  //         pathname: "/explore",
+  //         query: {
+  //           ll: reqParams.ll.join("_"),
+  //           section: reqParams.section,
+  //         },
+  //       },
+  //       undefined,
+  //       { shallow: true }
+  //     );
+  //   }
+  // }, [reqParams]);
 
   useEffect(() => {
-    if (reqParams.ll) {
-      router.push(
-        {
-          pathname: "/explore",
-          query: {
-            ll: reqParams.ll.join("_"),
-            section: reqParams.section,
-          },
-        },
-        undefined,
-        { shallow: true }
-      );
-    }
-  }, [reqParams]);
+    setLoadMap(true);
+  }, []);
 
   return (
     <div className="min-h-inner bg-repeat pt-72 flex flex-col">
@@ -38,7 +44,7 @@ export default function Explore() {
         <title>{t("app.name")}</title>
       </Head>
 
-      <Map />
+      {loadMap && <Map page="explore" />}
 
       <div
         id="results-container"
