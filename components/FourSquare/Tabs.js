@@ -76,7 +76,10 @@ function HistoryTab({ recent, clearRecent, t }) {
 
       {recent?.length > 0 && (
         <div id="clear-recent" className="text-center pt-4">
-          <button className="btn-outlined text-gray-700" onClick={clearRecent}>
+          <button
+            className="btn-outlined text-gray-700"
+            onClick={() => clearRecent()}
+          >
             {t("explore.history.clear")}
           </button>
         </div>

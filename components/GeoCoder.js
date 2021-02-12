@@ -50,6 +50,9 @@ export default function GeoCoder() {
       state.fourSquare.reqParams.ll = [center[1], center[0]];
       state.fourSquare.reqParams.near = `${text}, ${countryCode}`;
       state.fourSquare.reqParams.offset = 0;
+
+      state.mapBox.center = center;
+      state.mapBox.zoom = 14;
     });
 
     setQuery(place_name);
@@ -131,14 +134,14 @@ export default function GeoCoder() {
             </ol>
           )}
 
-          <CurrentLocation />
+          <CurrentLocation setQuery={setQuery} />
         </div>
       )}
     </div>
   );
 }
 
-function CurrentLocation() {
+function CurrentLocation({ setQuery }) {
   const { formatMessage, locale } = useIntl();
   const t = (id) => formatMessage({ id });
 
@@ -157,17 +160,21 @@ function CurrentLocation() {
   }, []);
 
   const success = (position) => {
-    const { latitude: lat, longitude: lon } = position.coords;
+    const { latitude: lat, longitude: lng } = position.coords;
 
     setCurrentLocation("ready");
 
     set((state) => {
       // Mapbox [Lon, Lat], FourSquare [Lat, Lon]
-      state.fourSquare.reqParams.ll = [lat, lon];
+      state.fourSquare.reqParams.ll = [lat, lng];
       state.fourSquare.reqParams.near = null;
       state.fourSquare.reqParams.offset = 0;
+
+      state.mapBox.center = [lng, lat];
+      state.mapBox.zoom = 14;
     });
 
+    setQuery("");
     document.activeElement.blur();
 
     if (pathname !== "/explore") {

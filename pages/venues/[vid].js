@@ -1,14 +1,15 @@
-import ReactMapGL, { Marker } from "react-map-gl";
 import axios from "axios";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import useSWR from "swr";
+import { useStore } from "../../hooks/useStore";
 
 import Loader from "../../utils/Loader";
 import Icon from "../../utils/Icon";
 import useRecentVenues from "../../hooks/useRecentVenues";
+import Map from "../../components/Map";
 
 const fetchVenue = (vid, locale) => {
   return axios.get(`/api/getVenue?vid=${vid}&locale=${locale}`);
@@ -18,23 +19,16 @@ function Venue() {
   const { formatMessage, locale } = useIntl();
   const t = (id) => formatMessage({ id });
 
-  const [venueCoords, setVenueCoords] = useState({ latitude: 0, longitude: 0 });
-
-  const [viewport, setViewport] = useState({
-    width: "100vw",
-    height: "100%",
-    zoom: 16,
-    ...venueCoords,
-  });
-
   const router = useRouter();
   const { vid, ll } = router.query;
 
-  const { addToRecent } = useRecentVenues();
+  const set = useStore((state) => state.set);
 
   const { data, error } = useSWR(vid ? [vid, locale] : null, fetchVenue);
 
   const isLoding = !data && !error && vid;
+
+  const { addToRecent } = useRecentVenues();
 
   let venueDetails = null;
 
@@ -42,12 +36,16 @@ function Venue() {
     if (data?.data?.response?.venue) {
       const { id, name, location, categories } = data.data.response.venue;
 
-      setVenueCoords({ latitude: location.lat, longitude: location.lng });
-
-      setViewport({
-        ...viewport,
-        latitude: location.lat,
-        longitude: location.lng,
+      set((state) => {
+        state.mapBox.center = [location.lng, location.lat];
+        state.mapBox.zoom = 16;
+        state.mapBox.markers = [
+          {
+            id,
+            lat: location.lat,
+            lng: location.lng,
+          },
+        ];
       });
 
       addToRecent({ venue: { id, name, location, categories } });
@@ -245,30 +243,17 @@ function Venue() {
   }
 
   return (
-    <div className="min-h-inner bg-repeat pt-72 flex flex-col">
-      <div
-        id="map"
-        className="h-64 w-full fixed top-14 flex items-center justify-center bg-yellow-100"
-      >
-        <ReactMapGL
-          {...viewport}
-          mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
-          onViewportChange={(nextViewport) => setViewport(nextViewport)}
-        >
-          <Marker {...venueCoords}>
-            <div className="h-1 w-1 bg-red-500"></div>
-          </Marker>
-        </ReactMapGL>
-      </div>
-
+    <div className="min-h-inner bg-repeat pt-76 flex flex-col">
       <div
         id="venue-details-container"
-        className="h-full w-full p-4 relative flex-1 flex flex-col border-t-2 border-gray-100 pattern-light rounded-t-2xl"
+        className="h-full w-full p-4 relative flex-1 flex flex-col border-t-2 border-gray-100 pattern-light rounded-t-2xl z-10"
       >
         <div className="bg-gray-50 p-2 mb-4 flex flex-col divide-y divide-gray-200 rounded-lg shadow">
           {venueDetails}
         </div>
       </div>
+
+      <Map />
     </div>
   );
 }

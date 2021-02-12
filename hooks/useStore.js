@@ -3,7 +3,11 @@ import produce from "immer";
 
 export const useStore = create((set) => ({
   modal: false,
-  markers: [],
+  mapBox: {
+    center: [0, 0],
+    zoom: 0,
+    markers: [],
+  },
   fourSquare: {
     selectedVenue: null,
     sections: ["all", "food", "drinks", "coffee", "shops", "arts", "outdoors"],

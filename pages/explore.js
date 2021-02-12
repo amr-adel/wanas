@@ -15,7 +15,6 @@ export default function Explore() {
   const router = useRouter();
 
   const { reqParams } = useStore((state) => state.fourSquare);
-  const [loadMap, setLoadMap] = useState(false);
 
   // Sync reqParams with URL
   // useEffect(() => {
@@ -34,24 +33,20 @@ export default function Explore() {
   //   }
   // }, [reqParams]);
 
-  useEffect(() => {
-    setLoadMap(true);
-  }, []);
-
   return (
-    <div className="min-h-inner bg-repeat pt-72 flex flex-col">
+    <div className="min-h-inner bg-repeat pt-76 flex flex-col">
       <Head>
         <title>{t("app.name")}</title>
       </Head>
 
-      {loadMap && <Map page="explore" />}
-
       <div
         id="results-container"
-        className="h-full w-full p-4 relative flex-1 flex flex-col border-t-2 border-gray-100 pattern-light rounded-t-2xl"
+        className="h-full w-full p-4 relative flex-1 flex flex-col border-t-2 border-gray-100 pattern-light rounded-t-2xl z-10"
       >
         <FourSquare />
       </div>
+
+      <Map />
     </div>
   );
 }

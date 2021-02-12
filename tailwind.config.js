@@ -39,12 +39,16 @@ module.exports = {
       backgroundImage: (theme) => ({
         "icons-light": "url('/images/wanas-icons-light.png')",
         "icons-dark": "url('/images/wanas-icons-dark.png')",
+        logo: "url('/images/wanas-logo.svg')",
       }),
       backgroundSize: {
         auto: "auto",
         cover: "cover",
         contain: "contain",
         "50%": "120px",
+      },
+      spacing: {
+        76: "19rem",
       },
     },
   },

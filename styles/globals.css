@@ -18,6 +18,16 @@
   @apply bg-gray-300 bg-icons-dark bg-50%;
 }
 
+.marker {
+  @apply bg-logo bg-contain bg-bottom bg-no-repeat;
+}
+
+.mapboxgl-map:focus,
+.mapboxgl-map *:focus {
+  border: none !important;
+  outline: none !important;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap");
 
 html {

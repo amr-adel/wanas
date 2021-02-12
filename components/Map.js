@@ -1,70 +1,127 @@
-import { useEffect, useState, useMemo, useRef } from "react";
-import ReactMapGL, { Marker, LinearInterpolator } from "react-map-gl";
+import { useEffect, useState, useRef } from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import mapboxgl from "mapbox-gl";
 import { useStore } from "../hooks/useStore";
 
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+
 export default function Map() {
-  const ll = useStore((state) => state.fourSquare.reqParams.ll);
-  const markers = useStore((state) => state.markers);
+  const { locale } = useRouter();
 
-  const [viewport, setViewport] = useState({
-    width: "100vw",
-    height: "100%",
-    latitude: 0,
-    longitude: 0,
-    zoom: 0,
-  });
+  const { markers, center, zoom } = useStore((state) => state.mapBox);
+  const [map, setMap] = useState(null);
+  const [markersOnMap, setMarkersOnMap] = useState([]);
+
+  const mapContainerRef = useRef(null);
 
   useEffect(() => {
-    if (ll?.length > 0) {
-      setViewport({ ...viewport, latitude: ll[0], longitude: ll[1], zoom: 14 });
+    setMap(
+      new mapboxgl.Map({
+        container: mapContainerRef.current,
+        style: "mapbox://styles/mapbox/light-v10",
+        center: center,
+        zoom: zoom,
+      })
+    );
+
+    if (mapboxgl.getRTLTextPluginStatus() === "unavailable") {
+      mapboxgl.setRTLTextPlugin(
+        "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js",
+        null,
+        true // Lazy load the plugin
+      );
     }
-  }, [ll]);
-
-  const mapRef = useRef(null);
+  }, []);
 
   useEffect(() => {
-    if (mapRef.current && markers.length) {
-      const bbox = getBoundsForPoints(markers);
-      const map = mapRef.current.getMap();
+    if (map) {
+      map.loaded()
+        ? changeMapLocale()
+        : map.on("load", () => changeMapLocale());
+    }
+  }, [map, locale]);
 
-      const nextViewport = map.cameraForBounds(bbox, { padding: 20 });
-
-      setViewport({
-        ...viewport,
-        zoom: nextViewport.zoom,
-        latitude: nextViewport.center.lat,
-        longitude: nextViewport.center.lng,
+  useEffect(() => {
+    if (map) {
+      map.easeTo({
+        center,
+        zoom,
       });
     }
-  }, [mapRef, markers]);
+  }, [center, zoom]);
 
-  const Markers = useMemo(
-    () =>
-      markers.map((venue) => (
-        <Marker key={venue.id} longitude={venue.lng} latitude={venue.lat}>
-          <div className="h-1 w-1 bg-red-500"></div>
-        </Marker>
-      )),
-    [markers]
-  );
+  useEffect(() => {
+    if (map) {
+      for (let markerOnMap of markersOnMap) {
+        markerOnMap.remove();
+      }
+
+      const tempMarkers = [];
+
+      for (let marker of markers) {
+        var el = document.createElement("div");
+        el.id = "marker-" + marker.id;
+        el.className = "marker h-8 w-6";
+
+        const tempMarker = new mapboxgl.Marker(el, {
+          anchor: "bottom",
+        }).setLngLat([marker.lng, marker.lat]);
+
+        tempMarkers.push(tempMarker);
+
+        tempMarker.addTo(map);
+      }
+
+      setMarkersOnMap(tempMarkers);
+
+      if (markers.length === 1) {
+        map.easeTo({
+          center: [markers[0].lng, markers[0].lat],
+          zoom: 14,
+        });
+      } else
+        map.fitBounds(getBoundsForPoints(markers), {
+          padding: { top: 40, left: 20, right: 20, bottom: 30 },
+          linear: true,
+        });
+    }
+  }, [markers]);
+
+  const changeMapLocale = () => {
+    const textField = map.getLayoutProperty("country-label", "text-field");
+
+    if (
+      textField[1].indexOf(locale) === -1 &&
+      textField[1]?.[1].indexOf(locale) === -1
+    ) {
+      // // https://stackoverflow.com/questions/58605220/how-to-change-language-in-mapbox
+      map.getStyle().layers.forEach(function (thisLayer) {
+        if (thisLayer.id.indexOf("-label") > 0) {
+          map.setLayoutProperty(thisLayer.id, "text-field", [
+            "get",
+            `name_${locale}`,
+          ]);
+        }
+      });
+    }
+  };
 
   return (
-    <div
-      id="map"
-      className="h-64 fixed top-14 flex items-center justify-center bg-yellow-100"
-    >
-      <ReactMapGL
-        ref={mapRef}
-        {...viewport}
-        mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
-        onViewportChange={(nextViewport) => setViewport(nextViewport)}
-        reuseMaps={true}
-        // transitionDuration={500}
-        // transitionInterpolator={new LinearInterpolator(["zoom"])}
-      >
-        {Markers}
-      </ReactMapGL>
-    </div>
+    <>
+      <Head>
+        <link
+          href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
+          rel="stylesheet"
+        />
+      </Head>
+
+      <div
+        id="map"
+        className="h-64 w-full fixed top-14"
+        ref={mapContainerRef}
+      />
+    </>
   );
 }
 

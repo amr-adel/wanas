@@ -17,8 +17,12 @@ export default function useRecentVenues() {
     setRecent(newRecent);
   };
 
-  const clearRecent = () => {
-    setRecent([]);
+  const clearRecent = (id) => {
+    if (!id) {
+      setRecent([]);
+    } else {
+      setRecent(recent.filter((venue) => venue.venue.id !== id));
+    }
   };
 
   return { recent, addToRecent, clearRecent };

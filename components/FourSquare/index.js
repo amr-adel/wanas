@@ -10,6 +10,7 @@ import useRecentVenues from "../../hooks/useRecentVenues";
 
 import Tabs from "./Tabs";
 import Pagination from "./Pagination";
+import Icon from "../../utils/Icon";
 
 const fetchVenues = (reqParams, locale) => {
   return axios.post(`/api/exploreVenues`, { ...reqParams, locale });
@@ -20,6 +21,7 @@ export default function FourSquare() {
   const t = (id) => formatMessage({ id });
 
   const reqParams = useStore((state) => state.fourSquare.reqParams);
+  const set = useStore((state) => state.set);
 
   const [activeTab, setActiveTab] = useState("info");
   const { recent, clearRecent } = useRecentVenues();
@@ -30,6 +32,13 @@ export default function FourSquare() {
   );
 
   const isLoading = !data && !error && reqParams.ll;
+
+  if (data?.data?.meta?.errorType === "failed_geocode") {
+    set((state) => {
+      state.fourSquare.reqParams.near = null;
+    });
+  }
+
   const response = data?.data?.response;
   const paginate = response?.totalResults > reqParams.limit;
 
@@ -48,26 +57,26 @@ export default function FourSquare() {
         <>
           {paginate && <Pagination total={response.totalResults} />}
 
-          <FourSquareVenues venues={response.groups[0]?.items} />
+          <FourSquareVenues venues={response.groups?.[0]?.items} />
 
           {paginate && <Pagination total={response.totalResults} />}
         </>
       )}
 
       {activeTab === "history" && recent?.length > 0 && (
-        <FourSquareVenues venues={recent} />
+        <FourSquareVenues venues={recent} clearRecent={clearRecent} removable />
       )}
     </div>
   );
 }
 
-export function FourSquareVenues({ venues }) {
+export function FourSquareVenues({ venues, clearRecent, removable = false }) {
   const router = useRouter();
 
   const set = useStore((state) => state.set);
 
   useEffect(() => {
-    if (venues.length > 0) {
+    if (venues?.length > 0) {
       const markers = venues.map((venue) => {
         return {
           id: venue.venue.id,
@@ -77,26 +86,42 @@ export function FourSquareVenues({ venues }) {
       });
 
       set((state) => {
-        state.markers = markers;
+        state.mapBox.markers = markers;
       });
     }
   }, [venues]);
 
   return (
     <ol id="venues-container" className="flex flex-col">
-      {venues.map((venue) => {
+      {venues?.map((venue) => {
         const { id, name, location, categories } = venue.venue;
         return (
           <li
             key={id}
-            className="bg-gray-50 p-2 mb-4 last:mb-0 rounded-lg shadow hover:shadow-md cursor-pointer"
+            className="relative bg-gray-50 p-2 mb-4 last:mb-0 rounded-lg shadow hover:shadow-md cursor-pointer"
             onClick={() => router.push(`/venues/${id}`)}
           >
-            {categories[0] ? (
-              <span className="text-xs text-yellow-400 bg-yellow-50 py-1 px-2 rounded">
-                {categories[0].name}
-              </span>
-            ) : null}
+            {(categories[0] || removable) && (
+              <div className="flex">
+                {categories[0] ? (
+                  <span className="text-xs text-yellow-400 bg-yellow-50 py-1 px-2 rounded">
+                    {categories[0].name}
+                  </span>
+                ) : null}
+
+                {removable && (
+                  <span
+                    className="text-xs ml-auto text-red-400 bg-red-50 py-1 px-2 rounded"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      clearRecent(id);
+                    }}
+                  >
+                    Remove
+                  </span>
+                )}
+              </div>
+            )}
 
             <h3 className="text-xl text-red-500 border-b border-gray-200 mb-1 py-1">
               {name}
