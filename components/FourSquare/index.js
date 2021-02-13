@@ -71,6 +71,9 @@ export default function FourSquare() {
 }
 
 export function FourSquareVenues({ venues, clearRecent, removable = false }) {
+  const { formatMessage, locale } = useIntl();
+  const t = (id) => formatMessage({ id });
+
   const router = useRouter();
 
   const set = useStore((state) => state.set);
@@ -111,13 +114,15 @@ export function FourSquareVenues({ venues, clearRecent, removable = false }) {
 
                 {removable && (
                   <span
-                    className="text-xs ml-auto text-red-400 bg-red-50 py-1 px-2 rounded"
+                    className={`text-xs ${
+                      router.locale === "ar" ? "mr-auto" : "ml-auto"
+                    } text-red-400 bg-red-50 py-1 px-2 rounded`}
                     onClick={(e) => {
                       e.stopPropagation();
                       clearRecent(id);
                     }}
                   >
-                    Remove
+                    {t("explore.history.clear.single")}
                   </span>
                 )}
               </div>

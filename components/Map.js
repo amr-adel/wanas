@@ -62,7 +62,7 @@ export default function Map() {
       for (let marker of markers) {
         var el = document.createElement("div");
         el.id = "marker-" + marker.id;
-        el.className = "marker h-8 w-6";
+        el.className = "marker h-8 w-7";
 
         const tempMarker = new mapboxgl.Marker(el, {
           anchor: "bottom",

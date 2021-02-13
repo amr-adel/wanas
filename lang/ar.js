@@ -31,7 +31,8 @@ export const ar = {
   "explore.settings.sort.distance": "المسافة",
   "explore.settings.confirm": "تحديث اعدادت البحث",
   "explore.history.msg": "الأماكن التي استكشفتها مؤخرًا : ",
-  "explore.history.clear": "أحذف القائمة",
+  "explore.history.clear": "حذف القائمة",
+  "explore.history.clear.single": "حذف",
   // Venue details
   "venue.moreInfo": "معلومات أكثر على FourSquare",
   "venue.gmaps": "الموقع على Google Maps",

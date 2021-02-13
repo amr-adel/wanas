@@ -31,7 +31,8 @@ export const en = {
   "explore.settings.sort.distance": "distance",
   "explore.settings.confirm": "Update search settings",
   "explore.history.msg": "Your recently explored venues: ",
-  "explore.history.clear": "Clear recent history",
+  "explore.history.clear": "Delete recent history",
+  "explore.history.clear.single": "Delete",
   // Venue details
   "venue.moreInfo": "More information at FourSquare",
   "venue.gmaps": "Location on Google Maps",
