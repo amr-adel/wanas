@@ -7,11 +7,14 @@ import { useStore } from "../hooks/useStore";
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 export default function Map() {
-  const { locale } = useRouter();
+  const { locale, pathname } = useRouter();
+  const router = useRouter();
 
-  const { markers, center, zoom } = useStore((state) => state.mapBox);
+  const { markers, center, zoom, popUp } = useStore((state) => state.mapBox);
+  const set = useStore((state) => state.set);
   const [map, setMap] = useState(null);
   const [markersOnMap, setMarkersOnMap] = useState([]);
+  const [popUpOnMap, setPopUpOnMap] = useState(null);
 
   const mapContainerRef = useRef(null);
 
@@ -61,8 +64,13 @@ export default function Map() {
 
       for (let marker of markers) {
         var el = document.createElement("div");
-        el.id = "marker-" + marker.id;
-        el.className = "marker h-8 w-7";
+        el.dataset.markerId = marker.id;
+        el.dataset.markerName = marker.name;
+        el.dataset.markerLng = marker.lng;
+        el.dataset.markerLat = marker.lat;
+        el.className = `marker h-8 w-7 ${
+          pathname === "/explore" ? "cursor-pointer" : ""
+        }`;
 
         const tempMarker = new mapboxgl.Marker(el, {
           anchor: "bottom",
@@ -88,6 +96,27 @@ export default function Map() {
     }
   }, [markers]);
 
+  useEffect(() => {
+    if (popUpOnMap) {
+      popUpOnMap.remove();
+      setPopUpOnMap(null);
+    }
+
+    if (popUp) {
+      const tempPopUp = new mapboxgl.Popup({
+        closeButton: false,
+        offset: 5,
+      })
+        .setLngLat([popUp.lng, popUp.lat])
+        .setHTML(
+          `<h3 class='pop-up-link text-red-500 text-center cursor-pointer' data-popUp-id=${popUp.id}>${popUp.name}</h3>`
+        )
+        .addTo(map);
+
+      setPopUpOnMap(tempPopUp);
+    }
+  }, [popUp]);
+
   const changeMapLocale = () => {
     const textField = map.getLayoutProperty("country-label", "text-field");
 
@@ -107,6 +136,31 @@ export default function Map() {
     }
   };
 
+  const handleClicks = (e) => {
+    // Handle clicks on markers
+    if (e.target.classList.contains("marker") && pathname === "/explore") {
+      const { markerId, markerName, markerLng, markerLat } = e.target.dataset;
+
+      set((state) => {
+        state.mapBox.popUp = {
+          id: markerId,
+          name: markerName,
+          lng: markerLng,
+          lat: markerLat,
+        };
+      });
+    }
+
+    // Handle clicks on pop-ups
+    if (e.target.classList.contains("pop-up-link")) {
+      e.stopPropagation();
+      set((state) => {
+        state.mapBox.popUp = null;
+      });
+      router.push(`/venues/${e.target.dataset.popupId}`);
+    }
+  };
+
   return (
     <>
       <Head>
@@ -120,6 +174,7 @@ export default function Map() {
         id="map"
         className="h-64 w-full fixed top-14"
         ref={mapContainerRef}
+        onClick={handleClicks}
       />
     </>
   );

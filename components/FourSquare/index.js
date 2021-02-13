@@ -81,10 +81,13 @@ export function FourSquareVenues({ venues, clearRecent, removable = false }) {
   useEffect(() => {
     if (venues?.length > 0) {
       const markers = venues.map((venue) => {
+        const { id, name, location } = venue.venue;
+
         return {
-          id: venue.venue.id,
-          lat: venue.venue.location.lat,
-          lng: venue.venue.location.lng,
+          id,
+          name,
+          lat: location.lat,
+          lng: location.lng,
         };
       });
 
@@ -93,6 +96,22 @@ export function FourSquareVenues({ venues, clearRecent, removable = false }) {
       });
     }
   }, [venues]);
+
+  const setPopUp = (id, name, location) =>
+    set((state) => {
+      state.mapBox.popUp = {
+        id,
+        name,
+        lat: location.lat,
+        lng: location.lng,
+      };
+    });
+
+  const removePopUp = () => {
+    set((state) => {
+      state.mapBox.popUp = null;
+    });
+  };
 
   return (
     <ol id="venues-container" className="flex flex-col">
@@ -103,6 +122,8 @@ export function FourSquareVenues({ venues, clearRecent, removable = false }) {
             key={id}
             className="relative bg-gray-50 p-2 mb-4 last:mb-0 rounded-lg shadow hover:shadow-md cursor-pointer"
             onClick={() => router.push(`/venues/${id}`)}
+            onMouseOver={() => setPopUp(id, name, location)}
+            onMouseLeave={removePopUp}
           >
             {(categories[0] || removable) && (
               <div className="flex">

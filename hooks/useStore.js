@@ -7,6 +7,7 @@ export const useStore = create((set) => ({
     center: [0, 0],
     zoom: 0,
     markers: [],
+    popUp: null,
   },
   fourSquare: {
     selectedVenue: null,
