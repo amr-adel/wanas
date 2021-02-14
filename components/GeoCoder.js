@@ -42,13 +42,16 @@ export default function GeoCoder() {
   const handleSuggestion = (e, { center, text, place_name, context }) => {
     e.preventDefault();
 
-    const countryCode = context.filter((con) => con.id.includes("country"))[0]
-      .short_code;
+    const countryCode =
+      context?.filter((con) => con.id.includes("country"))[0].short_code ||
+      null;
 
     set((state) => {
-      // Mapbox [Lon, Lat], FourSquare [Lat, Lon]
+      // Mapbox [Lng, Lat], FourSquare [Lat, Lng]
       state.fourSquare.reqParams.ll = [center[1], center[0]];
-      state.fourSquare.reqParams.near = `${text}, ${countryCode}`;
+      state.fourSquare.reqParams.near = `${text}${
+        countryCode ? `, ${countryCode}` : ""
+      }`;
       state.fourSquare.reqParams.offset = 0;
 
       state.mapBox.center = center;
@@ -165,7 +168,7 @@ function CurrentLocation({ setQuery }) {
     setCurrentLocation("ready");
 
     set((state) => {
-      // Mapbox [Lon, Lat], FourSquare [Lat, Lon]
+      // Mapbox [Lng, Lat], FourSquare [Lat, Lng]
       state.fourSquare.reqParams.ll = [lat, lng];
       state.fourSquare.reqParams.near = null;
       state.fourSquare.reqParams.offset = 0;
