@@ -97,23 +97,8 @@ export default function Map() {
   }, [markers]);
 
   useEffect(() => {
-    if (popUpOnMap) {
-      popUpOnMap.remove();
-      setPopUpOnMap(null);
-    }
-
-    if (popUp) {
-      const tempPopUp = new mapboxgl.Popup({
-        closeButton: false,
-        offset: 5,
-      })
-        .setLngLat([popUp.lng, popUp.lat])
-        .setHTML(
-          `<h3 class='pop-up-link text-red-500 text-center cursor-pointer' data-popUp-id=${popUp.id}>${popUp.name}</h3>`
-        )
-        .addTo(map);
-
-      setPopUpOnMap(tempPopUp);
+    if (map) {
+      map.loaded() ? showHidePopUps() : map.on("load", () => showHidePopUps());
     }
   }, [popUp]);
 
@@ -133,6 +118,28 @@ export default function Map() {
           ]);
         }
       });
+    }
+  };
+
+  const showHidePopUps = () => {
+    if (popUpOnMap) {
+      popUpOnMap.remove();
+      setPopUpOnMap(null);
+    }
+
+    if (popUp) {
+      const tempPopUp = new mapboxgl.Popup({
+        closeButton: false,
+        offset: 5,
+      })
+        .setLngLat([popUp.lng, popUp.lat])
+        .setHTML(
+          `<h3 class='pop-up-link text-red-500 text-center cursor-pointer' data-popUp-id=${popUp.id}>${popUp.name}</h3>`
+        );
+
+      tempPopUp.addTo(map);
+
+      setPopUpOnMap(tempPopUp);
     }
   };
 
