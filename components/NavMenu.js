@@ -7,7 +7,7 @@ import LocaleSwitcher from "./LocaleSwitcher";
 
 export default function NavMenu() {
   const [showMenu, setShowMenu] = useState(false);
-  const { formatMessage } = useIntl();
+  const { formatMessage, locale } = useIntl();
   const t = (id) => formatMessage({ id });
 
   useEffect(() => {
@@ -23,33 +23,57 @@ export default function NavMenu() {
   const toggleMenu = () => setShowMenu(!showMenu);
 
   const hideMenu = (e) => {
-    // Hide menu on clicking anywhere outside '#menu' div
-    if (e.target.closest("#menu") === null) {
+    // Hide menu on clicking anywhere outside '#menu' div, or on a <span /> or <button />
+    if (
+      e.target.closest("#menu") === null ||
+      ["SPAN", "BUTTON"].indexOf(e.target.tagName) !== -1
+    ) {
       setShowMenu(false);
     }
   };
 
+  const menuLinksClasses = `w-full block p-2 rounded-lg cursor-pointer transition-padding last:px-0 ${
+    locale === "ar" ? "hover:pr-4" : "hover:pl-4"
+  }`;
+
   const menu = (
     <nav
       dir="ltr"
-      className="fixed top-14 left-0 w-screen bg-gray-50 p-4 pb-2 border-b-2 border-gray-700 rounded-b-lg shadow-lg"
+      className={`w-72 absolute top-0 right-0 p-4 pt-10 flex flex-col text-gray-500 bg-gray-200 divide-y divide-gray-300 rounded-lg shadow-lg`}
     >
-      <ul className="mb-2 felx flex-col text-center border-b border-gray-200 text-xl">
-        <li key="home" className="p-2 my-2">
-          <Link href="/">Home</Link>
+      <ul
+        dir="auto"
+        className="felx flex-col px-2 text-xl rounded-lg bg-gray-50 divide-y divide-gray-200 shadow hover:shadow-md"
+      >
+        <li key="home" className="my-1.5">
+          <Link href="/">
+            <span className={menuLinksClasses}>{t("menu.home")}</span>
+          </Link>
         </li>
-        <li key="explore" className="p-2 my-2">
-          <Link href="/explore">Explore</Link>
+        <li key="explore" className="my-1.5">
+          <Link href="/explore">
+            <span className={menuLinksClasses}>{t("menu.explore")}</span>
+          </Link>
+        </li>
+        <li key="about" className="my-1.5">
+          <Link href="/about">
+            <span className={menuLinksClasses}>{t("menu.about")}</span>
+          </Link>
         </li>
       </ul>
-      <LocaleSwitcher />
+
+      <div id="locale-switcher-container" className="pt-2 mt-2">
+        <LocaleSwitcher />
+      </div>
     </nav>
   );
 
   return (
-    <div id="menu" className="h-10">
+    <div id="menu" className="h-10 relative">
       <button
-        className="h-10 w-10 focus:outline-none text-gray-200"
+        className={`relative h-10 w-10 focus:outline-none ${
+          showMenu ? " text-gray-400" : " text-gray-200"
+        } z-40`}
         onClick={toggleMenu}
       >
         <Icon name={showMenu ? "close" : "menu"} classes="h-6 w-6 mx-auto" />

@@ -78,7 +78,7 @@ export default function Layout({ children }) {
       <SetInnerHeightVar />
       {showModal && (
         <Modal>
-          <div className="flex flex-col justify-center text-center">
+          <div className="p-2 py-4 bg-gray-200 flex flex-col justify-center text-center rounded-lg border border-gray-300">
             <h2 className="text-xl text-red-500 text-center">
               {t("welcome.head")}
             </h2>
@@ -89,13 +89,13 @@ export default function Layout({ children }) {
 
             <div
               id="locale-switcher-container"
-              className="p-2 my-4 bg-gray-200 rounded-md"
+              className="w-full my-4 pb-4 border-b border-gray-300"
             >
               <LocaleSwitcher />
             </div>
 
             <button
-              className="btn-outlined mx-auto text-gray-700"
+              className="btn-outlined mx-auto text-gray-600"
               onClick={() => hideModal()}
             >
               {t("welcome.continue")}
@@ -108,7 +108,7 @@ export default function Layout({ children }) {
         <header
           className={`flex justify-between items-start ${
             locale === "ar" ? "flex-row-reverse" : ""
-          } p-2 h-14 pattern-dark fixed top-0 left-0 w-full z-50 shadow-md`}
+          } p-2 h-14 pattern-dark fixed top-0 left-0 w-full z-30 shadow-md`}
         >
           <GeoCoder />
           <NavMenu />

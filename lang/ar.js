@@ -4,6 +4,10 @@ export const ar = {
   "welcome.head": "أهلاً بك في",
   "welcome.change-locale": `هل تفضل استخدام "ونس" بلغة آخرى؟`,
   "welcome.continue": "استمر",
+  // Menu
+  "menu.home": "الرئيسية",
+  "menu.explore": "استكشف",
+  "menu.about": "عن ونس",
   // Home
   "home.looking-for": "أبحث عن",
   "home.looking-in": "في",

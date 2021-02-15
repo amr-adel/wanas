@@ -28,6 +28,7 @@ module.exports = {
     extend: {
       transitionProperty: {
         width: "width",
+        padding: "padding",
       },
       height: {
         inner: "var(--inner-height, 100vh)",
@@ -55,9 +56,10 @@ module.exports = {
   variants: {
     extend: {
       width: ["hover", "focus", "focus-within"],
+      padding: ["hover"],
       transitionProperty: ["hover", "focus"],
       textColor: ["disabled"],
-      margin: ["last"],
+      margin: ["first", "last"],
     },
   },
   plugins: [],

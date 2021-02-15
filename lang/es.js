@@ -4,6 +4,10 @@ export const es = {
   "welcome.head": "Bienvenido a",
   "welcome.change-locale": `¿Prefieres usar "Wanas" en un idioma diferente?`,
   "welcome.continue": "Seguir",
+  // Menu
+  "menu.home": "Página de inicio",
+  "menu.explore": "Explorar",
+  "menu.about": "Sobre Wanas",
   // Home
   "home.looking-for": "Estoy buscando",
   "home.looking-in": "En",

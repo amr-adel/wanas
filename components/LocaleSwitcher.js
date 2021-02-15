@@ -18,14 +18,17 @@ export default function LocaleSwitcher() {
   };
 
   return (
-    <ul dir="ltr" className="flex items-center justify-center">
+    <ul
+      dir="ltr"
+      className="flex w-full max-w-sm mx-auto justify-between rounded-lg bg-gray-50 shadow hover:shadow-md"
+    >
       {locales.map((loc) => {
         return (
-          <li key={loc}>
+          <li key={loc} className="border-0 flex-grow border-gray-600">
             <button
               onClick={() => handleChangeLocale(loc)}
-              className={`btn mx-2 ${
-                loc === locale ? "bg-red-500 text-red-50" : ""
+              className={`w-full p-2 text-center text-lg rounded-lg focus:outline-none ${
+                loc === locale ? "bg-yellow text-yellow-50" : "text-gray-500"
               }`}
             >
               {localeNames[loc]}
