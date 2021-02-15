@@ -22,6 +22,10 @@
   @apply bg-logo bg-contain bg-bottom bg-no-repeat;
 }
 
+.mapboxgl-popup-content {
+  padding: 0 !important;
+}
+
 .mapboxgl-map:focus,
 .mapboxgl-map *:focus {
   border: none !important;

@@ -134,7 +134,7 @@ export default function Map() {
       })
         .setLngLat([popUp.lng, popUp.lat])
         .setHTML(
-          `<h3 class='pop-up-link text-red-500 text-center cursor-pointer' data-popUp-id=${popUp.id}>${popUp.name}</h3>`
+          `<h3 class='pop-up-link p-2 text-red-500 text-center cursor-pointer' data-popUp-id=${popUp.id}>${popUp.name}</h3>`
         );
 
       tempPopUp.addTo(map);
