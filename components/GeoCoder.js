@@ -39,8 +39,17 @@ export default function GeoCoder() {
 
   const isLoading = !geoSuggestions && !error && throttledQuery.length > 2;
 
-  const handleSuggestion = (e, { center, text, place_name, context }) => {
+  const handleSuggestion = async (
+    e,
+    { center, text, place_name, context, properties: { wikidata } }
+  ) => {
     e.preventDefault();
+
+    const wikidataRes = await axios.get(
+      `https://www.wikidata.org/w/api.php?format=json&languages=en%7Car%7Ces&ids=${wikidata}&props=labels&action=wbgetentities&origin=*`
+    );
+
+    const placeLabels = wikidataRes?.data?.entities?.[wikidata]?.labels;
 
     const countryCode =
       context?.filter((con) => con.id.includes("country"))[0].short_code ||
@@ -49,9 +58,10 @@ export default function GeoCoder() {
     set((state) => {
       // Mapbox [Lng, Lat], FourSquare [Lat, Lng]
       state.fourSquare.reqParams.ll = [center[1], center[0]];
-      state.fourSquare.reqParams.near = `${text}${
+      state.fourSquare.reqParams.near = `${placeLabels?.en?.value || text}${
         countryCode ? `, ${countryCode}` : ""
       }`;
+      state.fourSquare.localeNear = placeLabels[locale].value || null;
       state.fourSquare.reqParams.offset = 0;
 
       state.mapBox.center = center;

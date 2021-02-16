@@ -10,7 +10,7 @@ export const useStore = create((set) => ({
     popUp: null,
   },
   fourSquare: {
-    selectedVenue: null,
+    localeNear: null,
     sections: ["all", "food", "drinks", "coffee", "shops", "arts", "outdoors"],
     reqParams: {
       section: "all",
