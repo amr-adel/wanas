@@ -28,7 +28,7 @@ export default function LocaleSwitcher() {
             <button
               onClick={() => handleChangeLocale(loc)}
               className={`w-full p-2 text-center text-lg rounded-lg focus:outline-none ${
-                loc === locale ? "bg-yellow text-yellow-50" : "text-gray-500"
+                loc === locale ? "bg-yellow text-yellow-500" : "text-gray-400"
               }`}
             >
               {localeNames[loc]}

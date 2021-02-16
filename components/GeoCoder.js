@@ -192,8 +192,8 @@ function CurrentLocation({ setQuery }) {
 
   const options = {
     enableHighAccuracy: true,
-    maximumAge: 30000,
-    timeout: 27000,
+    maximumAge: 180000,
+    timeout: 45000,
   };
 
   const handleCurrentLocation = (e) => {
