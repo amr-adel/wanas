@@ -19,8 +19,7 @@ export const es = {
   "home.fs-section.arts": "letras",
   "home.fs-section.outdoors": "al aire libre",
   // Explore
-  "explore.info.start":
-    "Comience seleccionando (región, ciudad) arriba o mueva el mapa al lugar donde desea explorar.",
+  "explore.info.start": "Comience seleccionando (región, ciudad) arriba.",
   "explore.info.zero": "Ningún lugar coincide con su ubicación/búsqueda.",
   "explore.info.venues": " Lugares encontrados",
   "explore.info.near": " , cerca ",
@@ -46,4 +45,6 @@ export const es = {
   "currentLocation.error": "No se puede recuperar su ubicación actual.",
   "currentLocation.error.1":
     "Por favor, habilite el acceso a la ubicación en su dispositivo.",
+  // Attributions
+  "attr.foursquare": "Datos por ",
 };

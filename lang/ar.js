@@ -19,8 +19,7 @@ export const ar = {
   "home.fs-section.arts": "فنون",
   "home.fs-section.outdoors": "في الهواء الطلق",
   // Explore
-  "explore.info.start":
-    "ابدأ بتحديد (المنطقة ، المدينة) أعلاه ، أو انقل الخريطة إلى المكان الذي تريد استكشافه.",
+  "explore.info.start": "ابدأ بتحديد (المنطقة ، المدينة) أعلاه.",
   "explore.info.zero": "لا يوجد مكان يطابق الموقع/اعدادات البحث.",
   "explore.info.venues": " مكان تم ايجاده",
   "explore.info.near": " ، بالقرب من ",
@@ -45,4 +44,6 @@ export const ar = {
   currentLocation: "موقعي الحالي",
   "currentLocation.error": "لا يمكن التعرف على موقعك الحالي.",
   "currentLocation.error.1": "برجاء اتاحة خدمة التعرف على المواقع (GPS).",
+  // Attributions
+  "attr.foursquare": "البيانات بواسطة ",
 };

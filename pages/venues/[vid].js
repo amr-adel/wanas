@@ -251,6 +251,20 @@ function Venue() {
         <div className="bg-gray-50 p-2 mb-4 flex flex-col divide-y divide-gray-200 rounded-lg shadow">
           {venueDetails}
         </div>
+
+        {data && (
+          <cite className="text-sm text-center not-italic text-gray-700 p-2">
+            {t("attr.foursquare")}
+            <a
+              href="https://foursquare.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="text-gray-500 hover:text-gray-700"
+            >
+              FourSquare
+            </a>
+          </cite>
+        )}
       </div>
 
       <Map />

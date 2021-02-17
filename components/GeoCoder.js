@@ -61,7 +61,7 @@ export default function GeoCoder() {
       state.fourSquare.reqParams.near = `${placeLabels?.en?.value || text}${
         countryCode ? `, ${countryCode}` : ""
       }`;
-      state.fourSquare.localeNear = placeLabels[locale].value || null;
+      state.fourSquare.localeNear = placeLabels?.[locale].value || text;
       state.fourSquare.reqParams.offset = 0;
 
       state.mapBox.center = center;

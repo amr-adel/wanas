@@ -43,7 +43,7 @@ export default function FourSquare() {
   const paginate = response?.totalResults > reqParams.limit;
 
   return (
-    <div id="venues-container">
+    <div id="venues-container" className="flex flex-col">
       <Tabs
         isLoading={isLoading}
         activeTab={activeTab}
@@ -60,6 +60,18 @@ export default function FourSquare() {
           <FourSquareVenues venues={response.groups?.[0]?.items} />
 
           {paginate && <Pagination total={response.totalResults} />}
+
+          <cite className="text-sm text-center not-italic text-gray-700 p-2 mx-auto">
+            {t("attr.foursquare")}
+            <a
+              href="https://foursquare.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="text-gray-500 hover:text-gray-700"
+            >
+              FourSquare
+            </a>
+          </cite>
         </>
       )}
 

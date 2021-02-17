@@ -19,8 +19,7 @@ export const en = {
   "home.fs-section.arts": "arts",
   "home.fs-section.outdoors": "outdoors",
   // Explore
-  "explore.info.start":
-    "Start by selecting (region, city) above, or move the map to where you want to explore.",
+  "explore.info.start": "Start by selecting (region, city) above.",
   "explore.info.zero": "No place match your location/search.",
   "explore.info.venues": " Venues found",
   "explore.info.near": " , near ",
@@ -45,4 +44,6 @@ export const en = {
   currentLocation: "My current Location",
   "currentLocation.error": "Unable to retrive your current location.",
   "currentLocation.error.1": "Please, enable Location access on your device.",
+  // Attributions
+  "attr.foursquare": "Data by ",
 };
