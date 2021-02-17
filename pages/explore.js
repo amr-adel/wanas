@@ -29,7 +29,11 @@ export default function Explore() {
 
   // Sync reqParams with URL
   useEffect(() => {
-    if (reqParams.ll === null && reqParams.near === null) {
+    if (
+      reqParams.ll === null &&
+      reqParams.near === null &&
+      router.asPath !== "/explore"
+    ) {
       // Get reqParams from URL
       const paramsFromUrl = reqParamsFromQueryString(router.asPath);
 
