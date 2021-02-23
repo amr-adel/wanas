@@ -3,7 +3,7 @@ import { useStore } from "../../hooks/useStore";
 export default function InfoTab({ total, t }) {
   const {
     localeNear,
-    reqParams: { section, radius },
+    reqParams: { section, near },
   } = useStore((state) => state.fourSquare);
 
   let msg = "";
@@ -17,8 +17,12 @@ export default function InfoTab({ total, t }) {
       <h1>
         <span className="text-red-500">{total}</span>
         {t("explore.info.venues")}
-        {localeNear ? t("explore.info.near") : ""}
-        {localeNear ? <span className="text-red-500">{localeNear}</span> : ""}
+        {localeNear || near ? t("explore.info.near") : ""}
+        {localeNear || near ? (
+          <span className="text-red-500">{localeNear || near}</span>
+        ) : (
+          ""
+        )}
         {section !== "all" ? t("explore.info.section") : ""}
         {section !== "all" ? (
           <span className="text-red-500">

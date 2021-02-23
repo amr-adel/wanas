@@ -25,13 +25,13 @@ module.exports = {
         900: "#190e00",
       },
     },
+    container: {
+      center: true,
+    },
     extend: {
       transitionProperty: {
         width: "width",
         padding: "padding",
-      },
-      height: {
-        inner: "var(--inner-height, 100vh)",
       },
       minHeight: {
         inner: "var(--inner-height, 100vh)",
@@ -47,9 +47,6 @@ module.exports = {
         cover: "cover",
         contain: "contain",
         "50%": "120px",
-      },
-      spacing: {
-        76: "19rem",
       },
     },
   },

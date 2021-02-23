@@ -3,10 +3,11 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import mapboxgl from "mapbox-gl";
 import { useStore } from "../hooks/useStore";
+import GeoCoder from "./GeoCoder";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-export default function Map() {
+export default function Map({ withGeoCoder = false }) {
   const { locale, pathname } = useRouter();
   const router = useRouter();
 
@@ -22,7 +23,8 @@ export default function Map() {
     setMap(
       new mapboxgl.Map({
         container: mapContainerRef.current,
-        style: "mapbox://styles/mapbox/light-v10",
+        // style: "mapbox://styles/mapbox/light-v10",
+        style: "mapbox://styles/fullstackamr/cklbcz9mj0ke417qlvx33xryl",
         center: center,
         zoom: zoom,
       })
@@ -90,7 +92,7 @@ export default function Map() {
         });
       } else
         map.fitBounds(getBoundsForPoints(markers), {
-          padding: { top: 40, left: 20, right: 20, bottom: 30 },
+          padding: { top: 90, left: 20, right: 20, bottom: 20 },
           linear: true,
         });
     }
@@ -169,7 +171,7 @@ export default function Map() {
   };
 
   return (
-    <>
+    <div className="w-full h-96 relative">
       <Head>
         <link
           href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
@@ -177,13 +179,22 @@ export default function Map() {
         />
       </Head>
 
+      {withGeoCoder && (
+        <div
+          id="geocoder-overlay"
+          className="absolute top-2 left-2 right-2 z-10"
+        >
+          <GeoCoder />
+        </div>
+      )}
+
       <div
         id="map"
-        className="h-64 w-full fixed top-14"
+        className="h-full w-full bg-gray-400 rounded-lg shadow"
         ref={mapContainerRef}
         onClick={handleClicks}
       />
-    </>
+    </div>
   );
 }
 

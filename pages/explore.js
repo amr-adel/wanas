@@ -1,22 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Head from "next/head";
-
+import { useStore } from "../hooks/useStore";
 import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
-import { useStore } from "../hooks/useStore";
 
-import FourSquare from "../components/FourSquare";
 import Map from "../components/Map";
-
-const initialReqParams = {
-  section: "all",
-  ll: null,
-  near: null,
-  radius: "auto",
-  limit: 15,
-  offset: 0,
-  sort: "auto",
-};
+import FourSquare from "../components/FourSquare";
 
 export default function Explore() {
   const { formatMessage } = useIntl();
@@ -54,19 +43,14 @@ export default function Explore() {
   }, [reqParams]);
 
   return (
-    <div className="min-h-inner bg-repeat pt-76 flex flex-col">
+    <div className="min-h-inner pt-16 pb-4 px-2 flex flex-col space-y-4 pattern-light">
       <Head>
         <title>{t("app.name")}</title>
       </Head>
 
-      <div
-        id="results-container"
-        className="h-full w-full p-4 relative flex-1 flex flex-col border-t-2 border-gray-100 pattern-light rounded-t-2xl z-10"
-      >
-        <FourSquare />
-      </div>
+      <Map withGeoCoder />
 
-      <Map />
+      <FourSquare />
     </div>
   );
 }

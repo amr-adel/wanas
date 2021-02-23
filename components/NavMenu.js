@@ -39,7 +39,7 @@ export default function NavMenu() {
   const menu = (
     <nav
       dir="ltr"
-      className={`w-72 absolute top-0 right-0 p-4 pt-10 flex flex-col text-gray-500 bg-gray-200 divide-y divide-gray-300 rounded-lg shadow-lg`}
+      className={`w-72 absolute top-2 right-2 p-4 pt-10 flex flex-col text-gray-500 bg-gray-200 divide-y divide-gray-300 rounded-lg shadow-lg`}
     >
       <ul
         dir="auto"
@@ -69,14 +69,14 @@ export default function NavMenu() {
   );
 
   return (
-    <div id="menu" className="h-10 relative">
+    <div id="menu" className="h-full w-full p-2 relative">
       <button
-        className={`relative h-10 w-10 focus:outline-none ${
-          showMenu ? " text-gray-400" : " text-gray-200"
+        className={`relative h-full rounded-lg w-full focus:outline-none flex justify-center items-center ${
+          showMenu ? " text-gray-400" : "text-inherit"
         } z-40`}
         onClick={toggleMenu}
       >
-        <Icon name={showMenu ? "close" : "menu"} classes="h-6 w-6 mx-auto" />
+        <Icon name={showMenu ? "close" : "menu"} classes="h-6" />
       </button>
 
       {showMenu && menu}

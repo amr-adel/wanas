@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
-
-import useThrottle from "../hooks/useThrottle";
-import { useStore } from "../hooks/useStore";
-
 import axios from "axios";
 import useSWR from "swr";
+import { useStore } from "../hooks/useStore";
+import useThrottle from "../hooks/useThrottle";
 
 import Loader from "../utils/Loader";
 import Icon from "../utils/Icon";
@@ -79,8 +77,8 @@ export default function GeoCoder() {
   return (
     <div
       id="geo-coder"
-      className={`p-2 relative transition-width rounded-lg ${
-        focused ? "bg-gray-200 shadow-lg w-full" : "w-10/12 bg-gray-700"
+      className={`p-2 relative transition-width rounded-lg shadow-md ${
+        focused ? "bg-gray-200 shadow-lg w-full" : "w-11/12 bg-gray-700 mx-auto"
       }`}
     >
       <label
@@ -181,6 +179,7 @@ function CurrentLocation({ setQuery }) {
       // Mapbox [Lng, Lat], FourSquare [Lat, Lng]
       state.fourSquare.reqParams.ll = [lat, lng];
       state.fourSquare.reqParams.near = null;
+      state.fourSquare.reqParams.localeNear = null;
       state.fourSquare.reqParams.offset = 0;
 
       state.mapBox.center = [lng, lat];

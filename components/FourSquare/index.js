@@ -43,7 +43,7 @@ export default function FourSquare() {
   const paginate = response?.totalResults > reqParams.limit;
 
   return (
-    <div id="venues-container" className="flex flex-col">
+    <div id="venues-container" className="flex flex-col space-y-4">
       <Tabs
         isLoading={isLoading}
         activeTab={activeTab}
@@ -58,8 +58,6 @@ export default function FourSquare() {
           {paginate && <Pagination total={response.totalResults} />}
 
           <FourSquareVenues venues={response.groups?.[0]?.items} />
-
-          {paginate && <Pagination total={response.totalResults} />}
 
           <cite className="text-sm text-center not-italic text-gray-700 p-2 mx-auto">
             {t("attr.foursquare")}
@@ -126,13 +124,13 @@ export function FourSquareVenues({ venues, clearRecent, removable = false }) {
   };
 
   return (
-    <ol id="venues-container" className="flex flex-col">
+    <ol id="venues-container" className="flex flex-col space-y-4">
       {venues?.map((venue) => {
         const { id, name, location, categories } = venue.venue;
         return (
           <li
             key={id}
-            className="relative bg-gray-50 p-2 mb-4 last:mb-0 rounded-lg shadow hover:shadow-md cursor-pointer"
+            className="relative bg-gray-50 p-2 rounded-lg shadow hover:shadow-md cursor-pointer"
             onClick={() => router.push(`/venues/${id}`)}
             onMouseOver={() => setPopUp(id, name, location)}
             onMouseLeave={removePopUp}

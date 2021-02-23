@@ -7,11 +7,10 @@ import SetInnerHeightVar from "../utils/SetInnerHeightVar";
 import Logo from "../utils/Logo";
 
 import Modal from "../components/Modal";
+import Header from "../components/Header";
 import { useStore } from "../hooks/useStore";
 import useLocalStorage from "../hooks/useLocalStorage";
 
-import GeoCoder from "../components/GeoCoder";
-import NavMenu from "../components/NavMenu";
 import LocaleSwitcher from "../components/LocaleSwitcher";
 
 export default function Layout({ children }) {
@@ -104,16 +103,7 @@ export default function Layout({ children }) {
         </Modal>
       )}
 
-      {pathname !== "/" && (
-        <header
-          className={`flex justify-between items-start ${
-            locale === "ar" ? "flex-row-reverse" : ""
-          } p-2 h-14 pattern-dark fixed top-0 left-0 w-full z-30 shadow-md`}
-        >
-          <GeoCoder />
-          <NavMenu />
-        </header>
-      )}
+      {pathname !== "/" && <Header />}
 
       {children}
     </div>

@@ -1,24 +1,24 @@
 import Head from "next/head";
-import Logo from "../utils/Logo";
-
 import { useIntl } from "react-intl";
+
+import Logo from "../utils/Logo";
 
 export default function Explore() {
   const { formatMessage, locale } = useIntl();
   const t = (id) => formatMessage({ id });
 
   return (
-    <div className="min-h-inner pt-14 flex flex-col pattern-light">
+    <div className="min-h-inner pt-16 pb-4 px-2 flex flex-col space-y-4 pattern-light">
       <Head>
         <title>{`${t("app.name")} | ${t("menu.about")}`}</title>
       </Head>
 
-      <Logo classes="w-24 mt-8 mx-auto" />
-      <Logo type="text" classes="h-8 my-4 mx-auto" />
+      <Logo classes="w-24 mx-auto" />
+      <Logo type="text" classes="h-8 mx-auto" />
 
       <main
         id="about-container"
-        className="p-4 my-4 mx-2 flex flex-col bg-gray-50 rounded-lg shadow-md"
+        className="p-4 flex flex-col bg-gray-50 rounded-lg shadow-md"
       >
         <h1 className="text-xl text-red-500 pb-4 mb-4 border-b border-gray-200">
           {t("menu.about")}

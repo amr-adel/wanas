@@ -12,7 +12,7 @@ export default function Pagination({ total }) {
   return (
     <div
       id="pagination"
-      className={`h-12 flex items-center bg-gray-50 m-4 rounded-lg overflow-hidden shadow`}
+      className={`h-12 sticky top-16 z-10 flex items-center bg-gray-100 rounded-lg overflow-hidden shadow`}
     >
       <button
         id="prev"

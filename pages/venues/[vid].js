@@ -1,8 +1,7 @@
-import axios from "axios";
-
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
+import axios from "axios";
 import useSWR from "swr";
 import { useStore } from "../../hooks/useStore";
 
@@ -243,17 +242,16 @@ function Venue() {
   }
 
   return (
-    <div className="min-h-inner bg-repeat pt-76 flex flex-col">
-      <div
-        id="venue-details-container"
-        className="h-full w-full p-4 relative flex-1 flex flex-col border-t-2 border-gray-100 pattern-light rounded-t-2xl z-10"
-      >
+    <div className="min-h-inner pt-16 pb-4 px-2 flex flex-col space-y-4 pattern-light">
+      <Map />
+
+      <div>
         <div className="bg-gray-50 p-2 mb-4 flex flex-col divide-y divide-gray-200 rounded-lg shadow">
           {venueDetails}
         </div>
 
         {data && (
-          <cite className="text-sm text-center not-italic text-gray-700 p-2">
+          <cite className="text-sm w-full block text-center not-italic text-gray-700 p-2">
             {t("attr.foursquare")}
             <a
               href="https://foursquare.com/"
@@ -266,8 +264,6 @@ function Venue() {
           </cite>
         )}
       </div>
-
-      <Map />
     </div>
   );
 }
