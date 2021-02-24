@@ -33,7 +33,7 @@ export default function Tabs({
   return (
     <div
       id="tabs"
-      className="bg-gray-50 rounded-lg shadow hover:shadow-md overflow-hidden"
+      className="flex-shrink-0 bg-gray-50 rounded-lg shadow hover:shadow-md overflow-hidden"
     >
       <ul
         id="tab-switcher"

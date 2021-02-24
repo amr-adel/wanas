@@ -27,15 +27,23 @@ module.exports = {
     },
     container: {
       center: true,
+      padding: {
+        DEFAULT: "0.5rem",
+        md: "1rem",
+      },
     },
     extend: {
       transitionProperty: {
         width: "width",
         padding: "padding",
       },
+      height: {
+        inner: "var(--inner-height, 100vh)",
+      },
       minHeight: {
         inner: "var(--inner-height, 100vh)",
         16: "4rem",
+        infint: "99999",
       },
       backgroundImage: (theme) => ({
         "icons-light": "url('/images/wanas-icons-light.png')",
@@ -52,6 +60,7 @@ module.exports = {
   },
   variants: {
     extend: {
+      height: ["hover", "focus"],
       width: ["hover", "focus", "focus-within"],
       padding: ["hover"],
       transitionProperty: ["hover", "focus"],

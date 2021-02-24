@@ -43,7 +43,7 @@ export default function FourSquare() {
   const paginate = response?.totalResults > reqParams.limit;
 
   return (
-    <div id="venues-container" className="flex flex-col space-y-4">
+    <div className="flex flex-col space-y-4 relative">
       <Tabs
         isLoading={isLoading}
         activeTab={activeTab}

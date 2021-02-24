@@ -32,54 +32,61 @@ export default function NavMenu() {
     }
   };
 
-  const menuLinksClasses = `w-full block p-2 rounded-lg cursor-pointer transition-padding last:px-0 ${
-    locale === "ar" ? "hover:pr-4" : "hover:pl-4"
-  }`;
+  const menuLinksClasses = `w-full block p-2 rounded-lg cursor-pointer transition-padding hover:text-gray-700 lg:text-base`;
 
   const menu = (
     <nav
       dir="ltr"
-      className={`w-72 absolute top-2 right-2 p-4 pt-10 flex flex-col text-gray-500 bg-gray-200 divide-y divide-gray-300 rounded-lg shadow-lg`}
+      className={`${
+        showMenu ? "flex" : "hidden lg:flex"
+      } w-72 lg:w-auto absolute lg:relative top-0 right-0 p-4 lg:p-0 pt-8 lg:pt-1 flex-col  text-gray-500 bg-gray-200 lg:bg-transparent rounded-lg shadow-lg lg:shadow-none ${
+        locale === "ar"
+          ? "lg:flex-row-reverse lg:space-x-reverse"
+          : "lg:flex-row lg:space-x-2"
+      }`}
     >
       <ul
         dir="auto"
-        className="felx flex-col px-2 text-xl rounded-lg bg-gray-50 divide-y divide-gray-200 shadow hover:shadow-md"
+        className={`flex flex-col lg:flex-row px-2 lg:px-0 text-xl rounded-lg bg-gray-50 lg:bg-transparent divide-y lg:divide-y-0 divide-gray-200 shadow lg:shadow-none hover:shadow-md lg:hover:shadow-none lg:space-x-4`}
       >
-        <li key="home" className="my-1.5">
+        <li key="home">
           <Link href="/">
             <span className={menuLinksClasses}>{t("menu.home")}</span>
           </Link>
         </li>
-        <li key="explore" className="my-1.5">
+        <li key="explore">
           <Link href="/explore">
             <span className={menuLinksClasses}>{t("menu.explore")}</span>
           </Link>
         </li>
-        <li key="about" className="my-1.5">
+        <li key="about">
           <Link href="/about">
             <span className={menuLinksClasses}>{t("menu.about")}</span>
           </Link>
         </li>
       </ul>
 
-      <div id="locale-switcher-container" className="pt-2 mt-2">
-        <LocaleSwitcher />
+      <div
+        id="locale-switcher-container"
+        className="bg-gray-50 lg:bg-transparent lg:hover:bg-gray-50 rounded-lg shadow lg:shadow-none hover:shadow-md mt-4 lg:mt-0 lg:h-12 lg:hover:h-auto lg:focus:h-auto lg:overflow-hidden"
+      >
+        <LocaleSwitcher menu />
       </div>
     </nav>
   );
 
   return (
-    <div id="menu" className="h-full w-full p-2 relative">
+    <div id="menu" className="h-full w-full relative">
       <button
         className={`relative h-full rounded-lg w-full focus:outline-none flex justify-center items-center ${
           showMenu ? " text-gray-400" : "text-inherit"
-        } z-40`}
+        } z-40 lg:hidden`}
         onClick={toggleMenu}
       >
         <Icon name={showMenu ? "close" : "menu"} classes="h-6" />
       </button>
 
-      {showMenu && menu}
+      {menu}
     </div>
   );
 }

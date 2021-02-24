@@ -37,7 +37,7 @@ export const es = {
   "explore.history.clear": "Eliminar historial reciente",
   "explore.history.clear.single": "Eliminar",
   // Venue details
-  "venue.moreInfo": "Mas información en FourSquare",
+  "venue.moreInfo": "Mas info en FourSquare",
   "venue.gmaps": "Ubicación en Google Maps",
   // About page
   "about.non-arabic":

@@ -171,7 +171,7 @@ export default function Map({ withGeoCoder = false }) {
   };
 
   return (
-    <div className="w-full h-96 relative">
+    <div className="w-full h-full">
       <Head>
         <link
           href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
@@ -182,7 +182,7 @@ export default function Map({ withGeoCoder = false }) {
       {withGeoCoder && (
         <div
           id="geocoder-overlay"
-          className="absolute top-2 left-2 right-2 z-10"
+          className="absolute top-2 left-1/2 transform -translate-x-1/2 w-11/12 max-w-lg z-10"
         >
           <GeoCoder />
         </div>

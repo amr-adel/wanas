@@ -16,7 +16,7 @@ export default function Modal({ children }) {
       onClick={handleHide}
       className="fixed h-inner w-screen p-4 bg-gray-900 bg-opacity-80 z-50 flex justify-center items-center"
     >
-      <div className="p-4 w-full bg-gray-50 rounded-lg shadow-lg">
+      <div className="p-4 w-full max-w-xl bg-gray-50 rounded-lg shadow-lg">
         {children}
       </div>
     </div>

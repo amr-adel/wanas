@@ -61,3 +61,7 @@ html[dir="rtl"] h6 {
   font-family: sans-serif;
   font-weight: 600;
 }
+
+.simplebar-scrollbar::before {
+  background-color: #9ca3af !important;
+}

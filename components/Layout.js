@@ -3,6 +3,9 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { useIntl } from "react-intl";
 
+import SimpleBar from "simplebar-react";
+import "simplebar/dist/simplebar.min.css";
+
 import SetInnerHeightVar from "../utils/SetInnerHeightVar";
 import Logo from "../utils/Logo";
 
@@ -38,7 +41,7 @@ export default function Layout({ children }) {
   }, []);
 
   return (
-    <div>
+    <div className="pattern-light min-h-inner">
       <Head>
         <link
           rel="apple-touch-icon"
@@ -103,9 +106,29 @@ export default function Layout({ children }) {
         </Modal>
       )}
 
-      {pathname !== "/" && <Header />}
+      <Header />
 
-      {children}
+      <main
+        className={`container pt-16 pb-4 flex flex-col space-y-4 md:h-inner md:items-center md:space-y-0 md:flex-row-reverse md:space-x-4 ${
+          locale !== "ar" && "md:space-x-reverse"
+        }`}
+      >
+        {children}
+      </main>
     </div>
+  );
+}
+
+export function LayoutMap({ children }) {
+  return <div className={`h-96 md:h-full w-full relative`}>{children}</div>;
+}
+
+export function LayoutDetails({ children }) {
+  return (
+    <SimpleBar
+      className={`md:w-2/5 md:max-w-sm md:flex-shrink-0 md:pb-2 md:h-full`}
+    >
+      {children}
+    </SimpleBar>
   );
 }

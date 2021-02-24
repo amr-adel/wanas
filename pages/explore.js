@@ -6,9 +6,10 @@ import { useRouter } from "next/router";
 
 import Map from "../components/Map";
 import FourSquare from "../components/FourSquare";
+import { LayoutDetails, LayoutMap } from "../components/Layout";
 
 export default function Explore() {
-  const { formatMessage } = useIntl();
+  const { formatMessage, locale } = useIntl();
   const t = (id) => formatMessage({ id });
 
   const router = useRouter();
@@ -43,15 +44,19 @@ export default function Explore() {
   }, [reqParams]);
 
   return (
-    <div className="min-h-inner pt-16 pb-4 px-2 flex flex-col space-y-4 pattern-light">
+    <>
       <Head>
         <title>{t("app.name")}</title>
       </Head>
 
-      <Map withGeoCoder />
+      <LayoutMap>
+        <Map withGeoCoder />
+      </LayoutMap>
 
-      <FourSquare />
-    </div>
+      <LayoutDetails>
+        <FourSquare />
+      </LayoutDetails>
+    </>
   );
 }
 

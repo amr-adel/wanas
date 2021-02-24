@@ -9,6 +9,7 @@ import Loader from "../../utils/Loader";
 import Icon from "../../utils/Icon";
 import useRecentVenues from "../../hooks/useRecentVenues";
 import Map from "../../components/Map";
+import { LayoutDetails, LayoutMap } from "../../components/Layout";
 
 const fetchVenue = (vid, locale) => {
   return axios.get(`/api/getVenue?vid=${vid}&locale=${locale}`);
@@ -242,29 +243,33 @@ function Venue() {
   }
 
   return (
-    <div className="min-h-inner pt-16 pb-4 px-2 flex flex-col space-y-4 pattern-light">
-      <Map />
+    <>
+      <LayoutMap>
+        <Map />
+      </LayoutMap>
 
-      <div>
-        <div className="bg-gray-50 p-2 mb-4 flex flex-col divide-y divide-gray-200 rounded-lg shadow">
-          {venueDetails}
+      <LayoutDetails>
+        <div className="flex flex-col space-y-4">
+          <div className="bg-gray-50 p-2 flex flex-col divide-y divide-gray-200 rounded-lg shadow">
+            {venueDetails}
+          </div>
+
+          {data && (
+            <cite className="text-sm w-full block text-center not-italic text-gray-700 p-2">
+              {t("attr.foursquare")}
+              <a
+                href="https://foursquare.com/"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-gray-500 hover:text-gray-700"
+              >
+                FourSquare
+              </a>
+            </cite>
+          )}
         </div>
-
-        {data && (
-          <cite className="text-sm w-full block text-center not-italic text-gray-700 p-2">
-            {t("attr.foursquare")}
-            <a
-              href="https://foursquare.com/"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="text-gray-500 hover:text-gray-700"
-            >
-              FourSquare
-            </a>
-          </cite>
-        )}
-      </div>
-    </div>
+      </LayoutDetails>
+    </>
   );
 }
 

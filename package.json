@@ -17,6 +17,7 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-intl": "^5.10.16",
+    "simplebar-react": "^2.3.0",
     "swr": "^0.4.0",
     "tailwindcss": "^2.0.2",
     "zustand": "^3.3.1"
