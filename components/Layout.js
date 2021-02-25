@@ -85,7 +85,7 @@ export default function Layout({ children }) {
               {t("welcome.head")}
             </h2>
 
-            <Logo type="text" classes="h-8 my-3" />
+            <Logo type="text" className="h-8 my-3" />
 
             <p className="text-gray-700">{t("welcome.change-locale")}</p>
 

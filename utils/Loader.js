@@ -1,11 +1,11 @@
 // SVG by Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL
 
-export default function Loader({ classes }) {
+export default function Loader({ className }) {
   const duration = "0.6s";
 
   return (
     <svg
-      className={classes}
+      className={className}
       // width="120"
       height="30"
       viewBox="0 0 120 30"

@@ -37,8 +37,8 @@ export default function Explore() {
       </LayoutMap>
 
       <LayoutDetails>
-        <Logo classes="w-24 mx-auto" />
-        <Logo type="text" classes="h-8 mx-auto" />
+        <Logo className="w-24 mx-auto" />
+        <Logo type="text" className="h-8 mx-auto" />
       </LayoutDetails>
     </>
   );

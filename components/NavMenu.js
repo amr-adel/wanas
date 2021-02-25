@@ -32,7 +32,7 @@ export default function NavMenu() {
     }
   };
 
-  const menuLinksClasses = `w-full block p-2 rounded-lg cursor-pointer transition-padding hover:text-gray-700 lg:text-base`;
+  const menuLinksclassName = `w-full block p-2 rounded-lg cursor-pointer transition-padding hover:text-gray-700 lg:text-base`;
 
   const menu = (
     <nav
@@ -51,17 +51,17 @@ export default function NavMenu() {
       >
         <li key="home">
           <Link href="/">
-            <span className={menuLinksClasses}>{t("menu.home")}</span>
+            <span className={menuLinksclassName}>{t("menu.home")}</span>
           </Link>
         </li>
         <li key="explore">
           <Link href="/explore">
-            <span className={menuLinksClasses}>{t("menu.explore")}</span>
+            <span className={menuLinksclassName}>{t("menu.explore")}</span>
           </Link>
         </li>
         <li key="about">
           <Link href="/about">
-            <span className={menuLinksClasses}>{t("menu.about")}</span>
+            <span className={menuLinksclassName}>{t("menu.about")}</span>
           </Link>
         </li>
       </ul>
@@ -83,7 +83,7 @@ export default function NavMenu() {
         } z-40 lg:hidden`}
         onClick={toggleMenu}
       >
-        <Icon name={showMenu ? "close" : "menu"} classes="h-6" />
+        <Icon name={showMenu ? "close" : "menu"} className="h-6" />
       </button>
 
       {menu}

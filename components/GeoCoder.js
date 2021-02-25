@@ -88,7 +88,7 @@ export default function GeoCoder() {
       >
         <Icon
           name="location-arrow"
-          classes="w-6 h-6 flex-shrink-0 pr-2 border-r border-gray-400"
+          className="w-6 h-6 flex-shrink-0 pr-2 border-r border-gray-400"
         />
 
         {/* Input */}
@@ -113,7 +113,7 @@ export default function GeoCoder() {
               setQuery("");
             }}
           >
-            <Icon name="close" classes="w-6 h-6 flex-shrink-0" />
+            <Icon name="close" className="w-6 h-6 flex-shrink-0" />
           </button>
         )}
       </label>
@@ -124,7 +124,7 @@ export default function GeoCoder() {
           id="results"
           className="p-2 pb-0 my-2 border-t border-gray-300 divide-y divide-gray-300"
         >
-          {isLoading && <Loader classes="text-gray-400 h-8 py-2" />}
+          {isLoading && <Loader className="text-gray-400 h-8 py-2" />}
 
           {geoSuggestions && (
             <ol dir={locale === "ar" ? "rtl" : "ltr"} className="flex flex-col">
@@ -218,7 +218,7 @@ function CurrentLocation({ setQuery }) {
   return !currentLocation ? null : (
     <div id="current-location" onMouseDown={handleCurrentLocation}>
       {currentLocation === "searching" ? (
-        <Loader classes="text-gray-400 h-8 py-2" />
+        <Loader className="text-gray-400 h-8 py-2" />
       ) : (
         <div
           className={`flex items-center divide-x ${
@@ -227,7 +227,7 @@ function CurrentLocation({ setQuery }) {
         >
           <Icon
             name="my-location"
-            classes="w-6 h-6 mx-2 flex-shrink-0 text-yellow"
+            className="w-6 h-6 mx-2 flex-shrink-0 text-yellow"
           />
 
           <span className="px-2 py-1">

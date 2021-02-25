@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { useIntl } from "react-intl";
 
 import Logo from "../utils/Logo";
-import GeoCoder from "../components/GeoCoder";
 import NavMenu from "../components/NavMenu";
 
 export default function Header() {
@@ -18,11 +18,21 @@ export default function Header() {
           locale === "ar" && "lg:flex-row-reverse"
         }`}
       >
-        <Logo classes="w-8 h-8 lg:mx-1" />
-        <Logo
-          type="text"
-          classes={`h-8 py-1 ${locale === "ar" ? "lg:ml-auto" : "lg:mr-auto"}`}
-        />
+        <Link href="/">
+          <div className="cursor-pointer lg:mx-1">
+            <Logo className="w-8 h-8" />
+          </div>
+        </Link>
+
+        <Link href="/">
+          <div
+            className={`cursor-pointer ${
+              locale === "ar" ? "lg:ml-auto" : "lg:mr-auto"
+            }`}
+          >
+            <Logo type="text" className={`h-8 py-1`} />
+          </div>
+        </Link>
 
         <div id="nav-container" className="h-8 lg:h-full w-8 lg:w-auto">
           <NavMenu />

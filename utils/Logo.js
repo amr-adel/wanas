@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-export default function Logo({ classes, type = "figure" }) {
+export default function Logo({ className, type = "figure" }) {
   const { locale, locales } = useRouter();
 
   if (type === "text") {
@@ -14,7 +14,7 @@ export default function Logo({ classes, type = "figure" }) {
       role="img"
       xmlns="http://www.w3.org/2000/svg"
       viewBox={logo[type].viewBox}
-      className={classes}
+      className={className}
     >
       {logo[type].body}
     </svg>

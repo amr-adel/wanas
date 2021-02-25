@@ -26,7 +26,7 @@ export default function Pagination({ total }) {
       >
         <Icon
           name={locale === "ar" ? "right" : "left"}
-          classes="h-12 w-12 p-2 pattern-dark"
+          className="h-12 w-12 p-2 pattern-dark"
         />
       </button>
 
@@ -47,7 +47,7 @@ export default function Pagination({ total }) {
       >
         <Icon
           name={locale !== "ar" ? "right" : "left"}
-          classes="h-12 w-12 p-2 pattern-dark"
+          className="h-12 w-12 p-2 pattern-dark"
         />
       </button>
     </div>

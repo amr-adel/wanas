@@ -107,16 +107,16 @@ export default function Map({ withGeoCoder = false }) {
   const changeMapLocale = () => {
     const textField = map.getLayoutProperty("country-label", "text-field");
 
-    if (
-      textField[1].indexOf(locale) === -1 &&
-      textField[1]?.[1].indexOf(locale) === -1
-    ) {
-      // // https://stackoverflow.com/questions/58605220/how-to-change-language-in-mapbox
+    if (textField[1]?.[1].indexOf(locale) === -1) {
+      // https://stackoverflow.com/questions/58605220/how-to-change-language-in-mapbox
       map.getStyle().layers.forEach(function (thisLayer) {
         if (thisLayer.id.indexOf("-label") > 0) {
           map.setLayoutProperty(thisLayer.id, "text-field", [
-            "get",
-            `name_${locale}`,
+            "coalesce",
+
+            ["get", `name_${locale}`],
+            ["get", `name_en`],
+            ["get", `name`],
           ]);
         }
       });
@@ -136,7 +136,7 @@ export default function Map({ withGeoCoder = false }) {
       })
         .setLngLat([popUp.lng, popUp.lat])
         .setHTML(
-          `<h3 class='pop-up-link p-2 text-red-500 text-center cursor-pointer' data-popUp-id=${popUp.id}>${popUp.name}</h3>`
+          `<h3 class='pop-up-link p-2 bg-gray-700 text-yellow rounded shadow text-center cursor-pointer' data-popUp-id=${popUp.id}>${popUp.name}</h3>`
         );
 
       tempPopUp.addTo(map);

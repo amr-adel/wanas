@@ -21,7 +21,7 @@ export default function Tabs({
 
   const tabBody = {
     info: isLoading ? (
-      <Loader classes="text-gray-400 h-4 my-4" />
+      <Loader className="text-gray-400 h-4 my-4" />
     ) : (
       <InfoTab total={total} t={t} />
     ),
@@ -49,7 +49,7 @@ export default function Tabs({
           >
             <Icon
               name={tab}
-              classes={`h-5 w-5 ${
+              className={`h-5 w-5 ${
                 tab === activeTab ? "text-yellow" : "text-gray-500"
               }`}
             />

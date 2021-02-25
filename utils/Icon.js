@@ -1,4 +1,4 @@
-export default function Icon({ name, classes }) {
+export default function Icon({ name, className }) {
   return (
     <svg
       aria-hidden="true"
@@ -6,7 +6,7 @@ export default function Icon({ name, classes }) {
       role="img"
       xmlns="http://www.w3.org/2000/svg"
       viewBox={icons[name].viewBox}
-      className={classes}
+      className={className}
     >
       <path fill="currentColor" d={icons[name].d}></path>
     </svg>

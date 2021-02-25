@@ -53,7 +53,7 @@ function Venue() {
   }, [data]);
 
   if (isLoding) {
-    venueDetails = <Loader classes="text-gray-400 h-14 py-5" />;
+    venueDetails = <Loader className="text-gray-400 h-14 py-5" />;
   } else if (data?.data?.response?.venue) {
     const {
       id,
@@ -151,7 +151,7 @@ function Venue() {
                 id="likes"
                 className="p-1 mt-2 flex justify-center items-center tracking-widest text-center text-lg bg-gray-800 rounded-lg shadow"
               >
-                <Icon name="heart" classes="h-4 w-4 text-red-500 mr-2" />
+                <Icon name="heart" className="h-4 w-4 text-red-500 mr-2" />
                 <span className="text-gray-200 tracking-wider text-sm text-center font-bold">
                   {likes.count}
                 </span>
@@ -182,7 +182,7 @@ function Venue() {
         {/* Address ========================================== */}
         {location.formattedAddress && (
           <div id="address" className="flex">
-            <Icon name="pin" classes="w-4 h-4 text-gray-200 mt-3 mx-1" />
+            <Icon name="pin" className="w-4 h-4 text-gray-200 mt-3 mx-1" />
             <p className="text-gray-700 py-2">
               {location.formattedAddress[0]} <br />
               {location.formattedAddress[1]}
@@ -219,7 +219,7 @@ function Venue() {
             </span>
             <Icon
               name="external"
-              classes="h-10 w-10 p-3 text-yellow-500 bg-yellow"
+              className="h-10 w-10 p-3 text-yellow-500 bg-yellow"
             />
           </a>
 
@@ -234,7 +234,7 @@ function Venue() {
             </span>
             <Icon
               name="pin"
-              classes="h-10 w-10 p-3 text-yellow-500 bg-yellow"
+              className="h-10 w-10 p-3 text-yellow-500 bg-yellow"
             />
           </a>
         </div>
