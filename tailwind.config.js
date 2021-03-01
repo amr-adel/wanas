@@ -49,6 +49,7 @@ module.exports = {
         "icons-light": "url('/images/wanas-icons-light.png')",
         "icons-dark": "url('/images/wanas-icons-dark.png')",
         logo: "url('/images/wanas-logo.svg')",
+        "my-location": "url('/images/my-location.svg')",
       }),
       backgroundSize: {
         auto: "auto",

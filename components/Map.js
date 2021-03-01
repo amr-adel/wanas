@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import mapboxgl from "mapbox-gl";
 import { useStore } from "../hooks/useStore";
 import GeoCoder from "./GeoCoder";
+import Icon from "../utils/Icon";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -11,7 +12,9 @@ export default function Map({ withGeoCoder = false }) {
   const { locale, pathname } = useRouter();
   const router = useRouter();
 
-  const { markers, center, zoom, popUp } = useStore((state) => state.mapBox);
+  const { markers, center, zoom, popUp, userLocation } = useStore(
+    (state) => state.mapBox
+  );
   const set = useStore((state) => state.set);
   const [map, setMap] = useState(null);
   const [markersOnMap, setMarkersOnMap] = useState([]);
@@ -39,6 +42,7 @@ export default function Map({ withGeoCoder = false }) {
     }
   }, []);
 
+  // Sync map labels language with user locale
   useEffect(() => {
     if (map) {
       map.loaded()
@@ -47,6 +51,7 @@ export default function Map({ withGeoCoder = false }) {
     }
   }, [map, locale]);
 
+  // Animate map pan on center or zoom change
   useEffect(() => {
     if (map) {
       map.easeTo({
@@ -56,6 +61,28 @@ export default function Map({ withGeoCoder = false }) {
     }
   }, [center, zoom]);
 
+  // Show icon at user's location if selected from geocoder
+  useEffect(() => {
+    if (map && userLocation && !document.querySelector("#user-location")) {
+      const addUserLocationMarker = () => {
+        var el = document.createElement("div");
+        el.id = "user-location";
+        el.className = `h-8 w-7`;
+
+        new mapboxgl.Marker(el, {
+          anchor: "bottom",
+        })
+          .setLngLat([userLocation[0], userLocation[1]])
+          .addTo(map);
+      };
+
+      map.loaded()
+        ? addUserLocationMarker()
+        : map.on("load", () => addUserLocationMarker());
+    }
+  }, [map, userLocation]);
+
+  // Handle markers
   useEffect(() => {
     if (map) {
       for (let markerOnMap of markersOnMap) {
@@ -83,6 +110,7 @@ export default function Map({ withGeoCoder = false }) {
         tempMarker.addTo(map);
       }
 
+      // Store marker objects to be removed upon update
       setMarkersOnMap(tempMarkers);
 
       if (markers.length === 1) {
@@ -98,6 +126,7 @@ export default function Map({ withGeoCoder = false }) {
     }
   }, [markers]);
 
+  // Handle pop-up state
   useEffect(() => {
     if (map) {
       map.loaded() ? showHidePopUps() : map.on("load", () => showHidePopUps());
@@ -141,6 +170,7 @@ export default function Map({ withGeoCoder = false }) {
 
       tempPopUp.addTo(map);
 
+      // Store pop-up object to be removed upon update
       setPopUpOnMap(tempPopUp);
     }
   };

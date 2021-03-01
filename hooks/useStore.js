@@ -8,6 +8,7 @@ export const useStore = create((set) => ({
     zoom: 0,
     markers: [],
     popUp: null,
+    userLocation: null,
   },
   fourSquare: {
     localeNear: null,

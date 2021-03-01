@@ -183,6 +183,7 @@ function CurrentLocation({ setQuery }) {
       state.fourSquare.reqParams.offset = 0;
 
       state.mapBox.center = [lng, lat];
+      state.mapBox.userLocation = [lng, lat];
       state.mapBox.zoom = 14;
     });
 
