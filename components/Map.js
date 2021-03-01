@@ -61,30 +61,21 @@ export default function Map({ withGeoCoder = false }) {
     }
   }, [center, zoom]);
 
-  // Show icon at user's location if selected from geocoder
   useEffect(() => {
-    if (map && userLocation && !document.querySelector("#user-location")) {
-      const addUserLocationMarker = () => {
-        var el = document.createElement("div");
-        el.id = "user-location";
-        el.className = `h-8 w-7`;
-
-        new mapboxgl.Marker(el, {
-          anchor: "bottom",
-        })
-          .setLngLat([userLocation[0], userLocation[1]])
-          .addTo(map);
-      };
-
+    if (map && userLocation & !document.querySelector("#user-location")) {
       map.loaded()
         ? addUserLocationMarker()
         : map.on("load", () => addUserLocationMarker());
     }
-  }, [map, userLocation]);
+  }, [userLocation]);
 
   // Handle markers
   useEffect(() => {
     if (map) {
+      if (userLocation && !document.querySelector("#user-location")) {
+        addUserLocationMarker();
+      }
+
       for (let markerOnMap of markersOnMap) {
         markerOnMap.remove();
       }
@@ -198,6 +189,18 @@ export default function Map({ withGeoCoder = false }) {
       });
       router.push(`/venues/${e.target.dataset.popupId}`);
     }
+  };
+
+  const addUserLocationMarker = () => {
+    var el = document.createElement("div");
+    el.id = "user-location";
+    el.className = `h-8 w-7`;
+
+    new mapboxgl.Marker(el, {
+      anchor: "bottom",
+    })
+      .setLngLat([userLocation[0], userLocation[1]])
+      .addTo(map);
   };
 
   return (
