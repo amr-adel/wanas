@@ -24,7 +24,7 @@ export default function Map({ withGeoCoder = false }) {
       new mapboxgl.Map({
         container: mapContainerRef.current,
         // style: "mapbox://styles/mapbox/light-v10",
-        style: "mapbox://styles/fullstackamr/cklbcz9mj0ke417qlvx33xryl",
+        style: "mapbox://styles/fullstackamr/cklqhou8c3tw917t65vl2u50x",
         center: center,
         zoom: zoom,
       })
@@ -182,7 +182,7 @@ export default function Map({ withGeoCoder = false }) {
       {withGeoCoder && (
         <div
           id="geocoder-overlay"
-          className="absolute top-2 left-1/2 transform -translate-x-1/2 w-11/12 max-w-lg z-10"
+          className="absolute top-3 left-1/2 transform -translate-x-1/2 w-11/12 max-w-lg z-10"
         >
           <GeoCoder />
         </div>
@@ -190,7 +190,8 @@ export default function Map({ withGeoCoder = false }) {
 
       <div
         id="map"
-        className="h-full w-full bg-gray-400 rounded-lg shadow"
+        dir="ltr"
+        className="h-full w-full bg-gray-400 rounded-lg shadow border-2 border-gray-100"
         ref={mapContainerRef}
         onClick={handleClicks}
       />

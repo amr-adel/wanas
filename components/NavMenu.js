@@ -47,7 +47,9 @@ export default function NavMenu() {
     >
       <ul
         dir="auto"
-        className={`flex flex-col lg:flex-row px-2 lg:px-0 text-xl rounded-lg bg-gray-50 lg:bg-transparent divide-y lg:divide-y-0 divide-gray-200 shadow lg:shadow-none hover:shadow-md lg:hover:shadow-none lg:space-x-4`}
+        className={`flex flex-col lg:flex-row px-2 lg:px-0 text-xl rounded-lg bg-gray-50 lg:bg-transparent divide-y lg:divide-y-0 divide-gray-200 shadow lg:shadow-none hover:shadow-md lg:hover:shadow-none lg:space-x-4 ${
+          locale === "ar" && "lg:space-x-reverse"
+        }`}
       >
         <li key="home">
           <Link href="/">

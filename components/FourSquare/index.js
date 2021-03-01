@@ -43,7 +43,11 @@ export default function FourSquare() {
   const paginate = response?.totalResults > reqParams.limit;
 
   return (
-    <div className="flex flex-col space-y-4 relative">
+    <div
+      className={`flex flex-col space-y-4 relative ${
+        locale === "ar" && "lg:pr-3"
+      }`}
+    >
       <Tabs
         isLoading={isLoading}
         activeTab={activeTab}

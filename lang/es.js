@@ -43,7 +43,7 @@ export const es = {
   "about.non-arabic":
     " es un término árabe que describe el estado de estar en un ambiente agradable y agradable.",
   "about.p1":
-    "Si tiene ganas de probar diferentes lugares o planea visitar una ciudad de la que no sabe mucho, la aplicación Wanas lo ayuda a explorar lugares a su alrededor y muchas otras ciudades alrededor del mundo.",
+    "Con ganas de probar un nuevo lugar o planeando visitar una ciudad de la que no sabe mucho, la aplicación Wanas lo ayuda a explorar lugares a su alrededor y muchas otras ciudades alrededor del mundo.",
   "about.p2":
     'Puedes filtrar lugares por "comida, bebidas, café, tiendas, arte y aire libre", también puedes controlar el radio de búsqueda "5 km, 10 km y 20 km" o dejar que la aplicación sugiera el radio según la densidad de los lugares en el lugar buscado y ordenarlos por popularidad o por la distancia a usted.',
   "about.p3":
