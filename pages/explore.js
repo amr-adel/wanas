@@ -4,9 +4,12 @@ import { useStore } from "../hooks/useStore";
 import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
 
+import SimpleBar from "simplebar-react";
+import "simplebar/dist/simplebar.min.css";
+
 import Map from "../components/Map";
 import FourSquare from "../components/FourSquare";
-import { LayoutDetails, LayoutMap } from "../components/Layout";
+import { LayoutWithMap } from "../components/Layout";
 
 export default function Explore() {
   const { formatMessage, locale } = useIntl();
@@ -44,19 +47,21 @@ export default function Explore() {
   }, [reqParams]);
 
   return (
-    <>
+    <LayoutWithMap>
       <Head>
         <title>{t("app.name")}</title>
       </Head>
 
-      <LayoutMap>
+      <div className="h-96 md:h-full w-full relative">
         <Map withGeoCoder />
-      </LayoutMap>
+      </div>
 
-      <LayoutDetails>
+      <SimpleBar
+        className={`md:w-2/5 md:max-w-sm md:flex-shrink-0 md:pb-2 md:h-full`}
+      >
         <FourSquare />
-      </LayoutDetails>
-    </>
+      </SimpleBar>
+    </LayoutWithMap>
   );
 }
 

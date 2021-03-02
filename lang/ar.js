@@ -19,7 +19,7 @@ export const ar = {
   "home.fs-section.arts": "فنون",
   "home.fs-section.outdoors": "في الهواء الطلق",
   // Explore
-  "explore.info.start": "ابدأ بتحديد (المنطقة ، المدينة) أعلاه.",
+  "explore.info.start": "ابدأ بتحديد (المنطقة ، المدينة).",
   "explore.info.zero": "لا يوجد مكان يطابق الموقع/اعدادات البحث.",
   "explore.info.venues": " مكان تم ايجاده",
   "explore.info.near": " ، بالقرب من ",

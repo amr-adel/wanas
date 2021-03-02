@@ -19,7 +19,7 @@ export const en = {
   "home.fs-section.arts": "arts",
   "home.fs-section.outdoors": "outdoors",
   // Explore
-  "explore.info.start": "Start by selecting (region, city) above.",
+  "explore.info.start": "Start by selecting (region, city).",
   "explore.info.zero": "No place match your location/search.",
   "explore.info.venues": " Venues found",
   "explore.info.near": ", near ",
@@ -43,7 +43,7 @@ export const en = {
   "about.non-arabic":
     " is an Arabic term that describes the state of being in a friendly and enjoyable atmosphere.",
   "about.p1":
-    "Feeling in mood to try a new place or planning to visit a city you don't know much about, Wanas app helps you explore places around you, and many other cities around the globe.",
+    "Feeling in the mood to try a new place or planning to visit a city you don't know much about, Wanas app helps you explore places around you, and many other cities around the globe.",
   "about.p2":
     'You can filter places by "food, drinks, coffee, shops, arts, and outdoors", you can also control the search radius "5km, 10km, and 20km" or let the app suggest the radius according to the density of the places in the searched spot, and sort them by popularity or by the distance from you.',
   "about.p3":

@@ -3,9 +3,6 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { useIntl } from "react-intl";
 
-import SimpleBar from "simplebar-react";
-import "simplebar/dist/simplebar.min.css";
-
 import SetInnerHeightVar from "../utils/SetInnerHeightVar";
 import Logo from "../utils/Logo";
 
@@ -17,7 +14,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import LocaleSwitcher from "../components/LocaleSwitcher";
 
 export default function Layout({ children }) {
-  const { locale, asPath, pathname } = useRouter();
+  const { locale, asPath } = useRouter();
   const router = useRouter();
 
   const { formatMessage } = useIntl();
@@ -42,6 +39,7 @@ export default function Layout({ children }) {
 
   return (
     <div className="pattern-light min-h-inner">
+      {/* head tags */}
       <Head>
         <link
           rel="apple-touch-icon"
@@ -77,7 +75,10 @@ export default function Layout({ children }) {
         <meta name="theme-color" content="#f1f5f9" />
       </Head>
 
+      {/* Set h-inner (100vh without bars) */}
       <SetInnerHeightVar />
+
+      {/* Set user locale on first visit */}
       {showModal && (
         <Modal>
           <div className="p-2 py-4 bg-gray-200 flex flex-col justify-center text-center rounded-lg border border-gray-300">
@@ -106,29 +107,25 @@ export default function Layout({ children }) {
         </Modal>
       )}
 
+      {/* Fixed header */}
       <Header />
 
-      <main
-        className={`container pt-16 pb-4 flex flex-col space-y-4 md:h-inner md:items-center md:space-y-0 md:flex-row-reverse md:space-x-4 ${
-          locale !== "ar" && "md:space-x-reverse"
-        }`}
-      >
-        {children}
-      </main>
+      {/* Main body */}
+      {children}
     </div>
   );
 }
 
-export function LayoutMap({ children }) {
-  return <div className={`h-96 md:h-full w-full relative`}>{children}</div>;
-}
+export function LayoutWithMap({ children }) {
+  const { locale } = useRouter();
 
-export function LayoutDetails({ children }) {
   return (
-    <SimpleBar
-      className={`md:w-2/5 md:max-w-sm md:flex-shrink-0 md:pb-2 md:h-full`}
+    <main
+      className={`container pt-16 pb-4 flex flex-col space-y-4 md:h-inner md:items-center md:space-y-0 md:flex-row-reverse md:space-x-4 ${
+        locale !== "ar" && "md:space-x-reverse"
+      }`}
     >
       {children}
-    </SimpleBar>
+    </main>
   );
 }

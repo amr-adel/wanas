@@ -20,23 +20,23 @@ export default function Home() {
   };
 
   return (
-    <>
+    <main className="container pt-96 md:pt-16 pb-4 md:min-h-inner w-full md:flex md:flex-col lg:flex-row md:justify-center md:items-center">
       <Head>
         <title>{t("app.name")}</title>
       </Head>
 
-      {/* <div
+      <div
         id="brand"
-        className="flex flex-col justify-center items-center my-8 md:w-2/5 md:flex-shrink-0"
+        className="fixed md:relative h-80 md:h-auto pt-4 lg:pt-0 top-12 md:top-auto left-0 right-0 flex flex-col justify-center items-center mx-auto md:mb-12 lg:m-20"
       >
-        <Logo className="h-32 mb-4" />
-        <Logo type="text" className="h-8 " />
-      </div> */}
+        <Logo className="h-44 mb-6" />
+        <Logo type="text" className="h-12" />
+      </div>
 
-      <div className="p-2 pattern-dark rounded-lg shadow-lg md:w-full">
+      <div className="px-4 md:max-w-md pattern-dark rounded-lg shadow-lg relative z-10">
         <div
           id="select-section"
-          className="max-w-sm mx-auto p-4 border-b border-gray-600"
+          className="mx-auto py-4 border-b border-gray-600"
         >
           <h3 className="mb-2 text-xl text-center text-gray-200">
             {t("home.looking-for")}
@@ -60,7 +60,7 @@ export default function Home() {
         </div>
         <div
           id="select-city"
-          className="max-w-sm mx-auto py-4 px-2 flex flex-col items-center"
+          className="max-w-sm mx-auto py-4 flex flex-col items-center"
         >
           <h3 className="mb-2 text-xl text-center text-gray-200">
             {t("home.looking-in")}
@@ -68,6 +68,6 @@ export default function Home() {
           <GeoCoder />
         </div>
       </div>
-    </>
+    </main>
   );
 }

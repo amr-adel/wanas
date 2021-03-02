@@ -76,6 +76,11 @@ export default function Map({ withGeoCoder = false }) {
         addUserLocationMarker();
       }
 
+      if (popUpOnMap) {
+        popUpOnMap.remove();
+        setPopUpOnMap(null);
+      }
+
       for (let markerOnMap of markersOnMap) {
         markerOnMap.remove();
       }

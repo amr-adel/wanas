@@ -1,15 +1,19 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { useIntl } from "react-intl";
 import axios from "axios";
 import useSWR from "swr";
 import { useStore } from "../../hooks/useStore";
 
+import SimpleBar from "simplebar-react";
+import "simplebar/dist/simplebar.min.css";
+
 import Loader from "../../utils/Loader";
 import Icon from "../../utils/Icon";
 import useRecentVenues from "../../hooks/useRecentVenues";
 import Map from "../../components/Map";
-import { LayoutDetails, LayoutMap } from "../../components/Layout";
+import { LayoutWithMap } from "../../components/Layout";
 
 const fetchVenue = (vid, locale) => {
   return axios.get(`/api/getVenue?vid=${vid}&locale=${locale}`);
@@ -243,12 +247,18 @@ function Venue() {
   }
 
   return (
-    <>
-      <LayoutMap>
-        <Map />
-      </LayoutMap>
+    <LayoutWithMap>
+      <Head>
+        <title>{t("app.name")}</title>
+      </Head>
 
-      <LayoutDetails>
+      <div className="h-96 md:h-full w-full relative">
+        <Map />
+      </div>
+
+      <SimpleBar
+        className={`md:w-2/5 md:max-w-sm md:flex-shrink-0 md:pb-2 md:h-full`}
+      >
         <div className="flex flex-col space-y-4">
           <div className="bg-gray-50 p-2 flex flex-col divide-y divide-gray-200 rounded-lg shadow">
             {venueDetails}
@@ -268,8 +278,8 @@ function Venue() {
             </cite>
           )}
         </div>
-      </LayoutDetails>
-    </>
+      </SimpleBar>
+    </LayoutWithMap>
   );
 }
 
