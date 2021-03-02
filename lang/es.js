@@ -51,10 +51,13 @@ export const es = {
   "about.p4":
     "* Wanas utiliza la API de FourSquare para explorar lugares y obtener información sobre ellos, por lo que la disponibilidad de detalles depende de la información proporcionada por los usuarios de FourSqaure.",
   // GeoCoder
-  geoCoderPlaceholder: "Región, ciudad",
-  currentLocation: "Mi ubicación actual",
-  "currentLocation.error": "No se puede recuperar su ubicación actual.",
-  "currentLocation.error.1":
+  "geocoder.placeholder": "Región, ciudad",
+  "geocoder.geocode-fail":
+    "No hay región o ciudad que coincida con su búsqueda, verifique la ortografía o pruebe con menos caracteres.",
+  "geocoder.currentLocation": "Mi ubicación actual",
+  "geocoder.currentLocation.error":
+    "No se puede recuperar su ubicación actual.",
+  "geocoder.currentLocation.error.1":
     "Por favor, habilite el acceso a la ubicación en su dispositivo.",
   // Attributions
   "attr.foursquare": "Datos por ",

@@ -94,7 +94,7 @@ export default function GeoCoder() {
         {/* Input */}
         <input
           type="text"
-          placeholder={t("geoCoderPlaceholder")}
+          placeholder={t("geocoder.placeholder")}
           spellCheck="false"
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
@@ -126,24 +126,32 @@ export default function GeoCoder() {
         >
           {isLoading && <Loader className="text-gray-400 h-8 py-2" />}
 
-          {geoSuggestions && (
-            <ol dir={locale === "ar" ? "rtl" : "ltr"} className="flex flex-col">
-              {geoSuggestions.features.map((place) => (
-                <li
-                  key={place.id}
-                  className="flex flex-col px-2 py-1 mb-2 bg-white rounded-lg cursor-pointer shadow hover:shadow-md"
-                  onMouseDown={(e) => handleSuggestion(e, place)}
-                >
-                  <h5 className="text-red-500 text-lg font-bold">
-                    {place.text}
-                  </h5>
-                  <span className="text-gray-400 text-sm">
-                    {place.place_name}
-                  </span>
-                </li>
-              ))}
-            </ol>
-          )}
+          {geoSuggestions &&
+            (geoSuggestions.features.length < 1 ? (
+              <p className="p-2 text-sm text-center text-gray-700">
+                {t("geocoder.geocode-fail")}
+              </p>
+            ) : (
+              <ol
+                dir={locale === "ar" ? "rtl" : "ltr"}
+                className="flex flex-col"
+              >
+                {geoSuggestions.features.map((place) => (
+                  <li
+                    key={place.id}
+                    className="flex flex-col px-2 py-1 mb-2 bg-white rounded-lg cursor-pointer shadow hover:shadow-md"
+                    onMouseDown={(e) => handleSuggestion(e, place)}
+                  >
+                    <h5 className="text-red-500 text-lg font-bold">
+                      {place.text}
+                    </h5>
+                    <span className="text-gray-400 text-sm">
+                      {place.place_name}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            ))}
 
           <CurrentLocation setQuery={setQuery} />
         </div>
@@ -232,7 +240,7 @@ function CurrentLocation({ setQuery }) {
           />
 
           <span className="px-2 py-1">
-            <h5>{t("currentLocation")}</h5>
+            <h5>{t("geocoder.currentLocation")}</h5>
             {errorMsg && <p className="text-sm text-red-400">{errorMsg}</p>}
           </span>
         </div>

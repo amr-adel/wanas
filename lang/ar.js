@@ -51,10 +51,13 @@ export const ar = {
   "about.p4":
     "ونس يستخدم  FourSquare لاستكشاف الأماكن والحصول على معلومات عنها، لذا فإن توفر التفاصيل يعتمد على المعلومات المقدمة من مستخدمي FourSqaure.",
   // GeoCoder
-  geoCoderPlaceholder: "منطقة أو مدينة",
-  currentLocation: "موقعي الحالي",
-  "currentLocation.error": "لا يمكن التعرف على موقعك الحالي.",
-  "currentLocation.error.1": "برجاء اتاحة خدمة التعرف على المواقع (GPS).",
+  "geocoder.placeholder": "منطقة أو مدينة",
+  "geocoder.geocode-fail":
+    "لا توجد منطقة أو مدينة تطابق بحثك ، تحقق من الإملاء أو حاول باستخدام أحرف أقل.",
+  "geocoder.currentLocation": "موقعي الحالي",
+  "geocoder.currentLocation.error": "لا يمكن التعرف على موقعك الحالي.",
+  "geocoder.currentLocation.error.1":
+    "برجاء اتاحة خدمة التعرف على المواقع (GPS).",
   // Attributions
   "attr.foursquare": "البيانات بواسطة ",
 };

@@ -51,10 +51,13 @@ export const en = {
   "about.p4":
     "*Wanas is using FourSquare API to explore places and get information about them, so details availability depends on the information provided by FourSqaure users.",
   // GeoCoder
-  geoCoderPlaceholder: "Region, city",
-  currentLocation: "My current Location",
-  "currentLocation.error": "Unable to retrive your current location.",
-  "currentLocation.error.1": "Please, enable Location access on your device.",
+  "geocoder.placeholder": "Region, city",
+  "geocoder.geocode-fail":
+    "There is no region or city match your search, check the spelling or try with less characters.",
+  "geocoder.currentLocation": "My current Location",
+  "geocoder.currentLocation.error": "Unable to retrive your current location.",
+  "geocoder.currentLocation.error.1":
+    "Please, enable Location access on your device.",
   // Attributions
   "attr.foursquare": "Data by ",
 };
