@@ -37,6 +37,7 @@ export const es = {
   "explore.history.clear": "Eliminar historial reciente",
   "explore.history.clear.single": "Eliminar",
   // Venue details
+  "venue.invalid-id": "Enlace de lugar no válido.",
   "venue.moreInfo": "Mas info en FourSquare",
   "venue.gmaps": "Ubicación en Google Maps",
   // About page
@@ -59,6 +60,9 @@ export const es = {
     "No se puede recuperar su ubicación actual.",
   "geocoder.currentLocation.error.1":
     "Por favor, habilite el acceso a la ubicación en su dispositivo.",
+  // 404
+  "page404.message": "La página a la que intenta acceder no existe.",
+  "page404.link": "Volver a la página de inicio",
   // Attributions
   "attr.foursquare": "Datos por ",
 };

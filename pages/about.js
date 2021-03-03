@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useIntl } from "react-intl";
-import { LayoutDetails, LayoutMap } from "../components/Layout";
 
 import Logo from "../utils/Logo";
 

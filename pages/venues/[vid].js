@@ -58,6 +58,12 @@ function Venue() {
 
   if (isLoding) {
     venueDetails = <Loader className="text-gray-400 h-14 py-5" />;
+  } else if (data?.data?.meta?.errorDetail?.includes("invalid for venue id")) {
+    venueDetails = (
+      <p className="my-2 mx-auto p-2 bg-red-50 text-red-500 text-center rounded-lg shadow">
+        {t("venue.invalid-id")}
+      </p>
+    );
   } else if (data?.data?.response?.venue) {
     const {
       id,

@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+*::selection {
+  color: #ffb24c;
+  background-color: #334155;
+}
+
 ::placeholder {
   opacity: 1;
 }
