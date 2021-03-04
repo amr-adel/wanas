@@ -269,6 +269,15 @@ function Venue() {
           }
           key="twitter-title"
         />
+        <meta
+          property="og:title"
+          content={
+            t("app.name") +
+            (data?.data?.response?.venue?.name &&
+              ` | ${data?.data?.response?.venue?.name}`)
+          }
+          key="og-title"
+        />
       </Head>
 
       <div className="h-96 md:h-full w-full relative">

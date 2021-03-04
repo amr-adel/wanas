@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import mapboxgl from "mapbox-gl";
 import { useStore } from "../hooks/useStore";
 import GeoCoder from "./GeoCoder";
-import Icon from "../utils/Icon";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 

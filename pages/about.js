@@ -18,6 +18,11 @@ export default function Explore() {
           content={t("app.name") + " | " + t("menu.about")}
           key="twitter-title"
         />
+        <meta
+          property="og:title"
+          content={t("app.name") + " | " + t("menu.about")}
+          key="og-title"
+        />
       </Head>
 
       <div

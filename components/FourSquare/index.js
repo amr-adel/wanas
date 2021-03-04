@@ -70,6 +70,16 @@ export default function FourSquare() {
           content={descriptionMsg}
           key="twitter-description"
         />
+        <meta
+          property="og:title"
+          content={t("app.name") + " | " + t("menu.explore")}
+          key="og-title"
+        />
+        <meta
+          property="og:description"
+          content={descriptionMsg}
+          key="og-description"
+        />
       </Head>
 
       <div

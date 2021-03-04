@@ -92,6 +92,21 @@ export default function Layout({ children }) {
           name="twitter:image"
           content="https://wanas.vercel.app/images/wanas-twitter-card.jpg"
         />
+        {/* Open graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={t("app.name")} key="og-title" />
+        <meta
+          property="og:image"
+          content="https://wanas.vercel.app/images/wanas-twitter-card.jpg"
+        />
+        <meta property="og:image:alt" content="Preview on wanas app on ipad" />
+        <meta
+          property="og:description"
+          content={t("meta.description")}
+          key="og-description"
+        />
+        <meta property="og:site_name" content="Wanas" />
+        <meta property="article:author" content="Fullstackamr" />
         <title key="title">{t("app.name")}</title>
         <meta
           key="description"
