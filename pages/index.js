@@ -24,8 +24,8 @@ export default function Home() {
         id="brand"
         className="fixed md:relative h-80 md:h-auto pt-4 lg:pt-0 top-12 md:top-auto left-0 right-0 flex flex-col justify-center items-center mx-auto md:mb-12 lg:m-20"
       >
-        <Logo className="h-44 mb-6" />
-        <Logo type="text" className="h-12" />
+        <Logo className="h-44 w-32 mb-6" />
+        <Logo type="text" className="h-12 w-52" />
       </div>
 
       <div className="px-4 md:max-w-md pattern-dark rounded-lg shadow-lg relative z-10">
