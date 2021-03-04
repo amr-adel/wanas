@@ -19,6 +19,7 @@ export default function Explore() {
           key="twitter-title"
         />
         <meta
+          prefix="og: http://ogp.me/ns#"
           property="og:title"
           content={t("app.name") + " | " + t("menu.about")}
           key="og-title"

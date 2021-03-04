@@ -66,19 +66,10 @@ export default function FourSquare() {
           key="twitter-title"
         />
         <meta
-          name="twitter:description"
-          content={descriptionMsg}
-          key="twitter-description"
-        />
-        <meta
+          prefix="og: http://ogp.me/ns#"
           property="og:title"
           content={t("app.name") + " | " + t("menu.explore")}
           key="og-title"
-        />
-        <meta
-          property="og:description"
-          content={descriptionMsg}
-          key="og-description"
         />
       </Head>
 

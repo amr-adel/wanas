@@ -270,6 +270,7 @@ function Venue() {
           key="twitter-title"
         />
         <meta
+          prefix="og: http://ogp.me/ns#"
           property="og:title"
           content={
             t("app.name") +
