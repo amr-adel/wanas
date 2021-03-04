@@ -82,6 +82,7 @@ export default function GeoCoder() {
       }`}
     >
       <label
+        htmlFor="geocoder"
         className={`flex justify-center text-gray-400 ${
           locale === "ar" ? "flex-row-reverse" : ""
         }`}
@@ -94,6 +95,7 @@ export default function GeoCoder() {
         {/* Input */}
         <input
           type="text"
+          id="geocoder"
           placeholder={t("geocoder.placeholder")}
           spellCheck="false"
           onFocus={() => setFocused(true)}

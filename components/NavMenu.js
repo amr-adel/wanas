@@ -80,6 +80,7 @@ export default function NavMenu() {
   return (
     <div id="menu" className="h-full w-full relative">
       <button
+        aria-label="toggle menu"
         className={`relative h-full rounded-lg w-full focus:outline-none flex justify-center items-center ${
           showMenu ? " text-gray-400" : "text-inherit"
         } z-40 lg:hidden`}
