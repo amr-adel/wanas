@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import Head from "next/head";
 import { useStore } from "../hooks/useStore";
 import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
@@ -48,10 +47,6 @@ export default function Explore() {
 
   return (
     <LayoutWithMap>
-      <Head>
-        <title>{t("app.name")}</title>
-      </Head>
-
       <div className="h-96 md:h-full w-full relative">
         <Map withGeoCoder />
       </div>

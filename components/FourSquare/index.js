@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
@@ -42,45 +43,78 @@ export default function FourSquare() {
   const response = data?.data?.response;
   const paginate = response?.totalResults > reqParams.limit;
 
+  const descriptionMsg = response?.totalResults
+    ? `${response.totalResults} ${t("explore.info.venues")}${
+        (reqParams.localeNear || reqParams.near) &&
+        t("explore.info.near") + " " + (reqParams.localeNear || reqParams.near)
+      }${
+        reqParams.section !== "all" &&
+        t("explore.info.section") + t(`home.fs-section.${reqParams.section}`)
+      }`
+    : "";
+
   return (
-    <div
-      className={`flex flex-col space-y-4 relative ${
-        locale === "ar" && "lg:pr-3"
-      }`}
-    >
-      <Tabs
-        isLoading={isLoading}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        recent={recent}
-        clearRecent={clearRecent}
-        total={response?.totalResults}
-      />
+    <>
+      <Head>
+        <title key="title">
+          {t("app.name")} | {t("menu.explore")}
+        </title>
+        <meta key="description" name="description" content={descriptionMsg} />
+        <meta
+          name="twitter:title"
+          content={t("app.name") + " | " + t("menu.explore")}
+          key="twitter-title"
+        />
+        <meta
+          name="twitter:description"
+          content={descriptionMsg}
+          key="twitter-description"
+        />
+      </Head>
 
-      {activeTab === "info" && response && (
-        <>
-          {paginate && <Pagination total={response.totalResults} />}
+      <div
+        className={`flex flex-col space-y-4 relative ${
+          locale === "ar" && "lg:pr-3"
+        }`}
+      >
+        <Tabs
+          isLoading={isLoading}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          recent={recent}
+          clearRecent={clearRecent}
+          total={response?.totalResults}
+        />
 
-          <FourSquareVenues venues={response.groups?.[0]?.items} />
+        {activeTab === "info" && response && (
+          <>
+            {paginate && <Pagination total={response.totalResults} />}
 
-          <cite className="text-sm text-center not-italic text-gray-700 p-2 mx-auto">
-            {t("attr.foursquare")}
-            <a
-              href="https://foursquare.com/"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="text-gray-500 hover:text-gray-700"
-            >
-              FourSquare
-            </a>
-          </cite>
-        </>
-      )}
+            <FourSquareVenues venues={response.groups?.[0]?.items} />
 
-      {activeTab === "history" && recent?.length > 0 && (
-        <FourSquareVenues venues={recent} clearRecent={clearRecent} removable />
-      )}
-    </div>
+            <cite className="text-sm text-center not-italic text-gray-700 p-2 mx-auto">
+              {t("attr.foursquare")}
+              <a
+                href="https://foursquare.com/"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-gray-500 hover:text-gray-700"
+              >
+                FourSquare
+              </a>
+            </cite>
+          </>
+        )}
+
+        {activeTab === "history" && recent?.length > 0 && (
+          <FourSquareVenues
+            venues={recent}
+            clearRecent={clearRecent}
+            removable
+          />
+        )}
+      </div>
+    </>
   );
 }
 

@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { useIntl } from "react-intl";
 import { useStore } from "../hooks/useStore";
 
@@ -21,10 +20,6 @@ export default function Home() {
 
   return (
     <main className="container pt-96 md:pt-16 pb-4 md:min-h-inner w-full md:flex md:flex-col lg:flex-row md:justify-center md:items-center">
-      <Head>
-        <title>{t("app.name")}</title>
-      </Head>
-
       <div
         id="brand"
         className="fixed md:relative h-80 md:h-auto pt-4 lg:pt-0 top-12 md:top-auto left-0 right-0 flex flex-col justify-center items-center mx-auto md:mb-12 lg:m-20"

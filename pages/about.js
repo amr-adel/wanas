@@ -10,7 +10,14 @@ export default function Explore() {
   return (
     <main className="container pt-96 md:pt-16 pb-4 md:min-h-inner w-full md:flex md:flex-col lg:flex-row md:justify-center md:items-center">
       <Head>
-        <title>{`${t("app.name")} | ${t("menu.about")}`}</title>
+        <title key="title">
+          {t("app.name")} | {t("menu.about")}
+        </title>
+        <meta
+          name="twitter:title"
+          content={t("app.name") + " | " + t("menu.about")}
+          key="twitter-title"
+        />
       </Head>
 
       <div

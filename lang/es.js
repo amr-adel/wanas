@@ -1,5 +1,8 @@
 export const es = {
   "app.name": "Wanas",
+  // Head meta
+  "meta.description":
+    "Explore lugares cercanos a usted y muchas otras ciudades alrededor del mundo.",
   // Welcome Modal
   "welcome.head": "Bienvenido a",
   "welcome.change-locale": `¿Prefieres usar "Wanas" en un idioma diferente?`,

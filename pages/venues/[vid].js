@@ -255,7 +255,20 @@ function Venue() {
   return (
     <LayoutWithMap>
       <Head>
-        <title>{t("app.name")}</title>
+        <title key="title">
+          {t("app.name")}
+          {data?.data?.response?.venue?.name &&
+            ` | ${data?.data?.response?.venue?.name}`}
+        </title>
+        <meta
+          name="twitter:title"
+          content={
+            t("app.name") +
+            (data?.data?.response?.venue?.name &&
+              ` | ${data?.data?.response?.venue?.name}`)
+          }
+          key="twitter-title"
+        />
       </Head>
 
       <div className="h-96 md:h-full w-full relative">

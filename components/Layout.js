@@ -73,6 +73,31 @@ export default function Layout({ children }) {
           content="/app-icons/browserconfig.xml"
         />
         <meta name="theme-color" content="#f1f5f9" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        {/* Twitter card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@fullstackamr" />
+        <meta name="twitter:creator" content="@fullstackamr" />
+        <meta
+          name="twitter:title"
+          content={t("app.name")}
+          key="twitter-title"
+        />
+        <meta
+          name="twitter:description"
+          content={t("meta.description")}
+          key="twitter-description"
+        />
+        <meta
+          name="twitter:image"
+          content="https://wanas.vercel.app/images/wanas-twitter-card.jpg"
+        />
+        <title key="title">{t("app.name")}</title>
+        <meta
+          key="description"
+          name="description"
+          content={t("meta.description")}
+        />
       </Head>
 
       {/* Set h-inner (100vh without bars) */}

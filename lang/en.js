@@ -1,5 +1,8 @@
 export const en = {
   "app.name": "Wanas",
+  // Head meta
+  "meta.description":
+    "Explore places near you and many other cities around the world.",
   // Welcome Modal
   "welcome.head": "Welcome to",
   "welcome.change-locale": `Do you prefer using "Wanas" in a different language?`,
@@ -44,7 +47,7 @@ export const en = {
   "about.non-arabic":
     " is an Arabic term that describes the state of being in a friendly and enjoyable atmosphere.",
   "about.p1":
-    "Feeling in the mood to try a new place or planning to visit a city you don't know much about, Wanas app helps you explore places around you, and many other cities around the globe.",
+    "Feeling in the mood to try a new place or planning to visit a city you don't know much about, Wanas app helps you explore places around you, and many other cities around the world.",
   "about.p2":
     'You can filter places by "food, drinks, coffee, shops, arts, and outdoors", you can also control the search radius "5km, 10km, and 20km" or let the app suggest the radius according to the density of the places in the searched spot, and sort them by popularity or by the distance from you.',
   "about.p3":
