@@ -145,6 +145,8 @@ export default function Map({ withGeoCoder = false }) {
         }
       });
     }
+
+    map.resize();
   };
 
   const showHidePopUps = () => {

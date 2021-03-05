@@ -288,7 +288,7 @@ function Venue() {
       <SimpleBar
         className={`md:w-2/5 md:max-w-sm md:flex-shrink-0 md:pb-2 md:h-full`}
       >
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 md:pr-3">
           <div className="bg-gray-50 p-2 flex flex-col divide-y divide-gray-200 rounded-lg shadow">
             {venueDetails}
           </div>

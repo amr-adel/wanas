@@ -180,8 +180,8 @@ export function LayoutWithMap({ children }) {
 
   return (
     <main
-      className={`container pt-16 pb-4 flex flex-col space-y-4 md:h-inner md:items-center md:space-y-0 md:flex-row-reverse md:space-x-4 ${
-        locale !== "ar" && "md:space-x-reverse"
+      className={`container pt-16 pb-4 flex flex-col space-y-4 md:h-inner md:items-center md:space-y-0 md:flex-row-reverse ${
+        locale === "ar" ? "md:space-x-4" : "md:space-x-1 md:space-x-reverse"
       }`}
     >
       {children}

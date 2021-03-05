@@ -73,11 +73,7 @@ export default function FourSquare() {
         />
       </Head>
 
-      <div
-        className={`flex flex-col space-y-4 relative ${
-          locale === "ar" && "lg:pr-3"
-        }`}
-      >
+      <div className={`flex flex-col space-y-4 relative md:pr-3`}>
         <Tabs
           isLoading={isLoading}
           activeTab={activeTab}
