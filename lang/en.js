@@ -3,6 +3,7 @@ export const en = {
   // Head meta
   "meta.description":
     "Explore places near you and many other cities around the world.",
+  "meta.description.venue": `Get location, rating, pricing, and tips about "{name}".`,
   // Welcome Modal
   "welcome.head": "Welcome to",
   "welcome.change-locale": `Do you prefer using "Wanas" in a different language?`,

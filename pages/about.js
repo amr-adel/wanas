@@ -43,7 +43,7 @@ export default function Explore() {
         </h1>
 
         {locale !== "ar" && (
-          <p className="p-2 bg-yellow-50 text-yellow text-center rounded-lg shadow">
+          <p className="p-2 bg-gray-100 text-gray-500 text-center rounded-lg shadow">
             "ونس" {t("about.non-arabic")}
           </p>
         )}

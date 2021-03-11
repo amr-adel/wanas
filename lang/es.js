@@ -3,6 +3,7 @@ export const es = {
   // Head meta
   "meta.description":
     "Explore lugares cercanos a usted y muchas otras ciudades alrededor del mundo.",
+  "meta.description.venue": `Obtenga ubicación, calificación, precios y sugerencias sobre "{name}".`,
   // Welcome Modal
   "welcome.head": "Bienvenido a",
   "welcome.change-locale": `¿Prefieres usar "Wanas" en un idioma diferente?`,

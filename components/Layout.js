@@ -74,6 +74,14 @@ export default function Layout({ children }) {
         />
         <meta name="theme-color" content="#f1f5f9" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+        <title key="title">{t("app.name")}</title>
+        <meta
+          key="description"
+          name="description"
+          content={t("meta.description")}
+        />
+        <meta name="author" content="FULLSTACKAMR"></meta>
         {/* Twitter card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@fullstackamr" />
@@ -125,13 +133,6 @@ export default function Layout({ children }) {
           property="og:site_name"
           content="Wanas"
         />
-        <title key="title">{t("app.name")}</title>
-        <meta
-          key="description"
-          name="description"
-          content={t("meta.description")}
-        />
-        <meta name="author" content="Fullstackamr"></meta>
       </Head>
 
       {/* Set h-inner (100vh without bars) */}

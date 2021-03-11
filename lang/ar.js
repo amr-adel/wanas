@@ -3,6 +3,7 @@ export const ar = {
   // Head meta
   "meta.description":
     "استكشف الأماكن القريبة منك والعديد من المدن الأخرى حول العالم.",
+  "meta.description.venue": `تعرف على موقع، تقييم، اسعار، ونصائح حول "{name}".`,
   // Welcome Modal
   "welcome.head": "أهلاً بك في",
   "welcome.change-locale": `هل تفضل استخدام "ونس" بلغة آخرى؟`,
