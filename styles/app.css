@@ -7,8 +7,8 @@
 }
 
 *::selection {
-  color: #ffb24c;
-  background-color: #334155;
+  color: #334155;
+  background-color: #ffb24c;
 }
 
 ::placeholder {

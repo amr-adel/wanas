@@ -45,8 +45,10 @@ export default function FourSquare() {
 
   const descriptionMsg = response?.totalResults
     ? `${response.totalResults} ${t("explore.info.venues")}${
-        (reqParams.localeNear || reqParams.near) &&
-        t("explore.info.near") + " " + (reqParams.localeNear || reqParams.near)
+        (reqParams.nearLabels?.[locale] || reqParams.near) &&
+        t("explore.info.near") +
+          " " +
+          (reqParams.nearLabels?.[locale] || reqParams.near)
       }${
         reqParams.section !== "all" &&
         t("explore.info.section") + t(`home.fs-section.${reqParams.section}`)

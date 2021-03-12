@@ -39,7 +39,7 @@ export default function NavMenu() {
       dir="ltr"
       className={`${
         showMenu ? "flex" : "hidden lg:flex"
-      } w-72 lg:w-auto absolute lg:relative top-0 right-0 p-4 lg:p-0 pt-8 lg:pt-1 flex-col  text-gray-500 bg-gray-200 lg:bg-transparent rounded-lg shadow-lg lg:shadow-none ${
+      } w-72 lg:w-auto absolute lg:relative top-0 right-0 p-4 lg:p-0 pt-8 lg:pt-1 flex-col text-gray-500 bg-gray-200 lg:bg-transparent rounded-lg shadow-lg lg:shadow-none ${
         locale === "ar"
           ? "lg:flex-row-reverse lg:space-x-reverse"
           : "lg:flex-row lg:space-x-2"

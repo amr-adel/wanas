@@ -23,7 +23,7 @@ export default function Tabs({
     info: isLoading ? (
       <Loader className="text-gray-400 h-4 my-4" />
     ) : (
-      <InfoTab total={total} t={t} />
+      <InfoTab total={total} />
     ),
     settings: <SettingsTab setActiveTab={setActiveTab} t={t} />,
     history: <HistoryTab recent={recent} clearRecent={clearRecent} t={t} />,

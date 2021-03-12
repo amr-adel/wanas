@@ -11,7 +11,7 @@ export const useStore = create((set) => ({
     userLocation: null,
   },
   fourSquare: {
-    localeNear: null,
+    nearLabels: null,
     sections: ["all", "food", "drinks", "coffee", "shops", "arts", "outdoors"],
     reqParams: {
       section: "all",

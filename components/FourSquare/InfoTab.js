@@ -1,8 +1,12 @@
 import { useStore } from "../../hooks/useStore";
+import { useIntl } from "react-intl";
 
-export default function InfoTab({ total, t }) {
+export default function InfoTab({ total }) {
+  const { formatMessage, locale } = useIntl();
+  const t = (id) => formatMessage({ id });
+
   const {
-    localeNear,
+    nearLabels,
     reqParams: { section, near },
   } = useStore((state) => state.fourSquare);
 
@@ -17,9 +21,9 @@ export default function InfoTab({ total, t }) {
       <h1>
         <span className="text-red-500">{total}</span>
         {t("explore.info.venues")}
-        {localeNear || near ? t("explore.info.near") : ""}
-        {localeNear || near ? (
-          <span className="text-red-500">{localeNear || near}</span>
+        {nearLabels?.[locale] || near ? t("explore.info.near") : ""}
+        {nearLabels?.[locale] || near ? (
+          <span className="text-red-500">{nearLabels?.[locale] || near}</span>
         ) : (
           ""
         )}

@@ -39,7 +39,7 @@ export default function LocaleSwitcher({ menu = false }) {
               } ${
                 loc === locale
                   ? `bg-yellow text-yellow-600 ${menu && "lg:bg-yellow-100"}`
-                  : "text-gray-400"
+                  : "text-gray-400 hover:text-gray-500"
               }`}
             >
               {localeNames[loc]}

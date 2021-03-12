@@ -28,7 +28,7 @@ export default function Home() {
         <Logo type="text" className="h-12 w-52" />
       </div>
 
-      <div className="px-4 md:max-w-md pattern-dark rounded-lg shadow-lg relative z-10">
+      <div className="px-4 md:max-w-md bg-gray-800 rounded-lg shadow-lg relative z-10">
         <div
           id="select-section"
           className="mx-auto py-4 border-b border-gray-600"
@@ -44,7 +44,7 @@ export default function Home() {
                   className={`btn my-1 mx-2 ${
                     sec === section
                       ? "bg-red-500 text-gray-200"
-                      : "bg-gray-700 text-gray-400"
+                      : "bg-gray-700 text-gray-400 hover:text-gray-300"
                   } capitalize`}
                 >
                   {t(`home.fs-section.${sec}`)}
