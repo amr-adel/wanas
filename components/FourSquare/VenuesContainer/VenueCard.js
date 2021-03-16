@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 
 import { useStore } from "../../../hooks/useStore";
@@ -7,6 +8,8 @@ export default function VenueCard({ venue, clearRecent }) {
   const t = (id) => formatMessage({ id });
 
   const set = useStore((state) => state.set);
+
+  const router = useRouter();
 
   const { id, name, location, categories } = venue.venue;
 
@@ -27,7 +30,23 @@ export default function VenueCard({ venue, clearRecent }) {
   };
 
   const handleCardClick = () => {
-    console.log(name);
+    router.push({
+      pathname: "/explore",
+      query: { vid: id },
+    });
+
+    set((state) => {
+      state.mapBox.popUp = null;
+      state.mapBox.markers = [
+        {
+          id,
+          name,
+          lat: location.lat,
+          lng: location.lng,
+        },
+      ];
+      // state.fourSquare.selectedVenue = id;
+    });
   };
 
   return (

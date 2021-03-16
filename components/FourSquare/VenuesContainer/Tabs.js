@@ -11,7 +11,7 @@ export default function Tabs({
   activeTab,
   setActiveTab,
   total,
-  recent,
+  recentLength,
   clearRecent,
 }) {
   const { formatMessage, locale } = useIntl();
@@ -25,8 +25,10 @@ export default function Tabs({
     ) : (
       <InfoTab total={total} />
     ),
-    settings: <SettingsTab setActiveTab={setActiveTab} t={t} />,
-    history: <HistoryTab recent={recent} clearRecent={clearRecent} t={t} />,
+    settings: <SettingsTab setActiveTab={setActiveTab} />,
+    history: (
+      <HistoryTab recentLength={recentLength} clearRecent={clearRecent} t={t} />
+    ),
     bookmark: "Bookmarked venues [WIP]",
   };
 
@@ -63,18 +65,18 @@ export default function Tabs({
   );
 }
 
-function HistoryTab({ recent, clearRecent, t }) {
+function HistoryTab({ recentLength, clearRecent, t }) {
   return (
     <div className="flex flex-col py-4 px-2 text-center">
       <div>
         {t("explore.history.msg")}(
         <span className="text-red-500 tracking-wider font-bold">
-          {recent?.length}
+          {recentLength}
         </span>
         )
       </div>
 
-      {recent?.length > 0 && (
+      {recentLength > 0 && (
         <div id="clear-recent" className="text-center pt-4">
           <button
             className="btn-outlined text-gray-700"

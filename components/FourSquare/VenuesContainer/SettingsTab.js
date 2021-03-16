@@ -1,7 +1,12 @@
 import { useState } from "react";
+import { useIntl } from "react-intl";
+
 import { useStore } from "../../../hooks/useStore";
 
-export default function SettingsTab({ setActiveTab, t }) {
+export default function SettingsTab({ setActiveTab }) {
+  const { formatMessage, locale } = useIntl();
+  const t = (id) => formatMessage({ id });
+
   const { sections, reqParams } = useStore((state) => state.fourSquare);
   const set = useStore((state) => state.set);
 

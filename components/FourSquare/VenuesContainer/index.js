@@ -1,22 +1,22 @@
-import Head from "next/head";
 import { useEffect, useState } from "react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 
 import { useStore } from "../../../hooks/useStore";
 import useRecentVenues from "../../../hooks/useRecentVenues";
-
+import {
+  reqParamsToQueryString,
+  reqParamsFromQueryString,
+} from "./syncReqParamasWithUrl";
 import Tabs from "./Tabs";
-import Pagination from "./Pagination";
 import VenuesList from "./VenuesList";
 
-export default function VenuesContainer({
-  setSelectedVenue,
-  isLoading,
-  responseData,
-}) {
+export default function VenuesContainer({ isLoading, responseData }) {
   const { formatMessage, locale } = useIntl();
   const t = (id) => formatMessage({ id });
+
+  const router = useRouter();
 
   const reqParams = useStore((state) => state.fourSquare.reqParams);
   const set = useStore((state) => state.set);
@@ -24,7 +24,27 @@ export default function VenuesContainer({
   const [activeTab, setActiveTab] = useState("info");
   const { recent, clearRecent } = useRecentVenues();
 
-  const paginate = responseData?.totalResults > reqParams.limit;
+  // Sync reqParams with URL
+  useEffect(() => {
+    if (
+      reqParams.ll === null &&
+      reqParams.near === null &&
+      router.asPath !== "/explore"
+    ) {
+      // Get reqParams from URL
+      const paramsFromUrl = reqParamsFromQueryString(router.asPath);
+
+      set((state) => {
+        state.fourSquare.reqParams = { ...reqParams, ...paramsFromUrl };
+      });
+    } else {
+      // Shallow update URL
+      router.replace({
+        pathname: "/explore",
+        query: reqParamsToQueryString(reqParams),
+      });
+    }
+  }, [reqParams]);
 
   // Create content for head meta description
   const descriptionMsg = responseData?.totalResults
@@ -64,29 +84,16 @@ export default function VenuesContainer({
           isLoading={isLoading}
           activeTab={activeTab}
           setActiveTab={setActiveTab}
-          recent={recent}
+          recentLength={recent.length}
           clearRecent={clearRecent}
           total={responseData?.totalResults}
         />
 
         {activeTab === "info" && responseData && (
-          <>
-            {paginate && <Pagination total={responseData.totalResults} />}
-
-            <VenuesList venues={responseData.groups?.[0]?.items} />
-
-            <cite className="text-sm text-center not-italic text-gray-700 p-2 mx-auto">
-              {t("attr.foursquare")}
-              <a
-                href="https://foursquare.com/"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="text-gray-500 hover:text-gray-700"
-              >
-                FourSquare
-              </a>
-            </cite>
-          </>
+          <VenuesList
+            venues={responseData.groups[0].items}
+            total={responseData.totalResults}
+          />
         )}
 
         {activeTab === "history" && (

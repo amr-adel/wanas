@@ -5,7 +5,7 @@ import "simplebar/dist/simplebar.min.css";
 
 import { LayoutWithMap } from "../../components/Layout";
 import Map from "../../components/Map";
-import VenueDetails from "../../components/FourSquare/VenueDetails";
+import VenueDetails from "../../components/FourSquare/VenueDetailed/VenueDetails";
 
 // Fetching venue details server-side
 export async function getServerSideProps({ params, locale }) {

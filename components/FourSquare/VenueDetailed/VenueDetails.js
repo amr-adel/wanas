@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import Head from "next/head";
 import { useIntl } from "react-intl";
-import { useStore } from "../../hooks/useStore";
 
-import Icon from "../../utils/Icon";
-import useRecentVenues from "../../hooks/useRecentVenues";
+import { useStore } from "../../../hooks/useStore";
+import Icon from "../../../utils/Icon";
+import useRecentVenues from "../../../hooks/useRecentVenues";
 
 export default function VenueDetails({ venue }) {
   const { formatMessage, locale } = useIntl();

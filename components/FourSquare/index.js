@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-
 import axios from "axios";
 import useSWR from "swr";
 
 import { useStore } from "../../hooks/useStore";
-
-import {
-  reqParamsToQueryString,
-  reqParamsFromQueryString,
-} from "./syncReqParamasWithUrl";
 import VenuesContainer from "./VenuesContainer";
+import VenueDetailed from "./VenueDetailed";
 
 const fetchVenues = (reqParams, locale) => {
   return axios.post(`/api/exploreVenues`, { ...reqParams, locale });
@@ -20,9 +15,8 @@ export default function FourSquare() {
   const router = useRouter();
 
   const reqParams = useStore((state) => state.fourSquare.reqParams);
+  const selectedVenue = useStore((state) => state.fourSquare.selectedVenue);
   const set = useStore((state) => state.set);
-
-  const [selectedVenue, setSelectedVenue] = useState(null);
 
   const { data, error } = useSWR(
     reqParams.ll || reqParams.near ? [reqParams, router.locale] : null,
@@ -31,45 +25,25 @@ export default function FourSquare() {
 
   const isLoading = !data && !error && reqParams.ll;
 
-  if (data?.data?.meta?.errorType === "failed_geocode") {
+  if (
+    ["failed_geocode", "geocode_too_big"].includes(data?.data?.meta?.errorType)
+  ) {
     set((state) => {
       state.fourSquare.reqParams.near = null;
     });
   }
 
-  // Sync reqParams with URL
-  useEffect(() => {
-    if (
-      reqParams.ll === null &&
-      reqParams.near === null &&
-      router.asPath !== "/explore"
-    ) {
-      // Get reqParams from URL
-      const paramsFromUrl = reqParamsFromQueryString(router.asPath);
+  const response = data?.data?.meta?.code === 200 ? data.data.response : null;
 
-      set((state) => {
-        state.fourSquare.reqParams = { ...reqParams, ...paramsFromUrl };
-      });
-    } else {
-      // Shallow update URL
-      router.push(
-        {
-          pathname: "/explore",
-          query: reqParamsToQueryString(reqParams),
-        },
-        undefined,
-        { shallow: true }
-      );
-    }
-  }, [reqParams]);
-
-  const response = data?.data?.response || null;
+  const vid = router.query.vid || null;
 
   return (
-    <VenuesContainer
-      setSelectedVenue={setSelectedVenue}
-      isLoading={isLoading}
-      responseData={response}
-    />
+    <>
+      {!vid && (
+        <VenuesContainer isLoading={isLoading} responseData={response} />
+      )}
+
+      {vid && <VenueDetailed vid={vid} />}
+    </>
   );
 }

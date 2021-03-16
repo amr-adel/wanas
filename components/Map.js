@@ -194,9 +194,21 @@ export default function Map({ withGeoCoder = false }) {
     if (e.target.classList.contains("pop-up-link")) {
       e.stopPropagation();
       set((state) => {
+        state.mapBox.markers = [
+          {
+            id: e.target.dataset.popupId,
+            name: e.target.innerText,
+            lat: popUpOnMap._lngLat.lat,
+            lng: popUpOnMap._lngLat.lng,
+          },
+        ];
         state.mapBox.popUp = null;
       });
-      router.push(`/venues/${e.target.dataset.popupId}`);
+
+      router.push({
+        pathname: "/explore",
+        query: { vid: e.target.dataset.popupId },
+      });
     }
   };
 
