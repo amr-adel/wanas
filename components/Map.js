@@ -84,40 +84,43 @@ export default function Map({ withGeoCoder = false }) {
         markerOnMap.remove();
       }
 
-      const tempMarkers = [];
+      if (markers.length > 0) {
+        const tempMarkers = [];
 
-      for (let marker of markers) {
-        var el = document.createElement("div");
-        el.dataset.markerId = marker.id;
-        el.dataset.markerName = marker.name;
-        el.dataset.markerLng = marker.lng;
-        el.dataset.markerLat = marker.lat;
-        el.className = `marker h-8 w-7 ${
-          pathname === "/explore" ? "cursor-pointer" : ""
-        }`;
+        for (let marker of markers) {
+          var el = document.createElement("div");
+          el.dataset.markerId = marker.id;
+          el.dataset.markerName = marker.name;
+          el.dataset.markerLng = marker.lng;
+          el.dataset.markerLat = marker.lat;
+          el.className = `marker h-8 w-7 ${
+            pathname === "/explore" ? "cursor-pointer" : ""
+          }`;
 
-        const tempMarker = new mapboxgl.Marker(el, {
-          anchor: "bottom",
-        }).setLngLat([marker.lng, marker.lat]);
+          const tempMarker = new mapboxgl.Marker(el, {
+            anchor: "bottom",
+          }).setLngLat([marker.lng, marker.lat]);
 
-        tempMarkers.push(tempMarker);
+          tempMarkers.push(tempMarker);
 
-        tempMarker.addTo(map);
+          tempMarker.addTo(map);
+        }
+
+        // Store marker objects to be removed upon update
+        setMarkersOnMap(tempMarkers);
+
+        if (markers.length === 1) {
+          map.easeTo({
+            center: [markers[0].lng, markers[0].lat],
+            zoom: 14,
+          });
+        } else {
+          map.fitBounds(getBoundsForPoints(markers), {
+            padding: { top: 90, left: 20, right: 20, bottom: 20 },
+            linear: true,
+          });
+        }
       }
-
-      // Store marker objects to be removed upon update
-      setMarkersOnMap(tempMarkers);
-
-      if (markers.length === 1) {
-        map.easeTo({
-          center: [markers[0].lng, markers[0].lat],
-          zoom: 14,
-        });
-      } else
-        map.fitBounds(getBoundsForPoints(markers), {
-          padding: { top: 90, left: 20, right: 20, bottom: 20 },
-          linear: true,
-        });
     }
   }, [markers]);
 
