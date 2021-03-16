@@ -10,12 +10,14 @@ export default function SettingsTab({ setActiveTab }) {
   const { sections, reqParams } = useStore((state) => state.fourSquare);
   const set = useStore((state) => state.set);
 
+  // Local reqParams to update them all once
   const [settings, setSettings] = useState(reqParams);
 
   const handleChange = (param, value) => {
     setSettings({ ...settings, [param]: value });
   };
 
+  // Update global state reqParams
   const updateSearchParams = () => {
     setActiveTab("info");
     set((state) => {

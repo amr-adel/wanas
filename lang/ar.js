@@ -40,6 +40,7 @@ export const ar = {
   "explore.history.msg": "الأماكن التي استكشفتها مؤخرًا : ",
   "explore.history.clear": "حذف القائمة",
   "explore.history.clear.single": "حذف",
+  "explore.venue.back": "رجوع",
   // Venue details
   "venue.invalid-id": "رابط المكان غير صحيح.",
   "venue.moreInfo": "معلومات أكثر على FourSquare",

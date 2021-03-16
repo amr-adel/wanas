@@ -24,7 +24,7 @@ export default function VenuesContainer({ isLoading, responseData }) {
   const [activeTab, setActiveTab] = useState("info");
   const { recent, clearRecent } = useRecentVenues();
 
-  // Sync reqParams with URL
+  // Sync reqParams with URL (sharable link)
   useEffect(() => {
     if (
       reqParams.ll === null &&

@@ -29,12 +29,8 @@ export default function VenueCard({ venue, clearRecent }) {
     });
   };
 
+  // Convert explore page to single venue mode
   const handleCardClick = () => {
-    router.push({
-      pathname: "/explore",
-      query: { vid: id },
-    });
-
     set((state) => {
       state.mapBox.popUp = null;
       state.mapBox.markers = [
@@ -45,7 +41,11 @@ export default function VenueCard({ venue, clearRecent }) {
           lng: location.lng,
         },
       ];
-      // state.fourSquare.selectedVenue = id;
+    });
+
+    router.push({
+      pathname: router.pathname,
+      query: { vid: id },
     });
   };
 

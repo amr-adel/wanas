@@ -40,6 +40,7 @@ export const es = {
   "explore.history.msg": "Tus lugares recientemente explorados: ",
   "explore.history.clear": "Eliminar historial reciente",
   "explore.history.clear.single": "Eliminar",
+  "explore.venue.back": "Atrás",
   // Venue details
   "venue.invalid-id": "Enlace de lugar no válido.",
   "venue.moreInfo": "Mas info en FourSquare",

@@ -40,6 +40,7 @@ export const en = {
   "explore.history.msg": "Your recently explored venues: ",
   "explore.history.clear": "Delete recent history",
   "explore.history.clear.single": "Delete",
+  "explore.venue.back": "Back",
   // Venue details
   "venue.invalid-id": "Invalid venue link.",
   "venue.moreInfo": "More info on FourSquare",

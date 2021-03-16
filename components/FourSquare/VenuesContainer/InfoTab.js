@@ -10,6 +10,7 @@ export default function InfoTab({ total }) {
     reqParams: { section, near },
   } = useStore((state) => state.fourSquare);
 
+  // Create response summary as a string
   let msg = "";
 
   if (total === undefined) {

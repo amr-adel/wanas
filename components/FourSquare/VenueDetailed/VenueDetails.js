@@ -28,10 +28,8 @@ export default function VenueDetails({ venue }) {
   } = venue;
 
   useEffect(() => {
-    // Update map global state to modify center, zoom, and add marker at venue location
+    // Add a marker for the map to center
     set((state) => {
-      state.mapBox.center = [location.lng, location.lat];
-      state.mapBox.zoom = 16;
       state.mapBox.markers = [
         {
           id,
