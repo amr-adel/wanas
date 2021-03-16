@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useStore } from "../../hooks/useStore";
+import { useStore } from "../../../hooks/useStore";
 
 export default function SettingsTab({ setActiveTab, t }) {
   const { sections, reqParams } = useStore((state) => state.fourSquare);

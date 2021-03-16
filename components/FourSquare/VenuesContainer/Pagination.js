@@ -1,6 +1,6 @@
 import { useIntl } from "react-intl";
-import { useStore } from "../../hooks/useStore";
-import Icon from "../../utils/Icon";
+import { useStore } from "../../../hooks/useStore";
+import Icon from "../../../utils/Icon";
 
 export default function Pagination({ total }) {
   const { formatMessage, locale } = useIntl();

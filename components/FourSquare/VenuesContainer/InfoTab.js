@@ -1,4 +1,4 @@
-import { useStore } from "../../hooks/useStore";
+import { useStore } from "../../../hooks/useStore";
 import { useIntl } from "react-intl";
 
 export default function InfoTab({ total }) {

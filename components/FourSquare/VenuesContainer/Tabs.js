@@ -1,7 +1,7 @@
 import { useIntl } from "react-intl";
 
-import Loader from "../../utils/Loader";
-import Icon from "../../utils/Icon";
+import Loader from "../../../utils/Loader";
+import Icon from "../../../utils/Icon";
 
 import SettingsTab from "./SettingsTab";
 import InfoTab from "./InfoTab";
