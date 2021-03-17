@@ -9,7 +9,7 @@ export default function Explore() {
   return (
     <LayoutWithMap>
       <div className="h-96 md:h-full w-full relative">
-        <Map withGeoCoder />
+        <Map />
       </div>
 
       <SimpleBar

@@ -180,12 +180,21 @@ export function LayoutWithMap({ children }) {
   const { locale } = useRouter();
 
   return (
-    <main
-      className={`container pt-16 pb-4 flex flex-col space-y-4 md:h-inner md:items-center md:space-y-0 md:flex-row-reverse ${
-        locale === "ar" ? "md:space-x-4" : "md:space-x-1 md:space-x-reverse"
-      }`}
-    >
-      {children}
-    </main>
+    <>
+      <Head>
+        <link
+          href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
+          rel="stylesheet"
+        />
+      </Head>
+
+      <main
+        className={`container pt-16 pb-4 flex flex-col space-y-4 md:h-inner md:items-center md:space-y-0 md:flex-row-reverse ${
+          locale === "ar" ? "md:space-x-4" : "md:space-x-1 md:space-x-reverse"
+        }`}
+      >
+        {children}
+      </main>
+    </>
   );
 }

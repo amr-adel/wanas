@@ -1,36 +1,35 @@
 import { useEffect, useState, useRef } from "react";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import mapboxgl from "mapbox-gl";
-import { useStore } from "../hooks/useStore";
-import GeoCoder from "./GeoCoder";
+
+import { useStore } from "../../hooks/useStore";
+import changeMapLocale from "./changeMapLocale";
+import PopUp from "./PopUp";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-export default function Map({ withGeoCoder = false }) {
+export default function Mapbox() {
   const { locale, pathname } = useRouter();
-  const router = useRouter();
 
-  const { markers, center, zoom, popUp, userLocation } = useStore(
+  const { markers, center, zoom, userLocation } = useStore(
     (state) => state.mapBox
   );
   const set = useStore((state) => state.set);
   const [map, setMap] = useState(null);
   const [markersOnMap, setMarkersOnMap] = useState([]);
-  const [popUpOnMap, setPopUpOnMap] = useState(null);
 
   const mapContainerRef = useRef(null);
 
   useEffect(() => {
-    setMap(
-      new mapboxgl.Map({
-        container: mapContainerRef.current,
-        // style: "mapbox://styles/mapbox/light-v10",
-        style: "mapbox://styles/fullstackamr/cklqhou8c3tw917t65vl2u50x",
-        center: center,
-        zoom: zoom,
-      })
-    );
+    const mapObj = new mapboxgl.Map({
+      container: mapContainerRef.current,
+      // style: "mapbox://styles/mapbox/light-v10",
+      style: "mapbox://styles/fullstackamr/cklqhou8c3tw917t65vl2u50x",
+      center: center,
+      zoom: zoom,
+    });
+
+    setMap(mapObj);
 
     if (mapboxgl.getRTLTextPluginStatus() === "unavailable") {
       mapboxgl.setRTLTextPlugin(
@@ -39,14 +38,22 @@ export default function Map({ withGeoCoder = false }) {
         true // Lazy load the plugin
       );
     }
+
+    return () => {
+      // Clean up and release all internal resources associated with this map
+      mapObj.remove();
+    };
   }, []);
+
+  // To run operations on map object when loaded
+  const opOnMap = (fn, args) => {
+    map.loaded() ? fn(...args) : map.on("load", () => fn(...args));
+  };
 
   // Sync map labels language with user locale
   useEffect(() => {
     if (map) {
-      map.loaded()
-        ? changeMapLocale()
-        : map.on("load", () => changeMapLocale());
+      opOnMap(changeMapLocale, [map, locale]);
     }
   }, [map, locale]);
 
@@ -73,11 +80,6 @@ export default function Map({ withGeoCoder = false }) {
     if (map) {
       if (userLocation && !document.querySelector("#user-location")) {
         addUserLocationMarker();
-      }
-
-      if (popUpOnMap) {
-        popUpOnMap.remove();
-        setPopUpOnMap(null);
       }
 
       for (let markerOnMap of markersOnMap) {
@@ -124,57 +126,6 @@ export default function Map({ withGeoCoder = false }) {
     }
   }, [markers]);
 
-  // Handle pop-up state
-  useEffect(() => {
-    if (map) {
-      map.loaded() ? showHidePopUps() : map.on("load", () => showHidePopUps());
-    }
-  }, [popUp]);
-
-  const changeMapLocale = () => {
-    const textField = map.getLayoutProperty("country-label", "text-field");
-
-    if (textField[1]?.[1].indexOf(locale) === -1) {
-      // https://stackoverflow.com/questions/58605220/how-to-change-language-in-mapbox
-      map.getStyle().layers.forEach(function (thisLayer) {
-        if (thisLayer.id.indexOf("-label") > 0) {
-          map.setLayoutProperty(thisLayer.id, "text-field", [
-            "coalesce",
-
-            ["get", `name_${locale}`],
-            ["get", `name_en`],
-            ["get", `name`],
-          ]);
-        }
-      });
-    }
-
-    map.resize();
-  };
-
-  const showHidePopUps = () => {
-    if (popUpOnMap) {
-      popUpOnMap.remove();
-      setPopUpOnMap(null);
-    }
-
-    if (popUp) {
-      const tempPopUp = new mapboxgl.Popup({
-        closeButton: false,
-        offset: 5,
-      })
-        .setLngLat([popUp.lng, popUp.lat])
-        .setHTML(
-          `<h3 class='pop-up-link p-2 bg-gray-700 text-yellow rounded shadow text-center cursor-pointer' data-popUp-id=${popUp.id}>${popUp.name}</h3>`
-        );
-
-      tempPopUp.addTo(map);
-
-      // Store pop-up object to be removed upon update
-      setPopUpOnMap(tempPopUp);
-    }
-  };
-
   const handleClicks = (e) => {
     // Handle clicks on markers
     if (e.target.classList.contains("marker") && pathname === "/explore") {
@@ -187,27 +138,6 @@ export default function Map({ withGeoCoder = false }) {
           lng: markerLng,
           lat: markerLat,
         };
-      });
-    }
-
-    // Handle clicks on pop-ups
-    if (e.target.classList.contains("pop-up-link")) {
-      e.stopPropagation();
-      set((state) => {
-        state.mapBox.markers = [
-          {
-            id: e.target.dataset.popupId,
-            name: e.target.innerText,
-            lat: popUpOnMap._lngLat.lat,
-            lng: popUpOnMap._lngLat.lng,
-          },
-        ];
-        state.mapBox.popUp = null;
-      });
-
-      router.push({
-        pathname: "/explore",
-        query: { vid: e.target.dataset.popupId },
       });
     }
   };
@@ -225,22 +155,8 @@ export default function Map({ withGeoCoder = false }) {
   };
 
   return (
-    <div className="w-full h-full">
-      <Head>
-        <link
-          href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
-          rel="stylesheet"
-        />
-      </Head>
-
-      {withGeoCoder && (
-        <div
-          id="geocoder-overlay"
-          className="absolute top-3 left-1/2 transform -translate-x-1/2 w-11/12 max-w-lg z-10"
-        >
-          <GeoCoder />
-        </div>
-      )}
+    <>
+      <PopUp map={map} />
 
       <div
         id="map"
@@ -249,7 +165,7 @@ export default function Map({ withGeoCoder = false }) {
         ref={mapContainerRef}
         onClick={handleClicks}
       />
-    </div>
+    </>
   );
 }
 

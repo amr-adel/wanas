@@ -53,7 +53,7 @@ export default function VenueCard({ venue, clearRecent }) {
     <li
       className="relative bg-gray-50 p-2 rounded-lg shadow hover:shadow-md cursor-pointer"
       onClick={handleCardClick}
-      onMouseOver={() => setPopUp(id, name, location)}
+      onMouseEnter={() => setPopUp(id, name, location)}
       onMouseLeave={removePopUp}
     >
       {(categories[0] || clearRecent) && (
