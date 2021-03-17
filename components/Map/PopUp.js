@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-
 import mapboxgl from "mapbox-gl";
 
 import { useStore } from "../../hooks/useStore";
@@ -16,6 +15,7 @@ export default function PopUp({ map }) {
   const router = useRouter();
 
   useEffect(() => {
+    // Remove popUp if exists
     if (currentPopUp) {
       currentPopUp.remove();
       setCurrentPopUp(null);
@@ -38,13 +38,14 @@ export default function PopUp({ map }) {
 
       tempPopUp.addTo(map);
 
-      // Store pop-up object to be removed upon update
+      // Store pop-up object to be removed on next update
       setCurrentPopUp(tempPopUp);
     }
   }, [popUp]);
 
   const handleClick = () => {
     if (popUp) {
+      // Set marker
       set((state) => {
         state.mapBox.markers = [
           {
@@ -57,6 +58,7 @@ export default function PopUp({ map }) {
         state.mapBox.popUp = null;
       });
 
+      // Navigate to explore in single venue layout
       router.push({
         pathname: "/explore",
         query: { vid: popUp.id },

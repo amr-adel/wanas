@@ -1,12 +1,11 @@
 import Link from "next/link";
-import { useIntl } from "react-intl";
+import { useRouter } from "next/router";
 
 import Logo from "../utils/Logo";
 import NavMenu from "../components/NavMenu";
 
 export default function Header() {
-  const { formatMessage, locale } = useIntl();
-  const t = (id) => formatMessage({ id });
+  const { locale } = useRouter();
 
   return (
     <header

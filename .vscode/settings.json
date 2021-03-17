@@ -1,4 +1,7 @@
 {
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
   "workbench.colorCustomizations": {
     "statusBar.background": "#dc6d6f",
     "statusBar.foreground": "#15202b",
