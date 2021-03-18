@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useStore } from "../../hooks/useStore";
 
 export default function SuggestionsList({ suggestions, setQuery }) {
-  const { pathname, locale } = useRouter();
+  const { asPath, locale } = useRouter();
   const router = useRouter();
 
   const set = useStore((state) => state.set);
@@ -28,7 +28,7 @@ export default function SuggestionsList({ suggestions, setQuery }) {
     setQuery(place_name);
     document.activeElement.blur();
 
-    if (pathname !== "/explore") {
+    if (!asPath.includes("/explore") || asPath.includes("vid")) {
       router.push("/explore");
     }
   };
