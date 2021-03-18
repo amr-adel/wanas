@@ -53,7 +53,7 @@ export default function VenuesList({
       </ol>
 
       {/* FourSquare attribution */}
-      <cite className="text-sm text-center not-italic text-gray-700 p-2 mx-auto">
+      <cite className="text-sm text-center not-italic text-gray-700 p-2 pb-16 md:pb-2 mx-auto">
         {t("attr.foursquare")}
         <a
           href="https://foursquare.com/"
