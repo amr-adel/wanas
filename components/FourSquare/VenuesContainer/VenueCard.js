@@ -55,6 +55,7 @@ export default function VenueCard({ venue, clearRecent }) {
       onClick={handleCardClick}
       onMouseEnter={() => setPopUp(id, name, location)}
       onMouseLeave={removePopUp}
+      data-testid="VenueCard"
     >
       {(categories[0] || clearRecent) && (
         <div className="flex">
@@ -66,6 +67,7 @@ export default function VenueCard({ venue, clearRecent }) {
 
           {clearRecent && (
             <span
+              role="button"
               className={`text-xs ${
                 locale === "ar" ? "mr-auto" : "ml-auto"
               } text-red-400 bg-red-50 py-1 px-2 rounded`}
@@ -84,8 +86,8 @@ export default function VenueCard({ venue, clearRecent }) {
         {name}
       </h3>
       <p className="text-sm text-gray-400">
-        {location.formattedAddress[0]} <br />
-        {location.formattedAddress[1]}
+        <span className="block">{location.formattedAddress[0]}</span>
+        <span className="block">{location.formattedAddress[1]}</span>
       </p>
     </li>
   );
