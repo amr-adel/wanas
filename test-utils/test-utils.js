@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { IntlProvider } from "react-intl";
-import * as locales from "./lang";
+import * as locales from "../lang";
 
 const AllTheProviders = ({ children }) => {
   return (
