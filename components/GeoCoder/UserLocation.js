@@ -54,7 +54,9 @@ export default function UserLocation({ setQuery }) {
 
   const error = (e) => {
     setCurrentLocation("ready");
-    setErrorMsg(t(`currentLocation.${e.code === 1 ? "error.1" : "error"}`));
+    setErrorMsg(
+      t(`geocoder.currentLocation.${e.code === 1 ? "error.1" : "error"}`)
+    );
   };
 
   const options = {
