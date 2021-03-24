@@ -22,19 +22,19 @@ export default function InfoTab({ total }) {
       <h1>
         <span className="text-red-500">{total}</span>
         {t("explore.info.venues")}
-        {nearLabels?.[locale] || near ? t("explore.info.near") : ""}
-        {nearLabels?.[locale] || near ? (
-          <span className="text-red-500">{nearLabels?.[locale] || near}</span>
-        ) : (
-          ""
+        {(nearLabels?.[locale] || near) && (
+          <>
+            {t("explore.info.near")}
+            <span className="text-red-500">{nearLabels?.[locale] || near}</span>
+          </>
         )}
-        {section !== "all" ? t("explore.info.section") : ""}
-        {section !== "all" ? (
-          <span className="text-red-500">
-            {t(`home.fs-section.${section}`)}
-          </span>
-        ) : (
-          ""
+        {section !== "all" && (
+          <>
+            {t("explore.info.section")}
+            <span className="text-red-500">
+              {t(`home.fs-section.${section}`)}
+            </span>
+          </>
         )}
         .
       </h1>
