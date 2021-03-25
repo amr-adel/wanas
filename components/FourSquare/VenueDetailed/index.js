@@ -49,22 +49,21 @@ export default function VenueDetailed({ vid }) {
         {isLoding && <Loader className="text-gray-400 h-12 my-4 py-4" />}
 
         {data && <VenueDetails venue={data.data.response.venue} />}
-
-        {/* FourSquare attribution */}
-        {data && (
-          <cite className="text-sm text-center not-italic text-gray-700 p-2 mx-auto">
-            {t("attr.foursquare")}
-            <a
-              href="https://foursquare.com/"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="text-gray-500 hover:text-gray-700"
-            >
-              FourSquare
-            </a>
-          </cite>
-        )}
       </div>
+      {/* FourSquare attribution */}
+      {data && (
+        <cite className="text-sm text-center not-italic text-gray-700 p-2 mx-auto">
+          {t("attr.foursquare")}
+          <a
+            href="https://foursquare.com/"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="text-gray-500 hover:text-gray-700"
+          >
+            FourSquare
+          </a>
+        </cite>
+      )}
     </div>
   );
 }
