@@ -59,15 +59,15 @@ module.exports = {
       },
     },
   },
-  variants: {
-    extend: {
-      height: ["hover", "focus"],
-      width: ["hover", "focus", "focus-within"],
-      padding: ["hover"],
-      transitionProperty: ["hover", "focus"],
-      textColor: ["disabled"],
-      margin: ["first", "last"],
-    },
-  },
+  // variants: {
+  //   extend: {
+  //     height: ["hover", "focus"],
+  //     width: ["hover", "focus", "focus-within"],
+  //     padding: ["hover"],
+  //     transitionProperty: ["hover", "focus"],
+  //     textColor: ["disabled"],
+  //     margin: ["first", "last"],
+  //   },
+  // },
   plugins: [],
 };

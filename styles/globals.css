@@ -2,28 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-.btn {
-  @apply py-2 px-4 rounded-md focus:outline-none;
-}
+@layer components {
+  .btn {
+    @apply py-2 px-4 rounded-md focus:outline-none;
+  }
 
-.btn-outlined {
-  @apply btn border-2 border-current font-bold;
-}
+  .btn-outlined {
+    @apply btn border-2 border-current font-bold;
+  }
 
-.pattern-dark {
-  @apply bg-gray-800 bg-icons-light bg-50%;
-}
+  .pattern-dark {
+    @apply bg-gray-800 bg-icons-light bg-50%;
+  }
 
-.pattern-light {
-  @apply bg-gray-300 bg-icons-dark bg-50%;
-}
+  .pattern-light {
+    @apply bg-gray-300 bg-icons-dark bg-50%;
+  }
 
-.marker {
-  @apply bg-logo bg-contain bg-bottom bg-no-repeat;
-}
+  .marker {
+    @apply bg-logo bg-contain bg-bottom bg-no-repeat;
+  }
 
-#user-location {
-  @apply bg-my-location bg-contain bg-bottom bg-no-repeat;
+  #user-location {
+    @apply bg-my-location bg-contain bg-bottom bg-no-repeat;
+  }
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap");
@@ -53,5 +55,5 @@ html[dir="rtl"] h4,
 html[dir="rtl"] h5,
 html[dir="rtl"] h6 {
   font-family: sans-serif;
-  font-weight: 600;
+  font-weight: 700;
 }
