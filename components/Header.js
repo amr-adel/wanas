@@ -17,20 +17,17 @@ export default function Header() {
           locale === "ar" && "lg:flex-row-reverse"
         }`}
       >
-        <Link href="/">
-          <div className="cursor-pointer lg:mx-1">
-            <Logo className="w-8 h-8" />
-          </div>
+        <Link href="/" className="cursor-pointer lg:mx-1">
+          <Logo className="w-8 h-8" />
         </Link>
 
-        <Link href="/">
-          <div
-            className={`cursor-pointer ${
-              locale === "ar" ? "lg:ml-auto" : "lg:mr-auto"
-            }`}
-          >
-            <Logo type="text" className={`h-8 py-1`} />
-          </div>
+        <Link
+          href="/"
+          className={`cursor-pointer ${
+            locale === "ar" ? "lg:ml-auto" : "lg:mr-auto"
+          }`}
+        >
+          <Logo type="text" className={`h-8 py-1`} />
         </Link>
 
         <div id="nav-container" className="h-8 lg:h-full w-8 lg:w-auto">

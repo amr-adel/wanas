@@ -1,6 +1,9 @@
 import axios from "axios";
 
-export default function getGeolocationSuggestions(query, locale) {
+export default function getGeolocationSuggestions({
+  throttledQuery: query,
+  locale,
+}) {
   const suggestions = axios
     .get(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}&language=${locale}&types=region,district,place,postcode`

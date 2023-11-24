@@ -49,7 +49,7 @@ export default function Markers({ map }) {
         el.className = `marker h-8 w-7 ${
           !asPath.includes("vid") && "cursor-pointer"
         }`;
-        el.addEventListener("click", () => handleClick(marker));
+        el.addEventListener("click", (e) => handleClick(e, marker));
 
         const tempMarker = new mapboxgl.Marker(el, {
           anchor: "bottom",
@@ -78,8 +78,9 @@ export default function Markers({ map }) {
     }
   }, [markers, userLocation]);
 
-  const handleClick = ({ id, name, lng, lat }) => {
+  const handleClick = (e, { id, name, lng, lat }) => {
     if (!asPath.includes("vid")) {
+      e.stopPropagation();
       set((state) => {
         state.mapBox.popUp = {
           id,

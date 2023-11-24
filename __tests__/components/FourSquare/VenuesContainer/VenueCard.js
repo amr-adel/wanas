@@ -60,19 +60,21 @@ describe("VenueCard", () => {
     expect(deleteButton).not.toBeInTheDocument();
   });
 
-  it("Should call clearRecent() with venue id on delete button click.", () => {
+  it("Should call clearRecent() with venue id on delete button click.", async () => {
+    const user = userEvent.setup();
     const { getByText } = render(<VenueCard {...expectedProps} />);
 
     const deleteButton = getByText("Delete");
 
-    userEvent.click(deleteButton);
+    await user.click(deleteButton);
 
     expect(expectedProps.clearRecent).toBeCalledWith(
       expectedProps.venue.venue.id
     );
   });
 
-  it("Should update store 'popUp' with card id, name, and coords onMouseEnter.", () => {
+  it("Should update store 'popUp' with card id, name, and coords onMouseEnter.", async () => {
+    const user = userEvent.setup();
     const card = render(<VenueCard {...expectedProps} />).getByTestId(
       "VenueCard"
     );
@@ -86,7 +88,7 @@ describe("VenueCard", () => {
     // Should be initially "null"
     expect(useStore.getState().mapBox.popUp).toBe(null);
 
-    userEvent.hover(card);
+    await user.hover(card);
     expect(useStore.getState().mapBox.popUp).toStrictEqual({
       id,
       name,

@@ -1,7 +1,7 @@
 import { useIntl } from "react-intl";
 
 import SimpleBar from "simplebar-react";
-import "simplebar/dist/simplebar.min.css";
+import "simplebar-react/dist/simplebar.min.css";
 
 import { LayoutWithMap } from "../../components/Layout";
 import Map from "../../components/Map";

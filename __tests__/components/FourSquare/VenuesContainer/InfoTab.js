@@ -7,7 +7,9 @@ const set = useStore.getState().set;
 
 describe("VenueCard", () => {
   afterEach(() => {
-    useStore.setState(initialStoreState, true);
+    act(() => {
+      useStore.setState(initialStoreState, true);
+    });
   });
 
   it("should render 'start' message if total doesn't exist.", () => {

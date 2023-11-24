@@ -22,10 +22,11 @@ export default function Page404() {
 
         <p>{t("page404.message")}</p>
 
-        <Link href="/">
-          <button className="btn-outlined mx-auto text-gray-600 capitalize">
-            {t("page404.link")}
-          </button>
+        <Link
+          href="/"
+          className="btn-outlined mx-auto text-gray-600 capitalize"
+        >
+          {t("page404.link")}
         </Link>
       </div>
     </main>

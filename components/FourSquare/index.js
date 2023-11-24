@@ -7,8 +7,8 @@ import VenuesContainer from "./VenuesContainer";
 import VenueDetailed from "./VenueDetailed";
 
 // Fetch venues through API route to protect client id & secret
-const fetchVenues = (reqParams, locale) => {
-  return axios.post(`/api/exploreVenues`, { ...reqParams, locale });
+const fetchVenues = (reqParams) => {
+  return axios.post(`/api/exploreVenues`, reqParams);
 };
 
 export default function FourSquare() {
@@ -18,7 +18,9 @@ export default function FourSquare() {
   const set = useStore((state) => state.set);
 
   const { data, error } = useSWR(
-    reqParams.ll || reqParams.near ? [reqParams, router.locale] : null,
+    reqParams.ll || reqParams.near
+      ? { ...reqParams, locale: router.locale }
+      : null,
     fetchVenues
   );
 

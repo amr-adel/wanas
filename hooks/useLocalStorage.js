@@ -10,7 +10,6 @@ export default function useLocalStorage(key, initial) {
       }
     }
 
-    // console.log("initial", initial);
     return initial;
   });
 

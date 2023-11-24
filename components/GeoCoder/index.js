@@ -19,7 +19,7 @@ export default function GeoCoder() {
   const { throttledQuery } = useThrottle(query);
 
   const { data: GeolocationSuggestions, error } = useSWR(
-    throttledQuery.length > 2 ? [throttledQuery, locale] : null,
+    throttledQuery.length > 2 ? { throttledQuery, locale } : null,
     getGeolocationSuggestions
   );
 

@@ -9,31 +9,25 @@
     "test": "jest"
   },
   "dependencies": {
-    "axios": "^0.21.1",
-    "immer": "^8.0.1",
-    "mapbox-gl": "^2.1.1",
-    "next": "10.0.4",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "react-intl": "^5.10.16",
-    "simplebar-react": "^2.3.0",
-    "swr": "^0.4.0",
-    "zustand": "^3.3.1"
+    "@testing-library/user-event": "^14.5.1",
+    "axios": "^1.6.2",
+    "immer": "^10.0.3",
+    "mapbox-gl": "^2.15.0",
+    "next": "14.0.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-intl": "^6.5.5",
+    "simplebar-react": "^3.2.4",
+    "swr": "^2.2.4",
+    "zustand": "^4.4.6"
   },
   "devDependencies": {
-    "@tailwindcss/jit": "^0.1.17",
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^13.0.3",
-    "autoprefixer": "^10.2.5",
-    "babel-jest": "^26.6.3",
-    "jest": "^26.6.3",
-    "postcss": "^8.2.8",
-    "tailwindcss": "^2.0.4"
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>/test-utils/setupTests.js"
-    ]
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.1.2",
+    "autoprefixer": "^10.4.16",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5"
   }
 }

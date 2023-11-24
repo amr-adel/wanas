@@ -9,7 +9,7 @@ import Icon from "../../../utils/Icon";
 import Loader from "../../../utils/Loader";
 
 // Fetch venue details through API route to protect client id & secret
-const fetchVenue = (vid, locale) => {
+const fetchVenue = ({ vid, locale }) => {
   return axios.get(`/api/getVenue?vid=${vid}&locale=${locale}`);
 };
 
@@ -19,7 +19,7 @@ export default function VenueDetailed({ vid }) {
 
   const router = useRouter();
 
-  const { data, error } = useSWR([vid, locale], fetchVenue);
+  const { data, error } = useSWR({ vid, locale }, fetchVenue);
 
   const isLoding = !data && !error && vid;
 

@@ -17,7 +17,9 @@ describe("<Pagination />", () => {
   });
 
   afterEach(() => {
-    useStore.setState(initialStoreState, true);
+    act(() => {
+      useStore.setState(initialStoreState, true);
+    });
   });
 
   it('should be rendered only if total results are more than venues/page "limit".', () => {
@@ -82,21 +84,23 @@ describe("<Pagination />", () => {
     expect(prevButton).not.toBeDisabled();
   });
 
-  it('should increment "offset" by "limit" at store on "next" button click.', () => {
+  it('should increment "offset" by "limit" at store on "next" button click.', async () => {
+    const user = userEvent.setup();
     const { getAllByRole } = render(<Pagination total={total} />);
 
     const nextButton = getAllByRole("button").filter(
       (btn) => btn.id === "next"
     )[0];
 
-    userEvent.click(nextButton);
+    await user.click(nextButton);
 
     const { offset, limit } = useStore.getState().fourSquare.reqParams;
 
     expect(offset).toBe(limit);
   });
 
-  it('should decrement "offset" by "limit" at store on "prev" button click.', () => {
+  it('should decrement "offset" by "limit" at store on "prev" button click.', async () => {
+    const user = userEvent.setup();
     const startOffset = 15;
 
     set((state) => {
@@ -109,7 +113,7 @@ describe("<Pagination />", () => {
       (btn) => btn.id === "prev"
     )[0];
 
-    userEvent.click(prevButton);
+    await user.click(prevButton);
 
     const { offset, limit } = useStore.getState().fourSquare.reqParams;
 

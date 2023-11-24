@@ -52,18 +52,18 @@ export default function NavMenu() {
         }`}
       >
         <li key="home">
-          <Link href="/">
-            <span className={menuLinksclassName}>{t("menu.home")}</span>
+          <Link href="/" className={menuLinksclassName}>
+            {t("menu.home")}
           </Link>
         </li>
         <li key="explore">
-          <Link href="/explore">
-            <span className={menuLinksclassName}>{t("menu.explore")}</span>
+          <Link href="/explore" className={menuLinksclassName}>
+            {t("menu.explore")}
           </Link>
         </li>
         <li key="about">
-          <Link href="/about">
-            <span className={menuLinksclassName}>{t("menu.about")}</span>
+          <Link href="/about" className={menuLinksclassName}>
+            {t("menu.about")}
           </Link>
         </li>
       </ul>
